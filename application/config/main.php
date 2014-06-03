@@ -40,7 +40,7 @@
     \* ============================== */
 
     // This is the main Web application configuration. Any writable CWebApplication properties can be configured here.
-    $config = array(
+    return array(
         'basePath' => dirname(__FILE__) . '/..',
         'name' => Yii::t('application', 'New Project'),
         'sourceLanguage' => 'en',
