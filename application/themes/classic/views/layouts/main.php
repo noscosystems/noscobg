@@ -47,7 +47,7 @@
                                 'label' => Yii::t(
                                     'application',
                                     'Logout ({name})',
-                                    array('{name}' => Yii::app()->user->displayName)
+                                    array('{name}' => Yii::app()->user->name)
                                 ),
                                 'url' => array('/logout'),
                                 'visible' => !Yii::app()->user->isGuest,
