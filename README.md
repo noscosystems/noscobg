@@ -1,33 +1,32 @@
 # New Project
 
-This project is designed to kickstart/bootstrap a new Yii application through
-Composer commands. Although it doesn't provide any functionality other than basic
-user authentication, it does provide many event declarations and an Event/Behaviour
-manager to allow the building of drop-in addons.
+This project is designed to kickstart a new Yii application through Composer
+commands. It does not provide **any** functionality other than application structure.
+Everything must be written from scratch; although several components, controllers, 
+models and migrations are available upon request (for common functionality such as 
+user authentication).
 
-This project is outdated. Updated versions do not have open-source releases.
+**Note:** This repository is based upon an outdated project that no longer has any open-source
+releases.
 
-This project utilises the following libraries:
+This project utilises the following libraries, listed as Composer dependancies:
 
-- [PHPass][phpass]: a library for the easy and secure management of passwords in
-  PHP.
 - [Yii Framework][yii]: a high-performance PHP framework best for developing Web 2.0
   applications.
+- Twitter's [Bootstrap](http://getbootstrap.com "Bootstrap CSS Framework"): popular
+  front-end framework for developing responsive, mobile first projects on the web.
+- [PHPUnit](http://phpunit.de "PHPUnit Testing Framework"): a programmer-oriented 
+  testing framework for PHP.
 
 
 
 ## License
 
 This project is licensed under the [MIT/X11][mit] open-source license.
-Copyright is held by the projects author, [Zander Baldwin][zander] (2013).
 
 
 
 ## Documentation
-
-Documentation is somewhat lacking for this project. Efforts have been focused
-on developing the application shell. Documentation will start appearing once
-this project reaches beta status.
 
 All current documentation for this project is within the source-code itself, as
 comments or DocComments.
@@ -37,7 +36,7 @@ comments or DocComments.
 ## Source Code
 
 This project is kept under [Git][git] and is hosted on the [GitHub][github].
-Source code can be accessed from `git@github.com:noscosystems/yiiskeleton.git`.
+Source code can be accessed from `git@github.com:noscosystems/noscobg.git`.
 
 
 ### Installation
@@ -64,10 +63,8 @@ Next, place the name of your chosen environment inside
 `application/config/.environment`. Then perform the database migration which
 will upgrade your database to work with the application:
 
-    PROJECT="/path/to/project"
-
-    $ cd "$PROJECT/application"
-    $ ./yiic migrate
+    $ cd "/path/to/project"
+    $ ./application/yiic migrate
 
 **Note:** This project has been built on the presumption that it will run on a
 Linux server with [PHP 5.3+](http://www.php.net).
@@ -76,7 +73,9 @@ Linux server with [PHP 5.3+](http://www.php.net).
 
 ## Authors
 
-- [Zander Baldwin][zander]; project lead.
+- [Zander Baldwin][zander]; that super amazing guy that everyone loves.
+- [Luchica Scowen](https://github.com/scowen); that funny guy who makes jokes all the time.
+- [Clive Dann](https://github.com/clivedann); ... Clive.
 
 
 
@@ -100,10 +99,7 @@ reports, feature requests, patch submissions, etc.:
 
 
 
-## Development Guidelines
-
-
-### Database
+## Database Guidelines
 
 After you have set up your database credentials in `application.config.databases`,
 all changes to the database that are not done through normal application
@@ -113,11 +109,6 @@ operations **must** be done through [database migrations][migrate] with the
 As a rule of thumb, until you are comfortable with database changes being done
 this way, the use of [phpMyAdmin][phpmyadmin] is forbidden except as a reference
 tool.
-
-
-### Source Code
-
-*Coming soon...*
 
 <!--
     Guidelines for a Successful README
