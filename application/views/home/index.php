@@ -5,17 +5,23 @@
     $this->pageTitle = false;
 ?>
 
-<h1>Welcome to <i><?php echo CHtml::encode(Yii::app()->name); ?></i></h1>
-
-<p>Congratulations! You have successfully created your Yii application.</p>
-
-<p>You may change the content of this page by modifying the following two files:</p>
-<ul>
-	<li>View file: <code><?php echo __FILE__; ?></code></li>
-	<li>Layout file: <code><?php echo $this->getLayoutFile('main'); ?></code></li>
-</ul>
-
-<p>For more details on how to further develop this application, please read
-the <a href="http://www.yiiframework.com/doc/">documentation</a>.
-Feel free to ask in the <a href="http://www.yiiframework.com/forum/">forum</a>,
-should you have any questions.</p>
+<div class="alert alert-danger">
+    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <strong>Title!</strong> Alert body ...
+</div>
+<br /><br />
+<div class="page-header">
+  <h1>title<small>subtext</small></h1>
+</div>
+<br /><br />
+<button type="button" class="btn btn-sm btn-success">button</button>
+<br /><br />
+<div class="jumbotron">
+    <div class="container">
+        <h1>Hello, world!</h1>
+        <p>Contents ...</p>
+        <p>
+            <a class="btn btn-primary btn-lg">Learn more</a>
+        </p>
+    </div>
+</div>
