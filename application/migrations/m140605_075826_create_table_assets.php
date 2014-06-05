@@ -14,7 +14,7 @@ class m140605_075826_create_table_assets extends CDbMigration
                 'rent_day'   	=> 'DOUBLE		    NULL COMMENT "Rent for a day"',
                 'rent_week'     => 'DOUBLE 			NULL',
                 'rent_month'    => 'DOUBLE 			NULL',
-                'price'	        => 'DOUBLE 	   NULL',
+                'price'	        => 'DOUBLE 			NULL',
                 'created'      	=> 'INT         NOT NULL COMMENT "Date of creation of the record in the db"',
                 'created_by'   	=> 'INT         NOT NULL COMMENT "user.id"',
                 'age'	        => 'INT     		NULL COMMENT "Age of the property"',
