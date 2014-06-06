@@ -18,3 +18,4 @@ We will add more when we think of them on the plane.
 
 ## Design
 Think of a design that fits with the theme to be used on pages that will not have the slider (carousel) at the top, so; normal pages.  
+Yeah fix up the design in `/application/themes/classic/views/layouts/main` when you can.
