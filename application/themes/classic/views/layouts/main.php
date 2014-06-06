@@ -28,11 +28,12 @@
         <link href="<?php echo $assetUrl; ?>/css/form.css" rel="stylesheet" type="text/css" media="all" />
         <!-- Document Meta Title. -->
         <title>
+            Properties store
             <?php
-                if(is_string($this->pageTitle) && $this->pageTitle) {
+                /*if(is_string($this->pageTitle) && $this->pageTitle) {
                     echo CHtml::encode($this->pageTitle) . ' &#8212; ';
                 }
-                echo CHtml::encode(Yii::app()->name);
+                echo CHtml::encode(Yii::app()->name);*/
             ?>
         </title>
     </head>
