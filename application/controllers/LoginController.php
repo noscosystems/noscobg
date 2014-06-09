@@ -22,7 +22,7 @@
             $form = new Form('application.forms.login', new Login);
 
             if($form->submitted() && $form->validate()) {
-                $user = \application\models\db\User::model()->findByAttributes(array('username'=>$form->model->username));
+                $user = \application\models\db\Users::model()->findByAttributes(array('username'=>$form->model->username));
                 echo'<pre>';
                 var_dump($user);
                 echo '</pre>';
