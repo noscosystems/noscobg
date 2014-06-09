@@ -69,7 +69,46 @@
             $this->render('form', array(
                 'form' => 'form',
             ));
+        }
 
+        // This function will demonstrate how to use some of the user functions.
+        public function actionUser()
+        {
+            // If I wanted to check if the user was logged in:
+            if(!Yii::app()->user->isGuest){
+                // User is logged in
+                // Lets check if they have an admin level
+                if(Yii::app()->user->priv >= 50){
+                    // The user is an admin!
+                    $showAdminPanel = true;
+                } else {
+                    // The user has only basic permissions
+                    $showAdminPanel = false;
+                }
+
+                // Lets display the username!
+                echo Yii::app()->user->model()->username;
+
+                // Lets get all the Assets that this user has created.
+                $assets = Yii::app()->user->model()->Assets;
+
+                // I don't like typing that long string every time I want to access the user model, lets assign it.
+                $user = Yii::app()->user->model();
+
+                // That's better, now lets see if the user owns any assets.
+                if($user->OwnedAssets && is_array($user->OwnedAssets) && count($user->OwnedAssets) > 0){
+                    // The user has some assets! Lets go through them.
+                    foreach($user->OwnedAssets as $asset){
+                        echo $asset->id;
+                        echo $asset->name;
+                    }
+                } else {
+                    // The user has no assets :(
+                }
+            } else {
+                // The user is a guest, get them to log in by force!
+                $this->redirect(array('/login'));
+            }
         }
 
     }
