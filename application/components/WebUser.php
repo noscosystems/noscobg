@@ -5,7 +5,7 @@
     use \Yii;
     use \CException;
     use \CEvent as Event;
-    use \application\models\db\User;
+    use \application\models\db\Users as User;
 
     /**
      * Web User
