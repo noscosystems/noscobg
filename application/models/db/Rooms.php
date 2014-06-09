@@ -60,8 +60,8 @@ class Rooms extends ActiveRecord
 		// class name for the relations automatically generated below.
 		return array(
 			'CreatedBy' => array(self::BELONGS_TO, '\\application\\models\\db\\Users', 'created_by'),
-			'Csset0' => array(self::BELONGS_TO, '\\application\\models\\db\\Assets', 'asset'),
-			'Type0' => array(self::BELONGS_TO, '\\application\\models\\db\\Option', 'type'),
+			'Asset' => array(self::BELONGS_TO, '\\application\\models\\db\\Assets', 'asset'),
+			'Type' => array(self::BELONGS_TO, '\\application\\models\\db\\Option', 'type'),
 		);
 	}
 

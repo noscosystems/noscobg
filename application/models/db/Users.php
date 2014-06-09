@@ -69,7 +69,7 @@ class Users extends ActiveRecord
 			'Assets' => array(self::HAS_MANY, '\\application\\models\\db\\Assets', 'created_by'),
 			'Owners' => array(self::HAS_MANY, '\\application\\models\\db\\Owners', 'user'),
 			'Rooms' => array(self::HAS_MANY, '\\application\\models\\db\\Rooms', 'created_by'),
-			'Title0' => array(self::BELONGS_TO, '\\application\\models\\db\\Option', 'title'),
+			'Title' => array(self::BELONGS_TO, '\\application\\models\\db\\Option', 'title'),
 		);
 	}
 

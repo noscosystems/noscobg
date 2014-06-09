@@ -54,8 +54,8 @@ class Owners extends ActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'User0' => array(self::BELONGS_TO, 'application\\models\\db\\Users', 'user'),
-			'Asset0' => array(self::BELONGS_TO, 'application\\models\\db\\Assets', 'asset'),
+			'User' => array(self::BELONGS_TO, 'application\\models\\db\\Users', 'user'),
+			'Asset' => array(self::BELONGS_TO, 'application\\models\\db\\Assets', 'asset'),
 		);
 	}
 
