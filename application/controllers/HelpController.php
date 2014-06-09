@@ -33,6 +33,8 @@
         {
             // Construct a new Form.
             // Replace 'config' with the form configuration and 'Model' with the form model (see later).
+            // See \application\forms for the configs.
+            // See \application\models\form for the form models.
             $form = new Form('application.forms.config', new \application\models\form\Model);
 
             // Check if the form has been submitted and validated.
@@ -89,7 +91,7 @@
                 // Lets display the username!
                 echo Yii::app()->user->model()->username;
 
-                // Lets get all the Assets that this user has created.
+                // Lets get all the Assets that this user has created. Using a relation!
                 $assets = Yii::app()->user->model()->Assets;
 
                 // I don't like typing that long string every time I want to access the user model, lets assign it.
