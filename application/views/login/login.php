@@ -87,7 +87,7 @@
 
 
 	<div class="row buttons">
-		<?php echo CHtml::submitButton('Login'); ?>
+		<?php echo CHtml::submitButton('Submit'); ?>
 	</div>
 
 <?php $this->endWidget(); ?>
