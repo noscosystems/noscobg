@@ -52,6 +52,13 @@
                 'hint' => 'Please enter your username',
                 'label' => 'Username'
             ),
+
+            // Here is an exmaple of using a dropdownlist
+            'gender' => array(
+                'type' => 'dropdownlist',
+                'items' => array(0 => 'Female', 1 => 'Male'),
+                'prompt' => 'Please Select',
+            ),
         ),
 
         // The buttons are used to submit the form, usually you will only need the one and quite typically, it will only need a certain amount
