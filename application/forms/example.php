@@ -25,6 +25,18 @@
                 // Specifying a hint is optional with Yii, Yii will pickup a hint and you can use the widget to display it or check for it.
                 'hint' => 'This is an example hint',
 
+                // To add items to a dropdownlist, you simply state the element with an array of options.
+                'items' => array(
+                        'Option One',
+                        'Option Two',
+                        // You can also specify a key or a value to a label:
+                        3 => 'Option Three',
+                        'Text Value' => 'Label',
+                    ),
+
+                // You can also set a prompt, basically what will show on the dropdownlist by default.
+                'prompt' => 'Please Select...',
+
                 // Finally, it is good practice to set a label, that way, if the nature of the form changes and you need to change the name
                 // of a field, you do not need to update all the views that use this form configuration, only this file. Imagine the concept
                 // of using file includes or stylesheets, instead of having to update every page, you update the single page which then 
