@@ -51,6 +51,11 @@ This page will display the asset with its images and details as such:
  - Image of asset
  - Name of asset
  - Rooms according to asset.
+ - A detailed area that has plenty of descriptive details.  
+
+### Registration  
+A registration page will be required in order for users to sign up.  
+The registration page should ask for basic information or the fields that are required in the user table. 
 
 ## Design
 Think of a design that fits with the theme to be used on pages that will not have the slider (carousel) at the top, so; normal pages.  
