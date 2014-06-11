@@ -67,6 +67,7 @@
                     $user->attributes = $form->model->attributes;
                     // Update the fields that are required by default.
                     // Have a basic user level of 10.
+                    $user->password = \CPasswordHelper::hashPassword($user->password);
                     $user->priv = 10;
                     // Assign the branch to 1 for now, we may be using the branch field later.
                     $user->branch = 1;
