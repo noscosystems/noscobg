@@ -88,3 +88,6 @@ Search
 <div style="padding-top:5%; width:90%; text-align:center; background:#CCC; margin: 0 5% 0 5%; height:33.3%;">
 	Search results
 </div>
+<div id="footer">
+Copyright &copy; 2014 by noscobg
+</div>
