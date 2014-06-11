@@ -59,7 +59,7 @@
                 // We need to do some manual error checking, ie: check if the username is taken
                 $user = Users::model()->findAllByAttributes(array('username' => $form->model->username));
                 if($user){
-                    $form->addError('username' => 'The username specified is already taken! Please choose another.');
+                    $form->addError('username', 'The username specified is already taken! Please choose another.');
                 } else {
                     // Create the user.
                     $user = new Users;
