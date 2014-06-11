@@ -12,33 +12,31 @@
             'firstname' => array(
                 'type' => 'text',
                 'maxlength' => 36,
-                'hint' => Yii::t('application', 'Please enter your username; it is case-insensitive.'),
+                'hint' => Yii::t('application', 'Please enter your firstname; it is case-insensitive.'),
             ),
             'middlename' => array(
                 'type' => 'text',
                 'maxlength' => 36,
-                'hint' => Yii::t('application', 'Please enter your username; it is case-insensitive.'),
+                'hint' => Yii::t('application', 'Please enter your middlename; it is case-insensitive.'),
             ),
             'lastname' => array(
                 'type' => 'text',
                 'maxlength' => 36,
-                'hint' => Yii::t('application', 'Please enter your username; it is case-insensitive.'),
+                'hint' => Yii::t('application', 'Please enter your lastname; it is case-insensitive.'),
             ),
             'password' => array(
                 'type' => 'password',
                 'hint' => Yii::t('application', 'Please enter your password; it is case-sensitive.'),
             ),
-            'priv' => array(
-                'type' => 'hidden',
-                'hint' => Yii::t('application', 'Please enter your password; it is case-sensitive.'),
-            ),
             'dob' => array(
-                'type' => 'hidden',
-                'hint' => Yii::t('application', 'Please enter your password; it is case-sensitive.'),
+                'type' => 'date',
+                'hint' => Yii::t('application', 'Please enter your date of birth; it is case-sensitive.'),
             ),
             'gender' => array(
-                'type' => 'text',
-                'hint' => Yii::t('application', 'Please enter your password; it is case-sensitive.'),
+                'type' => 'dropdownlist',
+                'items' => array(0 => 'Female', 1 => 'Male'),
+                'prompt' => 'Please Select'
+                // 'hint' => Yii::t('application', 'Please enter your password; it is case-sensitive.'),
             ),
 
         ),

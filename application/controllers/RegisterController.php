@@ -10,13 +10,26 @@
 
     class RegisterController extends Controller
     {
-
         public function actionRegister()
         {
             $form = new Form('application.forms.register', new Register);
-            $this->render('index',array('form'=>$form));
-        }
+            //$this->render('index',array('form'=>$form));
+            if($form->submitted() && $form->validated()){
+                echo 'DA!';
+                // Query is true.
 
+                // You are able to set the attributes of a database model with the attributes of a form model, example:
+                // Create a new empty DB model.
+                $dbModel = new \application\models\db\Users;
+                // Assign all attributes from the form model
+                $dbModel->attributes = $form->model->attributes;
+                $dbModel->branch=1;
+                $dbModel->priv=10;
+                $dbModel->created=time();
+                // Save the database model.
+                $dbModel->save();
+            }
+            $this->render('register',array('form'=>$form));
         // public function actionIndex(){
         //     $form = new Form('application.forms.login', new Login);
 
