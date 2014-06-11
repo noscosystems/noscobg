@@ -43,9 +43,11 @@
 
             <div id="header">
                 <div id="logo">
-                    <?php echo CHtml::encode(Yii::app()->name); ?>
+                    Smart Properties
                 </div>
             </div>
+
+            <i>Edit this header and layout in \application\themes\classic\views\layouts\main.php</i>
 
             <div id="mainmenu">
                 <?php
