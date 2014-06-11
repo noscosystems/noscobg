@@ -8,14 +8,23 @@
     use \application\components\Controller;
     use \application\models\form\Login;
     use \application\models\form\Register;
+    use \application\models\form\Insert;
     use \application\models\db\Users;
 
     class AdminController extends Controller
     {
 
         public function actionIndex()
-        {
-            $this->render('index');
+        { 
+            $form = new Form('application.forms.insert', new Insert);
+            //$this->render('index');
+            $this->render('index',array('form' => $form));
+           
+            if(!Yii::app()->user->isGuest){
+                $this->redirect(array('admin/login'));
+                
+            }
+            
         }
 
         public function actionLogin(){
@@ -27,15 +36,20 @@
                     $correct = \CPasswordHelper::verifyPassword($form->model->password, $user->password);
                     if($correct) {
                         echo 'The password is correct! :)';
-                        if(!Yii::app()->user->isGuest){
-                            if(Yii::app()->user->priv >= 50){
+                        //if(!Yii::app()->user->isGuest){
+                            //echo 'DA!';
+                            if($user->priv >= 30){
                                 // The user is an admin!
-                                $showadminPanel = true;
+                                // $showadminPanel = true;
+                                $this->actionIndex();
+                                Yii::app()->user->setId($user->id);
+                                //$this->redirect(array('admin/'));
                             } else {
                                 // The user has only basic permissions
-                                $showAdminPanel = false;
+                                // $showAdminPanel = false;
+                                $this->redirect(array('admin/login'));
                             }
-                        }
+                       // }
                     }
                     else {
                         echo 'The password was wrong :(';

@@ -6,43 +6,59 @@
     $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/assets');
 ?>
 
+<?php
+$form->attributes=array('class' => 'form-horizontal');
+echo $form->renderBegin();
+$widget = $form->activeFormWidget;
+?>
 
-<div>
-  <p style="text-align:center;"> Sample admin page</p>
-  <table>
-  <tr>
-    <td><input value="Name of asset" class="inp_label"></td>
-    <td><input name="name" type="text"></td>
-  </tr>
-  <tr>
-    <td><input value="Area of asset" type="text" class="inp_label"></td>
-    <td><input name="area" type="text"></td>
-  </tr>
-  <tr>
-    <td><input value="Type of asset" type="text" class="inp_label"></td>
-    <td><input name="type" type="text"></td>
-  </tr>
-  <tr>
-    <td><input value="Rent for a day" type="text" class="inp_label"></td>
-    <td><input name="rent_day" type="text"></td>
-  </tr>
-  <tr>
-    <td><input value="Rent for a week" type="text" class="inp_label"></td>
-    <td><input name="rent_week" type="text"></td>
-  </tr>
-  <tr>
-    <td><input value="Rent for a month" type="text" class="inp_label"></td>
-    <td><input name="rent_month" type="text"></td>
-  </tr>
-  <tr>
-    <td><input value="Price_of_asset" type="text" class="inp_label"></td>
-    <td><input name="price" type="text"></td>
-  </tr>
-  </table>
+<?php if($widget->error($form, 'name') || $widget->error($form, 'password')): ?>
+    <div class="alert alert-warning">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <strong>Errors Found!</strong> Your form has the following errors:<br />
+            <?php
+            echo $widget->error($form, 'username');
+            echo $widget->error($form, 'password');
+            ?>
+    </div>
+<?php endif; ?>
+
+<br />
+
+<div class="col-sm-offset-2 col-sm-10 page-header">
+  <h1>New Asset <small>Please fill in the form to create a new asset.</small></h1>
 </div>
-<style>
-.inp_label{
-  background:transparent;
-  border:none;
-}
-</style>
+
+<div class="row">
+    <div class="col-sm-3 control-label">Name of asset:</div>
+    <div class="col-sm-6">
+        <?php echo $widget->input($form, 'name', array('class' => 'form-control') ); ?>
+    </div>
+</div>
+
+<br/>
+
+<div class="row">
+    <div class="col-sm-3 control-label">Type of asset:</div>
+    <div class="col-sm-6">
+        <?php echo $widget->input($form, 'type', array('class' => 'form-control') ); ?>
+    </div>
+</div>
+
+<br>
+
+<div class="row">
+    <div class="col-sm-3 control-label">Area of asset:</div>
+    <div class="col-sm-6">
+        <?php echo $widget->input($form, 'area', array('class' => 'form-control') ); ?>
+    </div>
+</div>
+
+<br/>
+
+<div class="row">
+    <div class="col-sm-2 col-sm-offset-3">
+        <?php echo $widget->button($form, 'submit', array('class' => 'btn btn-lg btn-success',) ); ?>
+    </div>
+</div>
+<?php echo $form->renderEnd(); ?>
