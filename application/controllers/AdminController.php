@@ -56,25 +56,31 @@
             if($form->submitted() && $form->validate()) {
                 // The form has been submitted and there are no errors.
 
-                // Create the user.
-                $user = new Users;
-                // Assign the attributes from the form model.
-                $user->attributes = $form->model->attributes;
-                // Update the fields that are required by default.
-                // Have a basic user level of 10.
-                $user->priv = 10;
-                // Assign the branch to 1 for now, we may be using the branch field later.
-                $user->branch = 1;
-                // The created field is a unix timestamp of when the user was created.
-                $user->created = time();
-                // DOB only saves as a number, a unix timestamp.
-                $user->dob = strtotime($form->model->dob);
-                // Finally, save.
-                if(!$user->save()){
-                    echo "<pre class='pre-scrollable'>"; var_dump($user->errors); echo "</pre>"; exit;
-                }
+                // We need to do some manual error checking, ie: check if the username is taken
+                $user = Users::model()->findAllByAttributes(array('username' => $form->model->username));
+                if($user){
+                    $form->addError('username' => 'The username specified is already taken! Please choose another.');
+                } else {
+                    // Create the user.
+                    $user = new Users;
+                    // Assign the attributes from the form model.
+                    $user->attributes = $form->model->attributes;
+                    // Update the fields that are required by default.
+                    // Have a basic user level of 10.
+                    $user->priv = 10;
+                    // Assign the branch to 1 for now, we may be using the branch field later.
+                    $user->branch = 1;
+                    // The created field is a unix timestamp of when the user was created.
+                    $user->created = time();
+                    // DOB only saves as a number, a unix timestamp.
+                    $user->dob = strtotime($form->model->dob);
+                    // Finally, save.
+                    if(!$user->save()){
+                        echo "<pre class='pre-scrollable'>"; var_dump($user->errors); echo "</pre>"; exit;
+                    }
 
-                Yii::app()->user->setFlash('admin.register.success', 'Success!, you have successfully registered!');
+                    Yii::app()->user->setFlash('admin.register.success', 'Success!, you have successfully registered!');
+                }
             }
 
             $this->render('register',array('form' => $form));
