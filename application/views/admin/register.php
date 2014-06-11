@@ -5,16 +5,11 @@ echo $form->renderBegin();
 $widget = $form->activeFormWidget;
 ?>
 
-<?php if($widget->error($form, 'username') || $widget->error($form, 'password')): ?>
-    <div class="alert alert-success">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <strong>Errors Found!</strong> Your form has the following errors:<br />
-            <?php
-            echo $widget->error($form, 'username');
-            echo $widget->error($form, 'password');
-            ?>
-    </div>
-<?php endif; ?>
+<?php
+if($widget->errorSummary($form)){
+    echo '<div class="alert alert-danger">' . $widget->errorSummary($form) . '</div>';
+}
+?>
 
 <br />
 

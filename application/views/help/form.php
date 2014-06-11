@@ -14,6 +14,13 @@ echo $form->renderBegin();
 // Finally, use the widget for the PHP side of the form, the widget is used to render properties.
 $widget = $form->activeFormWidget;
 ?>
+    
+    <?php
+    // To check for errors made by validation, use the following statement.
+    if($widget->errorSummary($form)){
+        echo '<div class="alert alert-danger">' . $widget->errorSummary($form) . '</div>';
+    }
+    ?>
 
     <?php 
     // You can display an input field by using the syntax below:
