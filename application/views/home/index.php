@@ -88,6 +88,10 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
         height: 150px;
         padding-top: 20px;
         color: #FFF;
+        -webkit-box-shadow: 0px 0px 8px 2px #444444;
+           -moz-box-shadow: 0px 0px 8px 2px #444444;
+                box-shadow: 0px 0px 8px 2px #444444;
+        z-index: 150;
     }
 
     .searchResults {
@@ -96,6 +100,7 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
         height: 150px;
         padding-top: 20px;
         color: #999;
+        z-index: 130;
     }
 
     .font-raleway {
@@ -122,7 +127,7 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
 
 
 
-<div style="margin-left: -20px; width: 105%;" id="image-cycle" class="carousel slide" data-ride="carousel" data-interval="4000" data-wrap="true">
+<div style="margin-left: -20px; width: 105%; z-index: 100;" id="image-cycle" class="carousel slide" data-ride="carousel" data-interval="4000" data-wrap="true">
     <!-- Indicators -->
     <ol class="carousel-indicators">
         <li data-target="#image-cycle" data-slide-to="0" class="active"></li>
