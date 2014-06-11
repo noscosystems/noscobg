@@ -1,10 +1,10 @@
 
 <?php
-    /**
-     * @var HomeController $this
-     */
-    $this->pageTitle = false;
-    $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/assets');
+/**
+* @var HomeController $this
+*/
+$this->pageTitle = false;
+$assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/assets');
 ?>
 
 <head>
@@ -18,76 +18,157 @@
     <script src="<?php echo $bootstrap; ?>/js/bootstrap.min.js"></script>
     <link href="<?php echo $bootstrap; ?>/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
 
+    <link  href='http://fonts.googleapis.com/css?family=Raleway:400,300' rel='stylesheet' type='text/css'>
+
     <!-- Blueprint CSS Framework. -->
     <link href="<?php echo $assetUrl; ?>/css/screen.css" rel="stylesheet" type="text/css" media="screen, projection" />
     <link href="<?php echo $assetUrl; ?>/css/print.css" rel="stylesheet" type="text/css" media="print" />
     <!--[if lt IE 8]>
-        <link href="<?php echo $assetUrl; ?>/css/ie.css" rel="stylesheet" type="text/css" media="screen, projection" />
+    <link href="<?php echo $assetUrl; ?>/css/ie.css" rel="stylesheet" type="text/css" media="screen, projection" />
     <![endif]-->
     <link href="<?php echo $assetUrl; ?>/css/main.css" rel="stylesheet" type="text/css" media="all" />
     <link href="<?php echo $assetUrl; ?>/css/form.css" rel="stylesheet" type="text/css" media="all" />
     <!-- Document Meta Title. -->
     <title>
-    	Properties store
+        Properties store
         <?php
-            /*if(is_string($this->pageTitle) && $this->pageTitle) {
-                echo CHtml::encode($this->pageTitle) . ' &#8212; ';
-            }
-            echo CHtml::encode(Yii::app()->name);*/
-        ?>
+    /*if(is_string($this->pageTitle) && $this->pageTitle) {
+    echo CHtml::encode($this->pageTitle) . ' &#8212; ';
+    }
+    echo CHtml::encode(Yii::app()->name);*/
+    ?>
     </title>
+    <style>
+    .navigation {
+        top: 5;
+        left: 5;
+        z-index: 200;
+        position: absolute;
+        width: 100%;
+        padding: 20px;
+    }
+
+    .logo {
+        margin-top: 10px;
+        margin-left: 10px;
+    }
+
+    .links {
+        color: #FFF;
+        text-shadow: 1px 1px #444;
+        text-transform: uppercase;
+        font-size: 2em;
+        text-decoration: none;
+        margin-top: 15px;
+    }
+
+    .links a:visited {
+        color: #FFF;
+        margin-left: 15px;
+        text-decoration: none;
+    }
+    .links a:link {
+        color: #FFF;
+        margin-left: 15px;
+        text-decoration: none;
+    }
+    .links a:active {
+        color: #FFF;
+        margin-left: 15px;
+        text-decoration: none;
+    }
+    .links a:hover {
+        color: #FFF;
+        text-decoration: none;
+    }
+
+    .search {
+        background: #333;
+        width: 100%;
+        height: 150px;
+        padding-top: 20px;
+        color: #FFF;
+    }
+
+    .searchResults {
+        background: #CCC;
+        width: 100%;
+        height: 150px;
+        padding-top: 20px;
+        color: #999;
+    }
+
+    .font-raleway {
+        font-family: 'Raleway', sans-serif;
+        -webkit-font-smoothing: antialiased;
+    }
+    </style>
 </head>
-<div style="top:5; left:5; position:absolute; z-index:200;" >Logo</div>
-<div style="top:5; right:5; position:absolute; z-index:200;">
-  	<h1>
-		<a href="#" >My HREF 1</a>
-		<a href="#" >My HREF 2</a>
-		<a href="#" >My HREF 3</a>
-    </h1>
-</div>
 
-<div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-  <!-- Indicators -->
-  
-  <ol class="carousel-indicators">
-    <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-    <li data-target="#carousel-example-generic" data-slide-to="1"></li>
-    <!-- <li data-target="#carousel-example-generic" data-slide-to="2"></li> -->
-  </ol>
-
-  <!-- Wrapper for slides -->
-  <div class="carousel-inner" style="height:33%;">
-    <div class="item active" style="height:inherit;">
-      <img src="/noscobg/application/themes/classic/assets/images/first.jpg" alt="" style="width:100%;">
-      <div class="carousel-caption" style="color:black;">
-        
-      </div>
-
+<div class="navigation">
+    <div class="pull-left">
+        <div class="logo">
+            <img src="<?php echo $assetUrl; ?>/images/logo1.png">
+        </div>
     </div>
-    <div class="item">
-      <img src="/noscobg/application/themes/classic/assets/images/second.jpg" alt="" style="width:100%;">
-      <div class="carousel-caption">
-        My Caption
-     </div>
 
+    <div class="pull-right font-raleway links">
+        <a href="#" >Link</a>
+        <a href="#" >Link</a>
+        <a href="#" >Link</a>
     </div>
-    ...
-  </div>
+</div>
 
-  <!-- Controls -->
-  <a class="left carousel-control" href="#carousel-example-generic" data-slide="prev">
-    <span class="glyphicon glyphicon-chevron-left"></span>
-  </a>
-  <a class="right carousel-control" href="#carousel-example-generic" data-slide="next">
-    <span class="glyphicon glyphicon-chevron-right"></span>
-  </a>
+
+
+
+<div style="margin-left: -20px; width: 105%;" id="image-cycle" class="carousel slide" data-ride="carousel" data-interval="4000" data-wrap="true">
+    <!-- Indicators -->
+    <ol class="carousel-indicators">
+        <li data-target="#image-cycle" data-slide-to="0" class="active"></li>
+        <li data-target="#image-cycle" data-slide-to="1"></li>
+        <!-- <li data-target="#image-cycle" data-slide-to="2"></li> -->
+    </ol>
+
+    <!-- Wrapper for slides -->
+    <div class="carousel-inner">
+        <div class="item active">
+            <img src="<?php echo $assetUrl; ?>/images/varna1.png" width="100%" style="height:100%">
+            <div class="carousel-caption">
+                <h1></h1>
+                <br />
+            </div>
+        </div>
+
+        <div class="item">
+            <img src="<?php echo $assetUrl; ?>/images/varna2.png" width="100%" style="height:100%">
+            <div class="carousel-caption">
+                <h1></h1>
+                <br />
+            </div>
+        </div>
+    </div>
+
+    <!-- Controls -->
+    <a class="left carousel-control" href="#image-cycle" data-slide="prev">
+        <span class="glyphicon glyphicon-chevron-left"></span>
+    </a>
+    <a class="right carousel-control" href="#image-cycle" data-slide="next">
+        <span class="glyphicon glyphicon-chevron-right"></span>
+    </a>
 </div>
-<div style="background:#333; width:100%; height:150px; padding-top:5%;  text-align:center;">
-Search
+
+
+
+
+
+<div class="search">
+    <div class="container">
+        Search
+    </div>
 </div>
-<div style="padding-top:5%; width:90%; text-align:center; background:#CCC; margin: 0 5% 0 5%; height:33.3%;">
-	Search results
-</div>
-<div id="footer">
-Copyright &copy; 2014 by noscobg
+<div class="searchResults">
+    <div class="container">
+        Search Results
+    </div>
 </div>
