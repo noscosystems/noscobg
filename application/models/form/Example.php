@@ -40,6 +40,7 @@
                 array('foo', 'length', 'min' => 5, 'max' => 10, 'exact' => 6),
                 array('foo', 'numerical', 'integerOnly' => true/false, 'min' => 5, 'max' => 100),
                 array('foo', 'pattern', 'match' => '/$[0-9]{5}d+^/'), // Any regex patterns.
+                array('foo', 'boolean'),
 
                 // In order to set a custom error message, use the following syntax, I will use rule 'required' as an example:
                 array('bar', 'required', 'message' => 'You have left {{attribute}} blank, it is a required field. Fill it in!'),
