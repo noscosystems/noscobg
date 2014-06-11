@@ -5,7 +5,7 @@ echo $form->renderBegin();
 $widget = $form->activeFormWidget;
 ?>
 
-<div class="col-sm-offset-2 col-sm-10 page-header">
+<div class="page-header">
     <h1>Register <small>Please enter your information</small></h1>
 </div>
 
