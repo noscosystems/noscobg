@@ -5,17 +5,22 @@ echo $form->renderBegin();
 $widget = $form->activeFormWidget;
 ?>
 
+<div class="col-sm-offset-2 col-sm-10 page-header">
+    <h1>Register <small>Please enter your information</small></h1>
+</div>
+
+<?php if(Yii::app()->user->hasFlash('admin.register.success')): ?>
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <?php echo Yii::app()->user->getFlash('admin.register.success'); ?>
+    </div>
+<?php endif; ?>
+
 <?php
 if($widget->errorSummary($form)){
     echo '<div class="alert alert-danger">' . $widget->errorSummary($form) . '</div>';
 }
 ?>
-
-<br />
-
-<div class="col-sm-offset-2 col-sm-10 page-header">
-  <h1>Register <small>Please enter your information</small></h1>
-</div>
 
 <div class="row">
     <div class="col-sm-3 control-label">Enter desired Username:</div>
