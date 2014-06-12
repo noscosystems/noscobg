@@ -28,12 +28,37 @@
                 'maxlength' => 11,
                 'hint' => Yii::t('application', 'Please enter asset status; it is case-insensitive.'),
             ),
+            'short_desc' => array(
+                'type' => 'text',
+                'maxlength' => 128,
+                'hint' => Yii::t('application', 'Please enter asset status; it is case-insensitive.'),
+            ),
+            'long_desc' => array(
+                'type' => 'text',
+                'maxlength' => 65535,
+                'hint' => Yii::t('application', 'Please enter asset status; it is case-insensitive.'),
+            ),
+            'zip_pc' => array(
+                'type' => 'text',
+                'maxlength' => 12,
+                'hint' => Yii::t('application', 'Please enter asset status; it is case-insensitive.'),
+            ),
+            'town' => array(
+                'type' => 'text',
+                'maxlength' => 64,
+                'hint' => Yii::t('application', 'Please enter asset status; it is case-insensitive.')
+            ),
+            'county' => array(
+                'type' => 'text',
+                'maxlength' => 64,
+                'hint' => Yii::t('application', 'Please enter asset status; it is case-insensitive.')
+            )
         ),
 
         'buttons' => array(
             'submit' => array(
                 'type' => 'submit',
-                'label' => Yii::t('application', 'Login'),
+                'label' => Yii::t('application', 'Create Asset'),
             ),
         ),
     );

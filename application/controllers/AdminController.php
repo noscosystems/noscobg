@@ -10,20 +10,30 @@
     use \application\models\form\Register;
     use \application\models\form\Insert;
     use \application\models\db\Users;
+    use \application\models\db\Assets;
+    use \application\models\db\Address;
 
     class AdminController extends Controller
     {
 
         public function actionIndex()
-        { 
-            $form = new Form('application.forms.insert', new Insert);
-            //$this->render('index');
-            $this->render('index',array('form' => $form));
-           
-            if(!Yii::app()->user->isGuest){
+        {
+
+            if(Yii::app()->user->isGuest){
                 $this->redirect(array('admin/login'));
-                
             }
+            else{
+                $form = new Form('application.forms.insert', new Insert);
+                //$this->render('index');
+                $this->render('index',array('form' => $form));
+           }
+            if($form->submitted() && $form->validate()) {
+                $address = New Address;
+                // $address = 
+                $asset = New Assets;
+                $asset->attributes = $form->model->attributes;
+                $asset->created = time();
+            }            
             
         }
 
@@ -41,8 +51,10 @@
                             if($user->priv >= 30){
                                 // The user is an admin!
                                 // $showadminPanel = true;
-                                $this->actionIndex();
-                                Yii::app()->user->setId($user->id);
+                                Yii::app()->user->__set('username',$user->username);
+                                $this->redirect(array('admin/index'));
+                                // Yii::app()->user->setId($user->id);
+                                // Yii::app()->user->setName($user->username);
                                 //$this->redirect(array('admin/'));
                             } else {
                                 // The user has only basic permissions
