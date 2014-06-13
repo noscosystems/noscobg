@@ -5,7 +5,7 @@
     use \Yii;
     use \CException;
     use \CEvent as Event;
-    use \application\models\db\User;
+    use \application\models\db\Users as User;
 
     /**
      * User Identity
@@ -129,7 +129,7 @@
             $user = User::model()->findByAttributes(array('username' => $this->username));
             // If the user does not exist in the database, or the user has been disabled (inactive), set the error code
             // to ERROR_USERNAME_INVALID, return false.
-            if(!is_object($user) || !$user->active) {
+            if(!is_object($user)) {
                 $this->errorCode = self::ERROR_USERNAME_INVALID;
                 // Raise "onPasswordIncorrect" event; specifying that the password that the end-user entered was
                 // incorrect.

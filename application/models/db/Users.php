@@ -140,4 +140,80 @@ class Users extends ActiveRecord
 	{
 		return parent::model($className);
 	}
+
+
+
+    /**
+     * Full Name
+     *
+     * @access public
+     * @return string
+     */
+    public function getFullName()
+    {
+        if(!is_null($this->fullName)) {
+            return $this->fullName;
+        }
+        $this->fullName = ucwords($this->firstname) . ' ' . ucwords($this->lastname);
+        return $this->fullName;
+    }
+
+
+    /* -------------------------------- *\
+    |  END:   NAMING METHODS             |
+    |  BEGIN: PASSWORD-SPECIFIC METHODS  |
+    \* -------------------------------- */
+
+
+    /**
+     * Check Password
+     *
+     * Check that the password supplied to this method equates to the same password hash that is stored in the
+     * database for the user identified by the current (this) model instance.
+     *
+     * @access public
+     * @param string $password
+     * @return boolean
+     */
+    public function password($password)
+    {
+        return \CPasswordHelper::verifyPassword($password, $this->password);
+    }
+
+
+    /**
+     * PHP Magic Function: Set
+     *
+     * Override the method to extend the functionality (hash a password that is set as an attribute before adding it
+     * to the model).
+     *
+     * @access public
+     * @param string $name
+     * @param mixed $value
+     * @return void
+     */
+    public function __set($property, $value)
+    {
+        // If an override method exists for a certain property, call it to alter the value before passing it to the
+        // model to be saved to the database.
+        $method = 'set' . ucwords($property);
+        if(method_exists($this, $method)) {
+            $value = $this->{$method}($value);
+        }
+        // Carry on setting it to the model as normal.
+        parent::__set($property, $value);
+    }
+
+
+    /**
+     * Set: Password
+     *
+     * @access protected
+     * @param string $password
+     * @return void
+     */
+    protected function setPassword($password)
+    {
+        return \CPasswordHelper::hashPassword($password);
+    }
 }
