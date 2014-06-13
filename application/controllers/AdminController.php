@@ -27,7 +27,7 @@
                 $form = new Form('application.forms.insert', new Insert);
                 //$this->render('index');
                 $this->render('index',array('form' => $form));
-           }
+            }
             if($form->submitted() && $form->validate()) {
                 $address = New Address;
                 $address->attributes = $form->model->attributes;
@@ -36,6 +36,7 @@
                 $asset = New Assets;
                 $asset->attributes = $form->model->attributes;
                 $asset->created = time();
+                // $this->render('index');
             }            
             else{echo "FALSE!!!";}   
         }
