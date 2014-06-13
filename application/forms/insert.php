@@ -28,6 +28,27 @@
                 'maxlength' => 11,
                 'hint' => Yii::t('application', 'Please enter asset status; it is case-insensitive.'),
             ),
+            'age' => array(
+                'type' => 'text',
+                'maxlength' => 11,
+                'hint' => Yii::t('application', 'Please enter asset status; it is case-insensitive.'),
+            ),
+            'price' => array(
+                'type' => 'text',
+                'hint' => Yii::t('application', 'Please enter asset status; it is case-insensitive.'),
+            ),
+            'rent_day' => array(
+                'type' => 'text',
+                'hint' => Yii::t('application', 'Please enter asset status; it is case-insensitive.'),
+            ),
+            'rent_week' => array(
+                'type' => 'text',
+                'hint' => Yii::t('application', 'Please enter asset status; it is case-insensitive.'),
+            ),
+            'rent_month' => array(
+                'type' => 'text',
+                'hint' => Yii::t('application', 'Please enter asset status; it is case-insensitive.'),
+            ),
             'short_desc' => array(
                 'type' => 'text',
                 'maxlength' => 128,
@@ -44,6 +65,31 @@
                 'hint' => Yii::t('application', 'Please enter asset status; it is case-insensitive.'),
             ),
             'town' => array(
+                'type' => 'text',
+                'maxlength' => 64,
+                'hint' => Yii::t('application', 'Please enter asset status; it is case-insensitive.')
+            ),
+            'country' => array(
+                'type' => 'text',
+                'maxlength' => 64,
+                'hint' => Yii::t('application', 'Please enter asset status; it is case-insensitive.')
+            ),
+            'street' => array(
+                'type' => 'text',
+                'maxlength' => 64,
+                'hint' => Yii::t('application', 'Please enter asset status; it is case-insensitive.')
+            ),
+            'number' => array(
+                'type' => 'text',
+                'maxlength' => 11,
+                'hint' => Yii::t('application', 'Please enter asset status; it is case-insensitive.')
+            ),
+            'flat' => array(
+                'type' => 'text',
+                'maxlength' => 11,
+                'hint' => Yii::t('application', 'Please enter asset status; it is case-insensitive.')
+            ),
+            'district' => array(
                 'type' => 'text',
                 'maxlength' => 64,
                 'hint' => Yii::t('application', 'Please enter asset status; it is case-insensitive.')

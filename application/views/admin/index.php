@@ -63,6 +63,41 @@ if($widget->errorSummary($form)){
 </div>
 <br>
 <div class="row">
+    <div class="col-sm-3 control-label">Price rent for a day:</div>
+    <div class="col-sm-6">
+        <?php echo $widget->input($form, 'rent_day', array('class' => 'form-control') ); ?>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-3 control-label">Price rent for a week:</div>
+    <div class="col-sm-6">
+        <?php echo $widget->input($form, 'rent_week', array('class' => 'form-control') ); ?>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-3 control-label">Price rent for a month:</div>
+    <div class="col-sm-6">
+        <?php echo $widget->input($form, 'rent_month', array('class' => 'form-control') ); ?>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-3 control-label">Asset price:</div>
+    <div class="col-sm-6">
+        <?php echo $widget->input($form, 'price', array('class' => 'form-control') ); ?>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-3 control-label">Asset age:</div>
+    <div class="col-sm-6">
+        <?php echo $widget->input($form, 'age', array('class' => 'form-control') ); ?>
+    </div>
+</div>
+<br>
+<div class="row">
     <div class="col-sm-3 control-label">Short description:</div>
     <div class="col-sm-6">
         <?php echo $widget->input($form, 'short_desc', array('class' => 'form-control') ); ?>
@@ -77,9 +112,9 @@ if($widget->errorSummary($form)){
 </div>
 <br>
 <div class="row">
-  <div class="col-sm-3 control-label">Address:</div><div class="col-sm-offset-1 col-sm-1 control-label">Zip:</div>
+  <div class="col-sm-3 control-label">Address:</div><div class="col-sm-offset-1 col-sm-1 control-label">Country:</div>
     <div class="col-sm-4">
-        <?php echo $widget->input($form, 'zip_pc', array('class' => 'form-control') ); ?>
+        <?php echo $widget->input($form, 'country', array('class' => 'form-control') ); ?>
     </div>
 </div>
 <br>
@@ -91,11 +126,47 @@ if($widget->errorSummary($form)){
 </div>
 <br>
 <div class="row">
-  <div class="col-sm-3 control-label"></div><div class="col-sm-offset-1 col-sm-1 control-label">County:</div>
+  <div class="col-sm-3 control-label"></div><div class="col-sm-offset-1 col-sm-1 control-label">District:</div>
     <div class="col-sm-4">
-        <?php echo $widget->input($form, 'county', array('cladss' => 'form-control') ); ?>
+        <?php echo $widget->input($form, 'district', array('class' => 'form-control') ); ?>
     </div>
 </div>
+<br>
+<div class="row">
+  <div class="col-sm-3 control-label"></div><div class="col-sm-offset-1 col-sm-1 control-label">Street:</div>
+    <div class="col-sm-4">
+        <?php echo $widget->input($form, 'street', array('class' => 'form-control') ); ?>
+    </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-sm-3 control-label"></div><div class="col-sm-offset-1 col-sm-1 control-label">Building number:</div>
+    <div class="col-sm-4">
+        <?php echo $widget->input($form, 'number', array('class' => 'form-control') ); ?>
+    </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-sm-3 control-label"></div><div class="col-sm-offset-1 col-sm-1 control-label">Flat number:</div>
+    <div class="col-sm-4">
+        <?php echo $widget->input($form, 'flat', array('class' => 'form-control') ); ?>
+    </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-sm-3 control-label"></div><div class="col-sm-offset-1 col-sm-1 control-label">Zip:</div>
+    <div class="col-sm-4">
+        <?php echo $widget->input($form, 'zip_pc', array('class' => 'form-control') ); ?>
+    </div>
+</div>
+<br>
+<div class="row">
+  <div class="col-sm-3 control-label"></div><div class="col-sm-offset-1 col-sm-1 control-label">County:</div>
+    <div class="col-sm-4">
+        <?php echo $widget->input($form, 'county', array('class' => 'form-control') ); ?>
+    </div>
+</div>
+
 <br>
 <div class="row">
     <div class="col-sm-2 col-sm-offset-3">

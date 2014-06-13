@@ -12,6 +12,7 @@
     use \application\models\db\Users;
     use \application\models\db\Assets;
     use \application\models\db\Address;
+    use \application\models\db\Images;
 
     class AdminController extends Controller
     {
@@ -29,12 +30,14 @@
            }
             if($form->submitted() && $form->validate()) {
                 $address = New Address;
-                // $address = 
+                $address->attributes = $form->model->attributes;
+                var_dump($address);
+                exit;
                 $asset = New Assets;
                 $asset->attributes = $form->model->attributes;
                 $asset->created = time();
             }            
-            
+            else{echo "FALSE!!!";}   
         }
 
         public function actionLogin(){
