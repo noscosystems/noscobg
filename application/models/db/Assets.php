@@ -62,9 +62,12 @@ class Assets extends ActiveRecord
 	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
+		// 'VarName'=>array('RelationType', 'ClassName', 'ForeignKey', ...additional options)
 
 		return array(
-			'Images' => array(self::HAS_MANY, '\\application\\models\\db\\Images', 'asset')
+			'Images' => array(self::HAS_MANY, '\\application\\models\\db\\Images', 'asset'),
+			'Address' => array(self::HAS_ONE, '\\application\\models\\db\\Address', 'name'),
+			'Option' => array(self::HAS_ONE, '\\application\\models\\db\\Option', 'id')
 		);
 	}
 

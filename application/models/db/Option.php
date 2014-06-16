@@ -22,7 +22,7 @@ use \Yii;
 use \CException;
 use \application\components\ActiveRecord;
 
-class Option extends CActiveRecord
+class Option extends ActiveRecord
 {
 	/**
 	 * @return string the associated database table name

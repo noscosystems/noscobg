@@ -51,6 +51,7 @@ class Images extends ActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
+			'Assets'=>array(self::HAS_ONE, 'Images', 'asset')
 		);
 	}
 

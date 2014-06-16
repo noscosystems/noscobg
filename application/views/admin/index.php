@@ -29,15 +29,6 @@ if($widget->errorSummary($form)){
     </div>
 </div>
 
-<br/>
-
-<div class="row">
-    <div class="col-sm-3 control-label">Type of asset:</div>
-    <div class="col-sm-6">
-        <?php echo $widget->input($form, 'type', array('class' => 'form-control') ); ?>
-    </div>
-</div>
-
 <br>
 
 <div class="row">

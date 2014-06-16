@@ -13,11 +13,11 @@
                 'type' => 'text',
                 'hint' => Yii::t('application', 'Please enter area of the asset; it is case-sensitive.'),
             ),
-            'type' => array(
-                'type' => 'text',
-                'maxlength' => 11,
-                'hint' => Yii::t('application', 'Please enter the type of the asset (apartment, house, etc); it is case-insensitive.'),
-            ),
+            // 'type' => array(
+            //     'type' => 'text',
+            //     'maxlength' => 11,
+            //     'hint' => Yii::t('application', 'Please enter the type of the asset (apartment, house, etc); it is case-insensitive.'),
+            // ),
             'created_by' => array(
                 'type' => 'text',
                 'maxlength' => 11,

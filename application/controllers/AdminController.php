@@ -14,6 +14,7 @@
     use \application\models\db\Assets;
     use \application\models\db\Address;
     use \application\models\db\Images;
+    use \application\models\db\Option;
 
     class AdminController extends Controller
     {
@@ -33,18 +34,39 @@
                 $address->attributes = $form->model->attributes;
                 $address->created = time();
                 $address->save();
-                // $asset = New Assets;
-                // //$asset->address = $address->id;
-                // $asset->attributes = $form->model->attributes;
-                // $asset->created = time();
-                // $asset->save();
+                $address_name = Address::model()->findByAttributes(array('name'=> $address->name));
+                $asset = New Assets;
+                $asset->attributes = $form->model->attributes;
+                $asset->address = $address_name->id;
+                $asset->created_by = 6;
+                $option = Option::model()->findByPk(1);
+                $asset->type = $option->column;
+                $asset->created = time();
+                if ($asset->save()){
+                        echo 'SUCCESS!';
+                }else {
+                    echo 'Oh, no, no no, Huston we got a problem !!!';
+                    echo "<br><pre class='pre-scrollable'>"; var_dump($asset->errors); echo "</pre>";
+                }
                 $image = New Images;
-                $image->asset = 1;
-                $image->url = $url = 'application\\themes\\classic\\assets\images\\';
-                $image->name = $_FILES['image1']['tmp_name'];
+                $image->asset = $asset->id;
+                $image->name = $_FILES['image1']['name'];
+                $folder = 'application\\themes\\classic\\assets\images\\'.$address_name->name;
+                var_dump($folder);
+                if( !file_exists($folder) ) 
+                {
+                    mkdir($folder,0777, true);
+                }
+                $image->url = $folder = 'application\\themes\\classic\\assets\images\\';
                 $image->created = time();
-                move_uploaded_file($_FILES['image1']['name'], $url);
+                move_uploaded_file($_FILES['image1']['name'], $folder);
                 $image->save();
+                if ($image->save()){
+                        echo 'SUCCESS!';
+                }else {
+                    echo 'Oh, no, no no, Huston we got a problem !!!';
+                    echo "<br><pre class='pre-scrollable'>"; var_dump($image->errors); echo "</pre>";
+                }
             }
 
             $this->render('index',array('form' => $form));
