@@ -31,11 +31,20 @@
             if($form->submitted() && $form->validate()) {
                 $address = New Address;
                 $address->attributes = $form->model->attributes;
-                var_dump($address);
-                exit;
-                $asset = New Assets;
-                $asset->attributes = $form->model->attributes;
-                $asset->created = time();
+                $address->created = time();
+                $address->save();
+                // $asset = New Assets;
+                // //$asset->address = $address->id;
+                // $asset->attributes = $form->model->attributes;
+                // $asset->created = time();
+                // $asset->save();
+                $image = New Images;
+                $image->asset = 1;
+                $image->url = $url = 'application\\themes\\classic\\assets\images\\';
+                $image->name = $_FILES['image1']['tmp_name'];
+                $image->created = time();
+                move_uploaded_file($_FILES['image1']['name'], $url);
+                $image->save();
             }
 
             $this->render('index',array('form' => $form));
@@ -60,7 +69,7 @@
                     // been set).
                     $this->redirect(Yii::app()->user->getReturnUrl(Yii::app()->homeUrl));
 
-                    if($user->priv >= 30){
+                    if($user->priv >= 50){
                         // The user is an admin!
                         $this->redirect(array('admin/index'));
                     } else {
