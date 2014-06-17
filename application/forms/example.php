@@ -2,6 +2,16 @@
     // Do not worry about this variable. You will come across its reasoning later.
     $persistentClass = 'form-control';
 
+    // This will show how to add items from the DB
+    $users = Users::model()->findAll();
+    $userItems = array();
+    foreach($users as $user)
+        $userItems[$user->id] = $user->username;
+    // So what we just did was call all the users, create a blank array and then for each user, we added an element to the $userItems array.
+    // So now in the select dropdownlist thing, the options will look like this in the html:
+    // <option value="[[$user->id]]">[[$user->username]]</option>
+    // Where the [[brackets]] represent the elemts from the array.
+
     return array(
         // Set the elements that you wish to use, the format is as follows:
         'elements' => array(
@@ -9,7 +19,7 @@
             // For example, if the name is 'example' then the model should have a variable called '$example'.
             'nameOfElement' => array(
                 // Here you specify the html options for the element.
-                // The reason why the options are specified here and not in the view is so the views/controllers that use 
+                // The reason why the options are specified here and not in the view is so the views/controllers that use
                 //  this configuration have default settings, for example, the class of the element.
 
                 // This means that you can specify all fields to have similar classes by specifying the variable at the top of the page.
@@ -33,13 +43,15 @@
                         3 => 'Option Three',
                         'Text Value' => 'Label',
                     ),
+                // You can also add the array from earlier to be the items
+                'items' => $userItems,
 
                 // You can also set a prompt, basically what will show on the dropdownlist by default.
                 'prompt' => 'Please Select...',
 
                 // Finally, it is good practice to set a label, that way, if the nature of the form changes and you need to change the name
                 // of a field, you do not need to update all the views that use this form configuration, only this file. Imagine the concept
-                // of using file includes or stylesheets, instead of having to update every page, you update the single page which then 
+                // of using file includes or stylesheets, instead of having to update every page, you update the single page which then
                 // reflects on the rest of the system.
                 'label' => 'Label to the Element',
             ),
@@ -70,7 +82,7 @@
 
                 // Quite often, infact I've never had it where a button has been anything else, the type will be submit.
                 'type' => 'submit',
-                // The label is always good to set, this is the same as setting the default value 
+                // The label is always good to set, this is the same as setting the default value
                 'label' => 'Letters that appear on button',
             ),
         ),
