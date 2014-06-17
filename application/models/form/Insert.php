@@ -9,19 +9,19 @@
     class Insert extends FormModel
     {
 
-        public $name,$area,$type,$created_by,$status,$age,$price,$short_desc,$long_desc,$rent_day,$rent_week,$rent_month,
+        public $name,$area,$type,$owner,$status,$age,$price,$short_desc,$long_desc,$rent_day,$rent_week,$rent_month,
         $address,$zip_pc,$town,$street,$district,$county,$country,$number,$flat;
 
         public function rules()
         {
             return array(
                 // Username and password are required.
-                array('name, area, created_by, status, zip_pc, town, county', 'required'),
+                array('name, area, status, zip_pc, town, owner, county', 'required'),
                 // The database has a maximum username length of 64 characters.
                 array('name', 'length','min' => 5, 'max' => 64),
                 array('area', 'length','min' => 3, 'max' => 36),
                 //array('type', 'length','min' => 1, 'max' => 36),
-                array('created_by', 'length','min' => 1, 'max' => 36),
+                //array('created_by', 'length','min' => 1, 'max' => 36),
                 array('status', 'length','min' => 1, 'max' => 36),
                 array('short_desc', 'length', 'max' => 128),
                 array('long_desc', 'length', 'max' =>  65535),

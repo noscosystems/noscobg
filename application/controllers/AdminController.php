@@ -15,11 +15,16 @@
     use \application\models\db\Address;
     use \application\models\db\Images;
     use \application\models\db\Option;
+    use \application\models\db\Owners;
 
     class AdminController extends Controller
     {
 
         protected $identity;
+
+        public function actionOwnedAssets(){
+            $this->render('ownedassets');
+        }
 
         public function actionIndex()
         {
@@ -34,11 +39,11 @@
                 $address->attributes = $form->model->attributes;
                 $address->created = time();
                 $address->save();
-                $address_name = Address::model()->findByAttributes(array('name'=> $address->name));
+                //$address_name = Address::model()->findByAttributes(array('name'=> $address->name));
                 $asset = New Assets;
                 $asset->attributes = $form->model->attributes;
-                $asset->address = $address_name->id;
-                $asset->created_by = 6;
+                $asset->address = $address->id;// = $address_name->id;
+                $asset->created_by = Yii::app()->user->getId();
                 $option = Option::model()->findByPk(1);
                 $asset->type = $option->column;
                 $asset->created = time();
@@ -48,25 +53,13 @@
                     echo 'Oh, no, no no, Huston we got a problem !!!';
                     echo "<br><pre class='pre-scrollable'>"; var_dump($asset->errors); echo "</pre>";
                 }
-                $image = New Images;
-                $image->asset = $asset->id;
-                $image->name = $_FILES['image1']['name'];
-                $folder = 'application\\themes\\classic\\assets\images\\'.$address_name->name;
-                var_dump($folder);
-                if( !file_exists($folder) ) 
-                {
-                    mkdir($folder,0777, true);
-                }
-                $image->url = $folder = 'application\\themes\\classic\\assets\images\\';
-                $image->created = time();
-                move_uploaded_file($_FILES['image1']['name'], $folder);
-                $image->save();
-                if ($image->save()){
-                        echo 'SUCCESS!';
-                }else {
-                    echo 'Oh, no, no no, Huston we got a problem !!!';
-                    echo "<br><pre class='pre-scrollable'>"; var_dump($image->errors); echo "</pre>";
-                }
+                $owner = New Owners;
+                $owner->asset = $asset->id;
+                $owner->user = $form->model->owner;
+                $owner->created = time();
+                $owner->save();
+                // $image = New Images;
+                // $image->image_upload();
             }
 
             $this->render('index',array('form' => $form));

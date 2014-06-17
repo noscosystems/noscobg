@@ -37,19 +37,18 @@ if($widget->errorSummary($form)){
         <?php echo $widget->input($form, 'area', array('class' => 'form-control') ); ?>
     </div>
 </div>
-
-<br/>
-<div class="row">
-    <div class="col-sm-3 control-label">Asset created by:</div>
-    <div class="col-sm-6">
-        <?php echo $widget->input($form, 'created_by', array('class' => 'form-control') ); ?>
-    </div>
-</div>
 <br>
 <div class="row">
     <div class="col-sm-3 control-label">Asset status:</div>
     <div class="col-sm-6">
         <?php echo $widget->input($form, 'status', array('class' => 'form-control') ); ?>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-3 control-label">Owner of the asset:</div>
+    <div class="col-sm-6">
+        <?php echo $widget->input($form, 'owner', array('class' => 'form-control') ); ?>
     </div>
 </div>
 <br>

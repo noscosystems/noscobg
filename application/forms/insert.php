@@ -1,5 +1,14 @@
 <?php
 
+    // namespace application\controllers;
+
+    use \application\models\db\Users;
+
+    $users = Users::model()->findAll();
+    $userItems = array();
+    foreach($users as $user)
+        $userItems[$user->id] = $user->username;
+
     return array(
         'title' => Yii::t('application', 'Please provide your login credentials.'),
 
@@ -18,15 +27,21 @@
             //     'maxlength' => 11,
             //     'hint' => Yii::t('application', 'Please enter the type of the asset (apartment, house, etc); it is case-insensitive.'),
             // ),
-            'created_by' => array(
-                'type' => 'text',
-                'maxlength' => 11,
-                'hint' => Yii::t('application', 'Please enter by whom was the asset created; it is case-insensitive.'),
-            ),
+            // 'created_by' => array(
+            //     'type' => 'text',
+            //     'maxlength' => 11,
+            //     'hint' => Yii::t('application', 'Please enter by whom was the asset created; it is case-insensitive.'),
+            // ),
             'status' => array(
                 'type' => 'text',
                 'maxlength' => 11,
                 'hint' => Yii::t('application', 'Please enter asset status; it is case-insensitive.'),
+            ),
+            'owner' => array(
+                'type' => 'dropdownlist',
+                'items' => $userItems,
+                'prompt' => 'Please Select'
+                // 'hint' => Yii::t('application', 'Please enter your password; it is case-sensitive.'),
             ),
             'age' => array(
                 'type' => 'text',
