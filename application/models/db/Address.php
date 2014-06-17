@@ -42,11 +42,11 @@ class Address extends ActiveRecord
 		return array(
 			array('zip_pc, town, county, created', 'required' ),
 			array('number, flat, created', 'numerical', 'integerOnly'=>true),
-			array('name, discrict, town, street, country, county', 'length', 'max'=>64),
+			array('name, district, town, street, country, county', 'length', 'max'=>64),
 			array('zip_pc', 'length', 'max'=>12),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, number, name, flat, zip_pc, discrict, town, street, country, county, created', 'safe', 'on'=>'search'),
+			array('id, number, name, flat, zip_pc, district, town, street, country, county, created', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -73,7 +73,7 @@ class Address extends ActiveRecord
 			'name' => 'Name',
 			'flat' => 'Flat',
 			'zip_pc' => 'Zip Pc',
-			'discrict' => 'Discrict',
+			'district' => 'District',
 			'town' => 'Town',
 			'street' => 'Street',
 			'country' => 'Country',
@@ -105,7 +105,7 @@ class Address extends ActiveRecord
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('flat',$this->flat);
 		$criteria->compare('zip_pc',$this->zip_pc,true);
-		$criteria->compare('discrict',$this->discrict,true);
+		$criteria->compare('district',$this->discrict,true);
 		$criteria->compare('town',$this->town,true);
 		$criteria->compare('street',$this->street,true);
 		$criteria->compare('country',$this->country,true);
