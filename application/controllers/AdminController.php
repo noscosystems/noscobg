@@ -10,6 +10,7 @@
     use \application\models\form\Login;
     use \application\models\form\Register;
     use \application\models\form\Insert;
+    use \application\models\form\Img_upload;
     use \application\models\db\Users;
     use \application\models\db\Assets;
     use \application\models\db\Address;
@@ -22,8 +23,20 @@
 
         protected $identity;
 
+        public function actionListAssets(){
+            $this->render('listassets');
+        }
+
         public function actionOwnedAssets(){
-            $this->render('ownedassets');
+            $form = new Form('application.forms.img_upload', new Img_upload);
+            if ($form->submitted() && $form->validate()){
+                $image = New Images;
+                // $form->model->asset = $_GET['id'];
+                $image->attributes = $form->model->attributes;
+                $image->image_upload($_GET['asset_name']);
+            }
+            //$this->render('ownedassets');
+            $this->render('ownedassets',array('form' => $form));
         }
 
         public function actionIndex()

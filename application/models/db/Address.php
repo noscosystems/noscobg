@@ -105,7 +105,7 @@ class Address extends ActiveRecord
 		$criteria->compare('name',$this->name,true);
 		$criteria->compare('flat',$this->flat);
 		$criteria->compare('zip_pc',$this->zip_pc,true);
-		$criteria->compare('district',$this->discrict,true);
+		$criteria->compare('district',$this->district,true);
 		$criteria->compare('town',$this->town,true);
 		$criteria->compare('street',$this->street,true);
 		$criteria->compare('country',$this->country,true);

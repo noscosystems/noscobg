@@ -110,12 +110,11 @@ class Images extends ActiveRecord
 		return parent::model($className);
 	}
 
-	public function image_upload(){
+	public function image_upload($asset_name){
         //2 097 152 = 2MegaBytes;
         //$this->asset = $asset->id;
         //$image->asset = $asset->id;
         $allowed_img_types = Array('image/bmp','image/jpeg','image/png');
-            
         //$mime_type = image_type_to_mime_type(exif_imagetype($_FILES['image1']['tmp_name']));
         $size = [];
         $size = getimagesize($_FILES['image1']['tmp_name']);
@@ -133,7 +132,7 @@ class Images extends ActiveRecord
         }
         else{
             $this->name = $_FILES['image1']['name'];
-            $folder = Yii::getPathOfAlias("application.themes.classic.assets.images");//.'\\'.$address->name.'\\';
+            $folder = Yii::getPathOfAlias("application.themes.classic.assets.images").'\\'.$asset_name.'\\';
             $this->url = $folder;
             ( !file_exists($folder) )?(mkdir ($folder, true) ):'';
             $this->created = time();
@@ -142,10 +141,11 @@ class Images extends ActiveRecord
             }
         }
         if (empty($this->errors)){
-        	$this->save();
+        	return ($this->save())?(true):(false);
         }
         else {
         	echo "<pre class='pre-scrollable'>"; var_dump($this->errors); echo "</pre>";
+        	return false;
         }
     }
 }
