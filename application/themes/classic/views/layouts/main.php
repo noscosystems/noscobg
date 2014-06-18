@@ -93,7 +93,7 @@
             </div><!-- /.container-fluid -->
         </nav>
 
-        <div class="container" id="content">
+        <div class="container">
             <?php if(Yii::app()->user->hasFlash('success')): ?>
                 <br />
                 <div class="row">
