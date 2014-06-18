@@ -15,9 +15,6 @@ if($widget->errorSummary($form)){
     echo '<div class="alert alert-danger">' . $widget->errorSummary($form) . '</div>';
 }
 ?>
-
-<br />
-
 <div class="col-sm-offset-2 col-sm-10 page-header">
   <h1>New Asset <small>Please fill in the form to create a new asset.</small></h1>
 </div>

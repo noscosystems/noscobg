@@ -35,91 +35,65 @@
 
         <style>
         body {
-            background: #FEFEFE;
+            background: #FFF;
         }
 
-        .navigation {
-            top: 0;
-            left: 0;
-            position: absolute;
-            width:100%;
-            background: #CCC;
-            padding-bottom: 5px;
-            /*-webkit-box-shadow: 0px 0px 8px 2px #AAA;*/
-               /*-moz-box-shadow: 0px 0px 8px 2px #AAA;*/
-                    /*box-shadow: 0px 0px 8px 2px #AAA;*/
-        }
-
-        .logo {
-            margin-top: 10px;
-            margin-left: 10px;
-        }
-
-        .links {
-            color: #444;
-            text-shadow: 0px 1px #EEE;
-            text-transform: uppercase;
-            font-size: 1.2em;
-            text-decoration: none;
-            margin-top: 26px;
-        }
-
-        .links a:visited {
-            color: #444;
-            margin-left: 15px;
+        a:visited {
             text-decoration: none;
         }
-        .links a:link {
-            color: #444;
-            margin-left: 15px;
+        a:link {
             text-decoration: none;
         }
-        .links a:active {
-            color: #444;
-            margin-left: 15px;
+        a:active {
             text-decoration: none;
         }
-        .links a:hover {
-            color: #555;
+        a:hover {
             text-decoration: none;
-            background: #c5c5c5;
         }
 
         .font-raleway {
             font-family: 'Raleway', sans-serif;
             -webkit-font-smoothing: antialiased;
         }
-
-        #content {
-            background: #EFEFEF;
-        }
         </style>
     </head>
 
     <body>
-        <div class="navigation">
-            <div class="container">
 
-                <div class="pull-left">
-                    <div class="logo">
-                        <img src="<?php echo $assetUrl; ?>/images/logo1.png">
-                    </div>
+
+        <nav class="navbar navbar-inverse navbar-static-top" role="navigation">
+            <div class="container-fluid">
+                <!-- Brand and toggle get grouped for better mobile display -->
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Smart Properties</a>
                 </div>
 
-                <div class="pull-right">
-                    <div class="font-raleway links">
-                        <?php echo CHtml::link('Home', array('/home'), array()); ?>
-                        <?php echo CHtml::link('Houses', array('/asset', 'type' => 1), array()); ?>
-                        <?php echo CHtml::link('Apartments', array('/asset', 'type' => 2), array()); ?>
-                        <?php echo CHtml::link('Land', array('/asset', 'type' => 3), array()); ?>
-                        <?php echo CHtml::link('Admin', array('/admin'), array()); ?>
-                    </div>
-                </div>
-            </div>
-        </div>
+                <!-- Collect the nav links, forms, and other content for toggling -->
+                <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                    <ul class="nav navbar-nav navbar-right">
+                        <li><?php echo CHtml::link('Home', array('/home'), array()); ?></li>
+                        <li><?php echo CHtml::link('Houses', array('/asset', 'type' => 1), array()); ?></li>
+                        <li><?php echo CHtml::link('Apartments', array('/asset', 'type' => 2), array()); ?></li>
+                        <li><?php echo CHtml::link('Land', array('/asset', 'type' => 3), array()); ?></li>
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><?php echo CHtml::link('Index', array('/admin'), array()); ?></li>
+                                <li><?php echo CHtml::link('List Assets', array('/admin/listassets'), array()); ?></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div><!-- /.navbar-collapse -->
+            </div><!-- /.container-fluid -->
+        </nav>
 
         <div class="container" id="content">
-
             <?php if(Yii::app()->user->hasFlash('success')): ?>
                 <br />
                 <div class="row">
