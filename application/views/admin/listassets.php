@@ -4,33 +4,22 @@
      */
     $this->pageTitle = false;
     $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/assets');
-
-	echo 'Add images to owned assets';
 ?>
-<?php //echo CHtml::link('Link Text',array('admin/index')); ?>
+<div class="page-header">
+  <h1>View Assets <small>Below is a list of your Assets.</small></h1>
+</div>
 
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th>table header</th>
+			<th>Asset Name</th>
 		</tr>
 	</thead>
 	<tbody>
-<?php
-
-	use \application\models\db\Assets;
-	$assets = Assets::model()->findAllByAttributes(array('created_by'=>Yii::app()->user->getId()));
-    $assetItems = [];
-    foreach ($assets as $k => $v){
-        $assetItems [$v->id] = $v->name;
-    }
-    echo '<pre>';
-    var_dump($assetItems);
-    echo '</pre>';
-
-	foreach ($assetItems as $kk => $vv){
-        echo '<tr><td>'.CHtml::link($vv,array('admin/ownedassets','id' => $kk,'asset_name'=> $vv)).'</td></tr>';
-    }
-?>
+        <?php foreach(Yii::app()->user->model()->Assets as $asset): ?>
+            <tr>
+                <td><?php echo CHtml::link($asset->name, array('/asset/view', 'id' => $asset->id)); ?></td>
+            </tr>
+        <?php endforeach; ?>
 	</tbody>
 </table>

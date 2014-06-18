@@ -60,20 +60,25 @@
                 // The Type simply has to be the Option ID.
                 $asset->type = 1;
                 $asset->status = 1;
+                // Assign the owner to the asset
+                $asset->owner = $form->model->owner;
                 $asset->created = time();
                 if(!$asset->save()){
                     echo 'Error saving asset - Line: ' . __LINE__ ;
                     echo "<br><pre class='pre-scrollable'>"; var_dump($asset->errors); echo "</pre>";
                 }
 
-                $owner = New Owners;
-                $owner->asset = $asset->id;
-                $owner->user = $form->model->owner;
-                $owner->created = time();
-                if(!$owner->save()){
-                    echo 'Error saving owner - Line: ' . __LINE__ ;
-                    echo "<br><pre class='pre-scrollable'>"; var_dump($owner->errors); echo "</pre>";
-                }
+                /**
+                No longer need to save owner like this as it is now a 1 to 1 relationship.
+                */
+                // $owner = New Owners;
+                // $owner->asset = $asset->id;
+                // $owner->user = $form->model->owner;
+                // $owner->created = time();
+                // if(!$owner->save()){
+                //     echo 'Error saving owner - Line: ' . __LINE__ ;
+                //     echo "<br><pre class='pre-scrollable'>"; var_dump($owner->errors); echo "</pre>";
+                // }
                 // $image = New Images;
                 // $image->image_upload();
 

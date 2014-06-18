@@ -16,10 +16,10 @@
  * @property integer $gender
  * @property integer $branch
  * @property integer $created
+ * @property integer $active
  *
  * The followings are the available model relations:
  * @property Assets[] $assets
- * @property Owners[] $owners
  * @property Rooms[] $rooms
  * @property Option $title0
  */
@@ -48,13 +48,13 @@ class Users extends ActiveRecord
 		// will receive user inputs.
 		return array(
 			array('username, password, firstname, lastname, priv, dob, gender, branch, created', 'required'),
-			array('title, priv, dob, gender, branch, created', 'numerical', 'integerOnly'=>true),
+			array('title, priv, dob, gender, branch, created, active', 'numerical', 'integerOnly'=>true),
 			array('username', 'length', 'max'=>64),
 			array('password', 'length', 'max'=>60),
 			array('firstname, middlename, lastname', 'length', 'max'=>36),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, username, password, title, firstname, middlename, lastname, priv, dob, gender, branch, created', 'safe', 'on'=>'search'),
+			array('id, username, password, title, firstname, middlename, lastname, priv, dob, gender, branch, created, active', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -91,6 +91,7 @@ class Users extends ActiveRecord
 			'gender' => 'Gender',
 			'branch' => 'Branch',
 			'created' => 'Created',
+			'active' => 'Active',
 		);
 	}
 
@@ -124,6 +125,7 @@ class Users extends ActiveRecord
 		$criteria->compare('gender',$this->gender);
 		$criteria->compare('branch',$this->branch);
 		$criteria->compare('created',$this->created);
+		$criteria->compare('active',$this->active);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

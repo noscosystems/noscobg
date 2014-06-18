@@ -24,6 +24,14 @@ use \application\components\ActiveRecord;
  * @property string $short_desc
  * @property string $long_desc
  * @property integer $address
+ * @property integer $owner
+ *
+ * The followings are the available model relations:
+ * @property Address $address0
+ * @property Users $createdBy
+ * @property Option $type0
+ * @property Images[] $images
+ * @property Rooms[] $rooms
  */
 class Assets extends ActiveRecord
 {
@@ -43,15 +51,15 @@ class Assets extends ActiveRecord
 		// NOTE: you should only define rules for those attributes that
 		// will receive user inputs.
 		return array(
-			array('name, area, type, created, created_by, status', 'required'),
-			array('type, created, created_by, age, status, address', 'numerical', 'integerOnly'=>true),
+			array('name, area, type, created, created_by, status, owner', 'required'),
+			array('type, created, created_by, age, status, address, owner', 'numerical', 'integerOnly'=>true),
 			array('area, rent_day, rent_week, rent_month, price', 'numerical'),
 			array('name', 'length', 'max'=>64),
 			array('short_desc', 'length', 'max'=>128),
 			array('long_desc', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, area, type, rent_day, rent_week, rent_month, price, created, created_by, age, status, short_desc, long_desc, address', 'safe', 'on'=>'search'),
+			array('id, name, area, type, rent_day, rent_week, rent_month, price, created, created_by, age, status, short_desc, long_desc, address, owner', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -67,7 +75,9 @@ class Assets extends ActiveRecord
 		return array(
 			'Images' => array(self::HAS_MANY, '\\application\\models\\db\\Images', 'asset'),
 			'Address' => array(self::HAS_ONE, '\\application\\models\\db\\Address', 'name'),
-			'Option' => array(self::HAS_ONE, '\\application\\models\\db\\Option', 'id')
+			'Option' => array(self::HAS_ONE, '\\application\\models\\db\\Option', 'id'),
+			'Rooms' => array(self::HAS_MANY, '\\application\\models\\db\\Rooms', 'asset'),
+			'Owner' => array(self::HAS_ONE, '\\application\\models\\db\\Users', 'owner'),
 		);
 	}
 
@@ -92,6 +102,7 @@ class Assets extends ActiveRecord
 			'short_desc' => 'Short Desc',
 			'long_desc' => 'Long Desc',
 			'address' => 'Address',
+			'owner' => 'Owner',
 		);
 	}
 
@@ -128,6 +139,7 @@ class Assets extends ActiveRecord
 		$criteria->compare('short_desc',$this->short_desc,true);
 		$criteria->compare('long_desc',$this->long_desc,true);
 		$criteria->compare('address',$this->address);
+		$criteria->compare('owner',$this->owner);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,
