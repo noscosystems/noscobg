@@ -118,9 +118,11 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
     </div>
 
     <div class="pull-right font-raleway links">
-        <a href="#" >Link</a>
-        <a href="#" >Link</a>
-        <a href="#" >Link</a>
+        <?php echo CHtml::link('Home', array('/home'), array()); ?>
+        <?php echo CHtml::link('Houses', array('/asset', 'type' => 1), array()); ?>
+        <?php echo CHtml::link('Apartments', array('/asset', 'type' => 2), array()); ?>
+        <?php echo CHtml::link('Land', array('/asset', 'type' => 3), array()); ?>
+        <?php echo CHtml::link('Admin', array('/admin'), array()); ?>
     </div>
 </div>
 
