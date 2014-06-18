@@ -57,22 +57,28 @@
                 $asset->attributes = $form->model->attributes;
                 $asset->address = $address->id;// = $address_name->id;
                 $asset->created_by = Yii::app()->user->getId();
-                $option = Option::model()->findByPk(1);
-                $asset->type = $option->column;
+                // The Type simply has to be the Option ID.
+                $asset->type = 1;
+                $asset->status = 1;
                 $asset->created = time();
-                if ($asset->save()){
-                        echo 'SUCCESS!';
-                }else {
-                    echo 'Oh, no, no no, Huston we got a problem !!!';
+                if(!$asset->save()){
+                    echo 'Error saving asset - Line: ' . __LINE__ ;
                     echo "<br><pre class='pre-scrollable'>"; var_dump($asset->errors); echo "</pre>";
                 }
+
                 $owner = New Owners;
                 $owner->asset = $asset->id;
                 $owner->user = $form->model->owner;
                 $owner->created = time();
-                $owner->save();
+                if(!$owner->save()){
+                    echo 'Error saving owner - Line: ' . __LINE__ ;
+                    echo "<br><pre class='pre-scrollable'>"; var_dump($owner->errors); echo "</pre>";
+                }
                 // $image = New Images;
                 // $image->image_upload();
+
+                // This will display a success message.
+                Yii::app()->user->setFlash('success', 'The new Asset has been saved successfully.');
             }
 
             $this->render('index',array('form' => $form));

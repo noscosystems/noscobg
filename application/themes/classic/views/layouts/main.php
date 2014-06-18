@@ -77,6 +77,17 @@
                 }
             ?>
 
+            <?php if(Yii::app()->user->hasFlash('success')): ?>
+                <br />
+                <div class="row">
+                    <div class="col-xs-12">
+                        <div class="alert alert-success">
+                            <?php echo Yii::app()->user->getFlash('success'); ?>
+                        </div>
+                    </div>
+                </div>
+            <?php endif; ?>
+
             <?php echo $content; ?>
 
             <div class="clear"></div>
