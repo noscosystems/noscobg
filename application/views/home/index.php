@@ -122,7 +122,7 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
         <?php echo CHtml::link('Houses', array('/asset', 'type' => 1), array()); ?>
         <?php echo CHtml::link('Apartments', array('/asset', 'type' => 2), array()); ?>
         <?php echo CHtml::link('Land', array('/asset', 'type' => 3), array()); ?>
-        <?php echo CHtml::link('Admin', array('/admin'), array()); ?>
+        <?php echo (Yii::app()->user->isGuest)?(CHtml::link('Guest', array('/admin/login'), array())):CHtml::link('Admin', array('admin/'), array()); ?>
     </div>
 </div>
 

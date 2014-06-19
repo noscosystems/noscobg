@@ -155,13 +155,6 @@ if($widget->errorSummary($form)){
 </div>
 <br>
 <div class="row">
-    <div class="col-sm-3 control-label">Image_1:</div>
-    <div class="col-sm-6">
-        <input name="image1" type="file">
-    </div>
-</div>
-<br>
-<div class="row">
     <div class="col-sm-2 col-sm-offset-3">
         <?php echo $widget->button($form, 'submit', array('class' => 'btn btn-lg btn-success',) ); ?>
     </div>

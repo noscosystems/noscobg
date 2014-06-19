@@ -82,11 +82,20 @@
                         <li><?php echo CHtml::link('Apartments', array('/asset', 'type' => 2), array()); ?></li>
                         <li><?php echo CHtml::link('Land', array('/asset', 'type' => 3), array()); ?></li>
                         <li class="dropdown">
+                        <?php if( Yii::app()->user->isGuest){ ?>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Guest <b class="caret"></b></a>
+                            <ul class="dropdown-menu">
+                                <li><?php echo CHtml::link('Home', array('/home'), array()); ?></li>
+                                <li><?php echo CHtml::link('Login', array('/admin/login'), array()); ?></li>
+                            </ul>
+                        <?php } else {?>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><?php echo CHtml::link('Index', array('/admin'), array()); ?></li>
                                 <li><?php echo CHtml::link('List Assets', array('/admin/listassets'), array()); ?></li>
+                                <li><?php echo CHtml::link('Logout', array('/admin/logout'), array()); ?></li>
                             </ul>
+                        <?php } ?>
                         </li>
                     </ul>
                 </div><!-- /.navbar-collapse -->

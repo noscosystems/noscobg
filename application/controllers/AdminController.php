@@ -164,7 +164,6 @@
                 }
             }
 
-
             /*
 
             Pav, this is your code, I updated the login to use UserIdentity, this sets all the properties needed to login etc.
@@ -206,6 +205,11 @@
             $this->render('login',array(
                 'form' => $form
             ));
+        }
+
+        function actionLogout(){
+            Yii::app()->user->logout();
+            //$this->render('listassets');
         }
 
         public function actionRegister(){
