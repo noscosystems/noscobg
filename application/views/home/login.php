@@ -5,7 +5,7 @@ $widget = $form->activeFormWidget;
 ?>
 
 <?php if($widget->error($form, 'username') || $widget->error($form, 'password')): ?>
-    <div class="alert alert-warning">
+    <div class="alert alert-success">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <strong>Errors Found!</strong> Your form has the following errors:<br />
             <?php
