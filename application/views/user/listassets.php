@@ -18,7 +18,7 @@
 	<tbody>
         <?php foreach(Yii::app()->user->model()->Assets as $asset): ?>
             <tr>
-                <td><?php echo CHtml::link($asset->name, array('/asset/view', 'id' => $asset->id)); ?></td>
+                <td><?php echo CHtml::link($asset->name, array('/asset/view', 'id' => $asset->id, 'asset_name' => $asset->name)); ?></td>
             </tr>
         <?php endforeach; ?>
 	</tbody>

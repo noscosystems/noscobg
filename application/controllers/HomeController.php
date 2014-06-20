@@ -9,7 +9,6 @@
     use \application\components\Form;
     use \application\models\form\Login;
     use \application\models\form\Register;
-    use \application\models\form\Insert;
     use \application\models\db\Users;
     use \application\models\db\Address;
 
@@ -145,6 +144,7 @@
         }
 
         public function actionRegister(){
+            if (Yii::app()->user->isGuest){
             $form = new Form('application.forms.register', new Register);
 
             if($form->submitted() && $form->validate()) {
@@ -173,11 +173,15 @@
                     if(!$user->save()){
                         echo "<pre class='pre-scrollable'>"; var_dump($user->errors); echo "</pre>"; exit;
                     }
-
-                    Yii::app()->user->setFlash('admin.register.success', 'Success!, you have successfully registered!');
+                    else{
+                        Yii::app()->user->setFlash('home.register.success', 'Success!, you have successfully registered!');
+                    }
                 }
             }
-
+        }
+        else {
+            $this->redirect(array('/home'));
+        }
             $this->render('register',array('form' => $form));
         }
 

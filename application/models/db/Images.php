@@ -132,16 +132,16 @@ class Images extends ActiveRecord
         }
         else{
             $this->name = $_FILES['image1']['name'];
-            $folder = Yii::getPathOfAlias("application.themes.classic.assets.images").'\\'.$asset_name.'\\';
-            $this->url = $folder;
+            $folder = Yii::getPathOfAlias('application.views.Uploads').'\\'.$asset_name.'\\';/*Yii::getPathOfAlias("application.themes.classic.assets.images")*/
             ( !file_exists($folder) )?(mkdir ($folder, true) ):'';
+            $this->url = $folder.$_FILES['image1']['name'];
             $this->created = time();
             if ( !move_uploaded_file($_FILES['image1']['tmp_name'], $folder.'/'.$_FILES['image1']['name']) ){
             	array_push($this->errors, 'Unable to upload image, please try again!');
             }
         }
         if (empty($this->errors)){
-        	return ($this->save())?(true):(false);
+        	echo ($this->save())?'YESSSSS!!!!':'Noooooooooo!';
         }
         else {
         	echo "<pre class='pre-scrollable'>"; var_dump($this->errors); echo "</pre>";
