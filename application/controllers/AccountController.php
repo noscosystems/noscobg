@@ -9,11 +9,13 @@
 	use \application\components\UserIdentity;
 	use \application\models\form\Editpass;
 	use \application\models\db\Users;
+	use \application\models\form\Userprof;
+	use \application\models\db\Users_upd;
 
 
 	class AccountController extends Controller
 	{
-		public function actionIndex()
+		public function actionChangePass()
 		{
 			$form = new Form('application.forms.edit_pass', new Editpass);
 	            if ($form->submitted() && $form->validate()){
@@ -36,8 +38,36 @@
 	            		}
 	            	}
 	            }
-			$this->render('index',array('form' => $form));
+			$this->render('changepass',array('form' => $form));
 		}
+
+		public function actionMyaccount(){
+			if (!Yii::app()->user->isGuest){
+				$form = new Form('application.forms.userprof', new Userprof);
+				$user = Users::model()->findbyPk(Yii::app()->user->id);
+				if ($form->submitted() && $form->validate()){
+					$user_search = Users::model()->findAllByAttributes(array('username' => $form->model->username));
+                	if($user_search){
+                    	$form->model->addError('username', 'The username specified is already taken! Please choose another.');
+                	}else{
+                		// $user1->dob = $user->dob;
+                		// $user1->priv = $user->priv;
+                		// $user1->branch = $user->branch;\
+						$user->attributes = $form->model->attributes;
+						if (!$user->save()){
+							echo 'Error saving user - Line: ' . __LINE__ ;
+	                    	echo "<br><pre class='pre-scrollable'>"; var_dump($user1->errors);
+	                    	echo "</pre>";
+	                    	// Yii::setFlash('warning','');
+	                	}
+	                	else{
+	                		Yii::app()->user->setFlash('success','User profile updated successfully.');
+	            		}
+	            	}
+				}
+			}
+            $this->render('myaccount',array('form' => $form, 'user'=>$user));
+        }
 
 		// Uncomment the following methods and override them if needed
 		/*

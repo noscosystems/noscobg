@@ -6,7 +6,6 @@
 	use \application\components\Controller;
 	use \application\components\UserIdentity;
 	use \application\models\form\Insert;
-	use \application\models\form\Editpass;
 	use \application\models\db\Users;
 	use \application\models\db\Address;
 	use \application\models\db\Assets;
@@ -15,8 +14,7 @@ class DefaultController extends Controller
 {
 	protected $identity;
 
-        public function actionIndex()
-        {
+        public function actionIndex(){
             if(Yii::app()->user->isGuest){
                 $this->redirect(array('/login'));
             }
@@ -63,5 +61,11 @@ class DefaultController extends Controller
             }
 
             $this->render('index',array('form' => $form));
+        }
+
+        public function actionListUsers(){
+            //$users = Users::model()->findbyAll();
+            //var_dump($users);
+            $this->render('listusers');//,array('users'=>$users));
         }
 }
