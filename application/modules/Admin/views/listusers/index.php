@@ -43,7 +43,6 @@
 	</thead>
 	<tbody>
         <?php foreach($users as $v): ?>
-            <?php if ($v->priv>=50){break;} ?>
             <tr>
                 <td><?php echo $v->username; ?></td>
                 <td><?php echo $v->priv; ?></td>
