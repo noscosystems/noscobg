@@ -15,11 +15,11 @@
 			$form = New Form('application.forms.listusers', New ListUsers);
 			$criteria = new \CDbCriteria;
 			$count = Users::model()->count($criteria);
-			$pagination = new \CPagination( $count );
- 			$pagination->pageSize = 2;
-            $pagination->applyLimit($criteria);
+			$pages = new \CPagination( $count );
+ 			$pages->pageSize = 10;
+            $pages->applyLimit($criteria);
 			$users = Users::model()->findAll($criteria);
-			$dataProvider = new CArrayDataProvider($users);
+			//$dataProvider = new CArrayDataProvider($users);
 		    
 			
 //$actions = \application\models\db\MODEL::model()->findAll($criteria);
@@ -30,9 +30,8 @@
 		    	$this->redirect (array('/admin/edituser', 'id' => $found_user->id));
 		    }
 		    $this->render('index', array('form'=>$form,
-										 'pagination' => $pagination,
-										 'users' => $users,
-										 'dataProvider' => $dataProvider
+										 'pages' => $pages,
+										 'users' => $users
 										 )
 		    );
 		}

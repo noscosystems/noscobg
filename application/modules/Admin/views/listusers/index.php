@@ -49,24 +49,24 @@
         <?php endforeach; ?>
 	</tbody>
 </table>
-
+<?php $this->widget('CLinkPager', array('pages' => $pages)); ?>
 <?php echo $form->renderEnd(); ?>
 
-<?php
- $this->widget('zii.widgets.CListView', array(
-    'dataProvider' => $dataProvider,
-    'itemView' => '_index',
-    'ajaxUpdate'=>false,
-    'enablePagination'=>false,
-    'pagerCssClass' => 'result-list',
-    'summaryText' => 'Total '. $pagination->itemCount .' Results Found',
-));
-$this->widget('CLinkPager', array(
-    'header' => '',
-    'firstPageLabel' => '&lt;&lt;',
-    'prevPageLabel' => '&lt;',
-    'nextPageLabel' => '&gt;',
-    'lastPageLabel' => '&lt;&lt;',
-    'pagination' => $pagination,
-));
-?>
+ <?php
+//  $this->widget('zii.widgets.CListView', array(
+//     'dataProvider' => $dataProvider,
+//     'itemView' => '_index',
+//     'ajaxUpdate'=>false,
+//     'enablePagination'=>false,
+//     'pagerCssClass' => 'result-list',
+//     'summaryText' => 'Total '. $pagination->itemCount .' Results Found',
+// ));
+// $this->widget('CLinkPager', array(
+//     'header' => '',
+//     'firstPageLabel' => '&lt;&lt;',
+//     'prevPageLabel' => '&lt;',
+//     'nextPageLabel' => '&gt;',
+//     'lastPageLabel' => '&lt;&lt;',
+//     'pagination' => $pagination,
+// ));
+// ?>
