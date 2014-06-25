@@ -113,4 +113,34 @@
             }
         }
 
+        public function actionCriteriaPagination()
+        {
+            // Create a new Database Criteria Object.
+            $criteria = new \CDbCriteria;
+            // You are able to apply conditions, similar to WHERE statements.
+            $criteria->addBetweenCondition(column, start, end);
+            $criteria->addColumnCondition(array(
+                'field' => value,
+                'priv' => 50,
+            ));
+            $criteria->addInCondition(column, array(value,value,value));
+            $criteria->order = "column ASC/DESC";
+
+            // Create a new pagination object, passing to it the total amount of rows that get returned for the given
+            // database criteria.
+            $pagination = new \CPagination( \application\models\db\MODEL::model()->count($criteria) );
+
+            // Decide on how many items should be displayed on each page, and then apply that limit (and offset) to the
+            // database critera so only the required rows are returned to whatever method uses that criteria.
+            $pagination->pageSize = 25;
+            $pagination->applyLimit($criteria);
+
+            // Grab all the actions from the database that correspond to the current branch
+            $actions = \application\models\db\MODEL::model()->findAll($criteria);
+
+            $this->render('pagination', array(
+                'pagination' => $pagination,
+            ));
+        }
+
     }
