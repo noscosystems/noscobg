@@ -44,7 +44,7 @@
             <tr>
                 <td><?php echo $v->username; ?></td>
                 <td><?php echo $v->priv; ?></td>
-                <td><?php echo CHtml::link($v->username, array('/edituser', 'id' => $v->id, 'username' => $v->username),array('title' => 'Click to edit a user.')); ?></td>
+                <td><?php echo CHtml::link($v->username, array('/admin/edituser/', 'id' => $v->id ),array('title' => 'Click to edit a user.')); ?></td>
             </tr>
         <?php endforeach; ?>
 	</tbody>
