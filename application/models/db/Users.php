@@ -214,7 +214,7 @@ class Users extends ActiveRecord
      * @param string $password
      * @return void
      */
-    protected function setPassword($password)
+    public function _setPassword($password)
     {
         return \CPasswordHelper::hashPassword($password);
     }

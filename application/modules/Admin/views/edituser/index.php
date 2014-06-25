@@ -77,7 +77,7 @@ if($widget->errorSummary($form)){
     </div>
 </div>
 <br>
-
+<?php if (($user->priv<50)): ?>
 <div class="row">
     <div class="col-sm-3 control-label">Select privilige level for this user:</div>
     <div class="col-sm-6">
@@ -85,11 +85,14 @@ if($widget->errorSummary($form)){
     </div>
 </div>
 <br>
+
+<?php endif; ?>
 <div class="row">
     <div class="col-sm-2 col-sm-offset-3">
         <?php echo $widget->button($form, 'submit', array('class' => 'btn btn-lg btn-success') ); ?>
     </div>
 </div>
+
 <?php echo $form->renderEnd(); ?>
 </div><!-- form -->
 

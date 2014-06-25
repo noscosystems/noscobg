@@ -26,7 +26,7 @@
 	            	//var_dump(\CPasswordHelper::hashPassword($password));
 	            	if ($user->password($old_pass) && $password == $rep_new_pass)
 	            	{
-	            		$user->password = $password;//\CPasswordHelper::hashPassword($password);
+	            		$user->password = _setPassword($password);//\CPasswordHelper::hashPassword($password);
 	            		if (!$user->save()){
 		            		echo 'Error saving user - Line: ' . __LINE__ ;
 	                    	echo "<br><pre class='pre-scrollable'>"; var_dump($user->errors);

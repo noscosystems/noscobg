@@ -8,8 +8,6 @@
     echo $form->renderBegin();
     $widget = $form->activeFormWidget;
 
-
-
     if($widget->errorSummary($form)){
         echo '<div class="alert alert-danger">' . $widget->errorSummary($form) . '</div>';
     }
@@ -51,4 +49,24 @@
         <?php endforeach; ?>
 	</tbody>
 </table>
+
 <?php echo $form->renderEnd(); ?>
+
+<?php
+ $this->widget('zii.widgets.CListView', array(
+    'dataProvider' => $dataProvider,
+    'itemView' => '_index',
+    'ajaxUpdate'=>false,
+    'enablePagination'=>false,
+    'pagerCssClass' => 'result-list',
+    'summaryText' => 'Total '. $pagination->itemCount .' Results Found',
+));
+$this->widget('CLinkPager', array(
+    'header' => '',
+    'firstPageLabel' => '&lt;&lt;',
+    'prevPageLabel' => '&lt;',
+    'nextPageLabel' => '&gt;',
+    'lastPageLabel' => '&lt;&lt;',
+    'pagination' => $pagination,
+));
+?>

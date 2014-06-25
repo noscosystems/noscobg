@@ -15,7 +15,7 @@
         {
             return array(
                 // Username and password are required.
-                array('username, firstname, lastname, priv', 'required'),
+                array('username, firstname, lastname', 'required'),
                 // The database has a maximum username length of 64 characters.
                 array('username', 'length','min' => 5, 'max' => 64),
                 array('old_pass', 'length','min' => 5, 'max' => 60),
