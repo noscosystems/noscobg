@@ -122,7 +122,14 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
         <?php echo CHtml::link('Houses', array('/asset', 'type' => 1), array()); ?>
         <?php echo CHtml::link('Apartments', array('/asset', 'type' => 2), array()); ?>
         <?php echo CHtml::link('Land', array('/asset', 'type' => 3), array()); ?>
-        <?php echo (Yii::app()->user->isGuest)?(CHtml::link('Guest', array('home/login'), array())):CHtml::link('Myaccount', array('user/myaccount'), array()); ?>
+        <a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
+            <ul class="dropdown-menu">
+                <li><?php echo (Yii::app()->user->isGuest)?(CHtml::link('Guest\Login', array('home/login'), array())):CHtml::link('Myaccount', array('account/myaccount'), array()); ?></li>
+                <li><?php echo (!Yii::app()->user->isGuest)?(CHtml::link('My Assets', array('/user/listassets'), array())):''; ?></li>
+                <li><?php echo (!Yii::app()->user->isGuest)?(CHtml::link('Log out', array('/user/logout'), array())):'';?></li>
+            </ul>
+        
+        
     </div>
 </div>
 
@@ -164,7 +171,6 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
         <span class="glyphicon glyphicon-chevron-right"></span>
     </a>
 </div>
-
 
 
 

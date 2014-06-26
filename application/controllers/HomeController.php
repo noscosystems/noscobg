@@ -14,6 +14,8 @@
 
     class HomeController extends Controller {
 
+        public $identity;
+
         public function actionIndex()
         {
             $this->renderPartial('index');

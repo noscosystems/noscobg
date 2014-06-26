@@ -6,7 +6,7 @@ $widget = $form->activeFormWidget;
 ?>
 
 <div class="page-header">
-    <h1>User profile <small>Please enter your changes to</small></h1>
+    <h1>User profile <small>Please enter your changes</small></h1>
 </div>
 
 <?php if(Yii::app()->user->hasFlash('account.myaccount.success')): ?>

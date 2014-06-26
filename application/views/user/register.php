@@ -9,10 +9,10 @@ $widget = $form->activeFormWidget;
     <h1>Register <small>Please enter your information</small></h1>
 </div>
 
-<?php if(Yii::app()->user->hasFlash('home.register.success')): ?>
+<?php if(Yii::app()->user->hasFlash('user.logout.success')): ?>
     <div class="alert alert-success">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <?php echo Yii::app()->user->getFlash('home.register.success'); ?>
+        <?php echo Yii::app()->user->getFlash('user.logout.success'); ?>
     </div>
 <?php endif; ?>
 

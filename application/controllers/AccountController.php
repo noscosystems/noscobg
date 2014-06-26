@@ -7,10 +7,9 @@
 	use \application\components\Form;
 	use \application\components\Controller;
 	use \application\components\UserIdentity;
-	use \application\models\form\Editpass;
 	use \application\models\db\Users;
+	use \application\models\form\Editpass;
 	use \application\models\form\Userprof;
-	use \application\models\db\Users_upd;
 
 
 	class AccountController extends Controller
@@ -24,9 +23,8 @@
 	            	$password = $form->model->password;
 	            	$rep_new_pass = $form->model->rep_new_pass;
 	            	//var_dump(\CPasswordHelper::hashPassword($password));
-	            	if ($user->password($old_pass) && $password == $rep_new_pass)
-	            	{
-	            		$user->password = _setPassword($password);//\CPasswordHelper::hashPassword($password);
+	            	if ($user->password($old_pass) && $password == $rep_new_pass){
+	            		$user->password = Users::model()->_setPassword($rep_new_pass);//\CPasswordHelper::hashPassword($password);
 	            		if (!$user->save()){
 		            		echo 'Error saving user - Line: ' . __LINE__ ;
 	                    	echo "<br><pre class='pre-scrollable'>"; var_dump($user->errors);

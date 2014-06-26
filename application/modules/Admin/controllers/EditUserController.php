@@ -13,6 +13,8 @@
 	class EditUserController extends Controller{
 
 		public function actionIndex(){
+			var_dump(Yii::app()->user->id);
+			exit;
 			if (isset($_GET['id'])){
 				$form = New Form('application.forms.edit_user', New EditUser);
 				$user = Users::model()->findByPk($_GET['id']);
