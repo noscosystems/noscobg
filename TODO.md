@@ -17,14 +17,14 @@ Use dummy date for the search function until we get some actual data to insert.
 ### Admin Area
 This will be where the users with a level of 60 or above will be able to manage the site.  
 Admins should be able to do the following:  
- - Create and edit assets.
+ - Create and edit assets. 
  - Create and edit users.
  - Soft deletion of assets and users (never hard deletion).
  - See basic statistics, like how many users, how many assets, how many X, Y, Z...  
 
 ### My Account
 We are looking to implement an area where the user can edit details about their account and interaction which include:
- - Their personal information such as: password, email, display name.
+ ~~- Their personal information such as: password, email, display name.~~
  - Messaging other users and reading their own messages. Like an inbox.
  - See favourite assets.
  - If the user owns assets, then let them view a list and possibly edit the properties of the asset (to be confirmed).
@@ -53,7 +53,7 @@ This page will display the asset with its images and details as such:
  - Rooms according to asset.
  - A detailed area that has plenty of descriptive details.  
 
-### Registration  
+~~### Registration ~~
 A registration page will be required in order for users to sign up.  
 The registration page should ask for basic information or the fields that are required in the user table. 
 

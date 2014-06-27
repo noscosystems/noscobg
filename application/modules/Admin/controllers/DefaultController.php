@@ -12,60 +12,15 @@
 
 class DefaultController extends Controller
 {
-	protected $identity;
+	public $identity;
 
         public function actionIndex(){
-            if(Yii::app()->user->isGuest){
-                $this->redirect(array('/login'));
-            }
-            else{
-                $form = new Form('application.forms.insert', new Insert);
-            }
-            if($form->submitted() && $form->validate()) {
-                $address = New Address;
-                $address->attributes = $form->model->attributes;
-                $address->created = time();
-                $address->save();
-                //$address_name = Address::model()->findByAttributes(array('name'=> $address->name));
-                $asset = New Assets;
-                $asset->attributes = $form->model->attributes;
-                $asset->address = $address->id;// = $address_name->id;
-                $asset->created_by = Yii::app()->user->getId();
-                // The Type simply has to be the Option ID.
-                $asset->type = 1;
-                $asset->status = 1;
-                // Assign the owner to the asset
-                $asset->owner = $form->model->owner;
-                $asset->created = time();
-                if(!$asset->save()){
-                    echo 'Error saving asset - Line: ' . __LINE__ ;
-                    echo "<br><pre class='pre-scrollable'>"; var_dump($asset->errors); echo "</pre>";
-                }
-
-                /**
-                No longer need to save owner like this as it is now a 1 to 1 relationship.
-                */
-                // $owner = New Owners;
-                // $owner->asset = $asset->id;
-                // $owner->user = $form->model->owner;
-                // $owner->created = time();
-                // if(!$owner->save()){
-                //     echo 'Error saving owner - Line: ' . __LINE__ ;
-                //     echo "<br><pre class='pre-scrollable'>"; var_dump($owner->errors); echo "</pre>";
-                // }
-                // $image = New Images;
-                // $image->image_upload();
-
-                // This will display a success message.
-                Yii::app()->user->setFlash('success', 'The new Asset has been saved successfully.');
-            }
-
-            $this->render('index',array('form' => $form));
+            $this->render('index');
         }
 
-        public function actionListUsers(){
-            //$users = Users::model()->findbyAll();
-            //var_dump($users);
-            $this->render('listusers');//,array('users'=>$users));
-        }
+       //  public function actionListUsers(){
+       //     $users = Users::model()->findbyAll();
+       //     var_dump($users);
+       //     $this->render('listusers');//,array('users'=>$users));
+       // }
 }

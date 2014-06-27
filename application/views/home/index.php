@@ -124,9 +124,11 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
         <?php echo CHtml::link('Land', array('/asset', 'type' => 3), array()); ?>
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
             <ul class="dropdown-menu">
-                <li><?php echo (Yii::app()->user->isGuest)?(CHtml::link('Guest\Login', array('home/login'), array())):CHtml::link('Myaccount', array('account/myaccount'), array()); ?></li>
-                <li><?php echo (!Yii::app()->user->isGuest)?(CHtml::link('My Assets', array('/user/listassets'), array())):''; ?></li>
-                <li><?php echo (!Yii::app()->user->isGuest)?(CHtml::link('Log out', array('/user/logout'), array())):'';?></li>
+                <li><?php echo (Yii::app()->user->isGuest)?(CHtml::link('Register', array('account/register'), array())):'';?></li>
+                <li><?php echo (!Yii::app()->user->isGuest)?(CHtml::link('My Account', array('/account/myaccount'), array())):'';?></li>
+                <li><?php echo (!Yii::app()->user->isGuest)?(CHtml::link('My Assets', array('/account/listassets'), array())):''; ?></li>
+                <li><?php echo (Yii::app()->user->isGuest)?(CHtml::link('Guest\Login', array('/login'), array())):CHtml::link('Log Out', array('/account/logout'), array()); ?></li>
+                <!-- CHtml::link('Myaccount', array('account/myaccount'), array()) -->
             </ul>
         
         
