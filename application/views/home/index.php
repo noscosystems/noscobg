@@ -122,6 +122,7 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
         <?php echo CHtml::link('Houses', array('/asset', 'type' => 1), array()); ?>
         <?php echo CHtml::link('Apartments', array('/asset', 'type' => 2), array()); ?>
         <?php echo CHtml::link('Land', array('/asset', 'type' => 3), array()); ?>
+        <?php echo CHtml::link('Sell', array('/sell')); ?></div>
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li><?php echo (Yii::app()->user->isGuest)?(CHtml::link('Register', array('account/register'), array())):'';?></li>
@@ -130,8 +131,8 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
                 <li><?php echo (Yii::app()->user->isGuest)?(CHtml::link('Guest\Login', array('/login'), array())):CHtml::link('Log Out', array('/account/logout'), array()); ?></li>
                 <!-- CHtml::link('Myaccount', array('account/myaccount'), array()) -->
             </ul>
-        
-        
+
+
     </div>
 </div>
 
