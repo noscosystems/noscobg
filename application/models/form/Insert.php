@@ -16,7 +16,7 @@
         {
             return array(
                 // Username and password are required.
-                array('name, area, status, zip_pc, town, owner, county', 'required'),
+                array('name, area, zip_pc, town, owner, county', 'required'),
                 // The database has a maximum username length of 64 characters.
                 array('name', 'length','min' => 5, 'max' => 64),
                 array('area', 'length','min' => 3, 'max' => 36),

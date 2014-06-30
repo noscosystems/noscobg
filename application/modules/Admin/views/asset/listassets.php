@@ -1,0 +1,1 @@
+<?php //$this->renderPartial('//account/listassets');

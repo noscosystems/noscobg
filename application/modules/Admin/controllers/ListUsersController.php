@@ -12,7 +12,16 @@
 	class ListUsersController extends Controller{
 
 		public function actionIndex(){
-			$form = New Form('application.forms.listusers', New ListUsers);
+			if(Yii::app()->user->isGuest){
+                $this->redirect(array('/login'));
+            }
+            else if (Yii::app()->user->priv >=50){
+                $form = New Form('application.forms.listusers', New ListUsers);
+            }
+            else {
+                $this->redirect(array('/home'));
+            }
+			
 			$criteria = new \CDbCriteria;
 			$count = Users::model()->count($criteria);
 			$pages = new \CPagination( $count );

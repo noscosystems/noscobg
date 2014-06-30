@@ -19,6 +19,7 @@
                 array('username, password', 'required'),
                 // The database has a maximum username length of 64 characters.
                 array('username', 'length','min' => 5, 'max' => 64),
+                array('password', 'length','min' => 5, 'max' => 60),
             );
         }
 

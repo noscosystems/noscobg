@@ -46,7 +46,7 @@
                         echo "<pre class='pre-scrollable'>"; var_dump($user->errors); echo "</pre>";
                     }
                     else{
-                        Yii::app()->user->setFlash('home.register.success', 'Success!, you have successfully registered!');
+                        Yii::app()->user->setFlash('account.register.success', 'Success!, you have successfully registered!');
                     }
                 }
             }
@@ -122,12 +122,13 @@
                 $image->attributes = $form->model->attributes;
                 $image->image_upload($_GET['asset_name']);
             }
-            //$this->render('ownedassets');
             $this->render('view',array('form' => $form));
         }
 
 		function actionLogout(){
-		    (Yii::app()->user->logout())?(Yii::app()->user->setFlash('user.logout.success', 'Successfully logged out. Hope to see you soon, again.')):'';
+		    // (Yii::app()->user->logout())?(Yii::app()->user->setFlash('account.logout.success', 'Successfully logged out. Hope to see you soon, again.')):'';
+		    Yii::app()->user->logout();
+		    Yii::app()->user->setFlash('account.logout.success', 'Successfully logged out. Hope to see you soon, again.');
 		    $this->render('logout');
 		}
 

@@ -7,6 +7,7 @@
     use \application\components\Form;
     use \application\models\form\Img_upload;
     use \application\models\form\Insert;
+    use \application\models\form\ListUsers;
     use \application\models\db\Images;
     use \application\models\db\Address;
     use \application\models\db\Assets;
@@ -19,8 +20,11 @@
             if(Yii::app()->user->isGuest){
                 $this->redirect(array('/login'));
             }
-            else{
+            else if (Yii::app()->user->priv >=50){
                 $form = new Form('application.forms.insert', new Insert);
+            }
+            else {
+                $this->redirect(array('/home'));
             }
             if($form->submitted() && $form->validate()) {
                 $address = New Address;
@@ -63,5 +67,44 @@
 
             $this->render('index',array('form' => $form));
         }
+
+        public function actionListAssets(){
+            if(Yii::app()->user->isGuest){
+                $this->redirect(array('/login'));
+            }
+            else if (Yii::app()->user->priv >=50){
+                $form = new Form('application.forms.listusers', new ListUsers);
+            }
+            else {
+                $this->redirect(array('/home'));
+            }
+
+            if ($form->submitted() && $form->validate()){
+               $asset = Assets::model()->findByAttributes(array ('name' => $form->model->search));
+            }
+            $criteria = new \CDbCriteria;
+            $count = Assets::model()->count($criteria);
+            $pages = new \CPagination( $count );
+            $pages->pageSize = 10;
+            $pages->applyLimit($criteria);
+            $assets = Assets::model()->findAll($criteria);
+            $this->render('/account/listassets');//, array('form' => $form, 'assets' => $assets,'pages' => $pages));
+        }
+
+        // public function actionEditAsset(){
+        //     if(Yii::app()->user->isGuest){
+        //         $this->redirect(array('/login'));
+        //     }
+        //     else if (Yii::app()->user->priv >=50){
+        //         $form = new Form('application.forms.insert', new Insert);
+        //     }
+        //     else {
+        //         $this->redirect(array('/home'));
+        //     }
+
+        //     if($form->submitted() && $form->validate()) {
+        //     }
+        //     $this->render('index',array('form' => $form, 'asset' => $asset));
+        // }
 
     }

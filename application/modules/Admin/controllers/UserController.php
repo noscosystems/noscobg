@@ -6,21 +6,28 @@
 	use \application\components\Controller;
 	use \application\components\UserIdentity;
 	use \application\models\form\EditUser;
+	use \application\models\form\Register;
 	use \application\models\db\Users;
+	use \application\controllers\AccountController;
 
-	class EditUserController extends Controller{
+	class UserController extends Controller{
 
 		public function actionIndex(){
-			echo '<pre>';
-			var_dump($priv= Yii::app()->user->priv);
-			echo '</pre>';
 			// var_dump(Yii::app()->user);
-			if ((Yii::app()->user->priv)>=50){
-				if (isset($_GET['id'])){
-					$form = New Form('application.forms.edit_user', New EditUser);
+			if(Yii::app()->user->isGuest){
+                $this->redirect(array('/login'));
+            }
+            else if (Yii::app()->user->priv >=50){
+                $form = New Form('application.forms.edit_user', New EditUser);
+            }
+            else {
+                $this->redirect(array('/home'));
+            }
+				if (isset($_GET['id']) && !empty($_GET['id'])){
+					
 					$user = Users::model()->findByPk($_GET['id']);
-					$priv_ = $user->priv;
-					$pass_ = $user->password;
+					$priv_ = $user->priv;	//buffer variable for storing the user's privilige
+					$pass_ = $user->password;	//buffer variable for storing the user's password
 					if ($form->submitted() && $form->validate()){
 						if ($form->model->old_pass == ''){
 							$user->attributes = $form->model->attributes;
@@ -42,10 +49,20 @@
 						// var_dump($form->model->attributes);
 						// echo '</pre>';
 				}
-			}
-			else {
-				// $this->redirect('/home');
-			}
 			$this->render ( 'index', array ( 'form' => $form, 'user' => $user ));
 		}
+
+		public function actionCreateuser(){
+			// var_dump(Yii::app()->user);
+			if(Yii::app()->user->isGuest){
+                $this->redirect(array('/login'));
+            }
+            else if (Yii::app()->user->priv >=50){
+                $form = new Form('application.forms.register', new Register);
+            }
+            else {
+                $this->redirect(array('/home'));
+            }
+            $this->render('createuser', array ('form' => $form));
+        }
 	}

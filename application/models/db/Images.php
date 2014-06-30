@@ -52,7 +52,7 @@ class Images extends ActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'Assets'=>array(self::HAS_ONE, 'Images', 'asset')
+			'Assets'=>array(self::HAS_ONE, 'Assets', 'asset')
 		);
 	}
 
@@ -114,11 +114,11 @@ class Images extends ActiveRecord
         //2 097 152 = 2MegaBytes;
         //$this->asset = $asset->id;
         //$image->asset = $asset->id;
-        $allowed_img_types = Array('image/bmp','image/jpeg','image/png');
+        $allowed_img_types = Array('image/bmp','image/jpeg','image/png');	//allowed image types, stored in an array
         //$mime_type = image_type_to_mime_type(exif_imagetype($_FILES['image1']['tmp_name']));
         $size = [];
         $size = getimagesize($_FILES['image1']['tmp_name']);
-        if (!in_array($size['mime'],$allowed_img_types)){
+        if (!in_array($size['mime'],$allowed_img_types)){ // Checking wether the image is of the allowed image types
             array_push($this->errors, 'Image not of allowed type. Allowed image types are jpeg, bmp and png!');
         }
         else if ($size[0]>3072){
@@ -131,6 +131,9 @@ class Images extends ActiveRecord
             array_push($this->errors, 'Size is greater than 2MBs, please upload a smaller image!');
         }
         else{
+        	$ext = strstr($_FILES['image1']['name'], '.');
+        	$_FILES['image1']['name'] = substr(md5(time()), 0, 7).$ext;	//sets a name based on crrent time
+        	//then md5's it :D and get's a part of the string as the name
             $this->name = $_FILES['image1']['name'];
             $folder = Yii::getPathOfAlias('application.views.Uploads').'\\'.$asset_name.'\\';/*Yii::getPathOfAlias("application.themes.classic.assets.images")*/
             ( !file_exists($folder) )?(mkdir ($folder, true) ):'';
@@ -141,7 +144,8 @@ class Images extends ActiveRecord
             }
         }
         if (empty($this->errors)){
-        	echo ($this->save())?'YESSSSS!!!!':'Noooooooooo!';
+        	// Yii::app()->user->setFlash((($this->save())?'','Thank you for contacting us. We will respond to you as soon as possible.':);
+        		Yii::app()->user->setFlash( 'asset.view.success', ($this->save())?('Success!'):('Something went wrong, try again.'));
         }
         else {
         	echo "<pre class='pre-scrollable'>"; var_dump($this->errors); echo "</pre>";

@@ -93,7 +93,7 @@
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Admin <b class="caret"></b></a>
                             <ul class="dropdown-menu">
                                 <li><?php echo CHtml::link('Index', array('/admin'), array()); ?></li>
-                                <li><?php echo CHtml::link('List Assets', array('/user/listassets'), array()); ?></li>
+                                <li><?php echo CHtml::link('List Assets', array('/account/listassets'), array()); ?></li>
                                 <li><?php echo CHtml::link('Logout', array('/account/logout'), array()); ?></li>
                             </ul>
                         <?php } ?>

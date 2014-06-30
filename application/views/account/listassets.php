@@ -8,10 +8,19 @@
 <div class="page-header">
   <h1>View Assets <small>Below is a list of your Assets.</small></h1>
 </div>
+<?php
+
+foreach(Yii::app()->user->model()->Assets as $asset){
+  foreach ($asset->Images as $image){
+    echo $image->url;
+  }
+}
+?>
 
 <table class="table table-hover">
 	<thead>
 		<tr>
+      <th></th>
 			<th>Asset Name</th>
 		</tr>
 	</thead>

@@ -9,7 +9,7 @@ I recommend that we create a module for the admin area. The new location for the
 
 Inside the module will be the following controllers with their actions listed below:
  - UserController
-  - Create (Create a user)
+  ~~- Create (Create a user)~~
   ~~- Edit (Edit a User)~~
   - Statistics (Display statistics about all the users)
  ~~- AssetController~~

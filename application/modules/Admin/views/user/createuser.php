@@ -6,7 +6,7 @@ $widget = $form->activeFormWidget;
 ?>
 
 <div class="page-header">
-    <h1>Register <small>Please enter your information</small></h1>
+    <h1>Create a user <small>Please enter the user's informatio</small></h1>
 </div>
 
 <?php if(Yii::app()->user->hasFlash('account.register.success')): ?>
@@ -23,49 +23,49 @@ if($widget->errorSummary($form)){
 ?>
 
 <div class="row">
-    <div class="col-sm-3 control-label">Enter desired Username:</div>
+    <div class="col-sm-3 control-label">Enter Username:</div>
     <div class="col-sm-6">
         <?php echo $widget->input($form, 'username', array('class' => 'form-control') ); ?>
     </div>
 </div>
 <br>
 <div class="row">
-    <div class="col-sm-3 control-label">Enter your Password:</div>
+    <div class="col-sm-3 control-label">Enter Password:</div>
     <div class="col-sm-6">
         <?php echo $widget->input($form, 'password', array('class' => 'form-control') ); ?>
     </div>
 </div>
 <br>
 <div class="row">
-    <div class="col-sm-3 control-label">Enter your firstname here:</div>
+    <div class="col-sm-3 control-label">Enter firstname here:</div>
     <div class="col-sm-6">
         <?php echo $widget->input($form, 'firstname', array('class' => 'form-control') ); ?>
     </div>
 </div>
 <br>
 <div class="row">
-    <div class="col-sm-3 control-label">Enter your middlename here:</div>
+    <div class="col-sm-3 control-label">Enter middlename here:</div>
     <div class="col-sm-6">
         <?php echo $widget->input($form, 'middlename', array('class' => 'form-control') ); ?>
     </div>
 </div>
 <br>
 <div class="row">
-    <div class="col-sm-3 control-label">Enter your lastname here:</div>
+    <div class="col-sm-3 control-label">Enter lastname here:</div>
     <div class="col-sm-6">
         <?php echo $widget->input($form, 'lastname', array('class' => 'form-control') ); ?>
     </div>
 </div>
 <br>
 <div class="row">
-    <div class="col-sm-3 control-label">Select your gender</div>
+    <div class="col-sm-3 control-label">Select gender</div>
     <div class="col-sm-6">
         <?php echo $widget->input($form, 'gender', array('class' => 'form-control') ); ?>
     </div>
 </div>
 <br>
 <div class="row">
-    <div class="col-sm-3 control-label">Please type in the exact date of your birth</div>
+    <div class="col-sm-3 control-label">Please type in the exact date of birth</div>
     <div class="col-sm-6">
         <?php echo $widget->input($form, 'dob', array('class' => 'form-control') ); ?>
     </div>
@@ -73,7 +73,7 @@ if($widget->errorSummary($form)){
 <br>
 <div class="row">
     <div class="col-sm-2 col-sm-offset-3">
-        <?php echo $widget->button($form, 'submit', array('class' => 'btn btn-lg btn-success',) ); ?>
+        <?php echo $widget->button($form, 'submit', array('class' => 'btn btn-lg btn-success', 'value' => 'Create User') ); ?>
     </div>
 </div>
 <?php echo $form->renderEnd(); ?>
