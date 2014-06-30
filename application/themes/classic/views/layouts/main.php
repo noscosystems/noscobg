@@ -81,6 +81,7 @@
                         <li><?php echo CHtml::link('Houses', array('/asset', 'type' => 1), array()); ?></li>
                         <li><?php echo CHtml::link('Apartments', array('/asset', 'type' => 2), array()); ?></li>
                         <li><?php echo CHtml::link('Land', array('/asset', 'type' => 3), array()); ?></li>
+                        <li><?php echo CHtml::link('Sell', array('/sell')); ?></li>
                         <li class="dropdown">
                         <?php if( Yii::app()->user->isGuest){ ?>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Guest <b class="caret"></b></a>
