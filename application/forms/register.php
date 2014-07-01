@@ -38,7 +38,16 @@
                 'prompt' => 'Please Select'
                 // 'hint' => Yii::t('application', 'Please enter your password; it is case-sensitive.'),
             ),
-
+            'email' => array(
+                'type' => 'text',
+                'maxlength' => 128,
+                'hint' => Yii::t('application', 'Please enter your date of birth; it is case-sensitive.'),
+            ),
+            'mobile_number' => array(
+                'type' => 'text',
+                'maxlength' => 15,
+                'hint' => Yii::t('application', 'Please enter your date of birth; it is case-sensitive.'),
+            )
         ),
 
         'buttons' => array(

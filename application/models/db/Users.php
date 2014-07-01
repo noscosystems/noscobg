@@ -52,6 +52,10 @@ class Users extends ActiveRecord
 			array('username', 'length', 'max'=>64),
 			array('password', 'length', 'max'=>60),
 			array('firstname, middlename, lastname', 'length', 'max'=>36),
+			array('email', 'length', 'max'=>128),
+			array('mobile_number', 'length', 'max'=>15),
+			// array('mobile_number', 'unique', 'className' => '\\application\\models\\db\\Users', 'attributeName' => 'mobile_number', 'message' => 'Mobile number already taken by another user.'),
+			// array('email', 'unique', 'className' => '\\application\\models\\db\\Users', 'attributeName' => 'email', 'message' => 'Email already taken by another user.'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, username, password, title, firstname, middlename, lastname, priv, dob, gender, branch, created, active', 'safe', 'on'=>'search'),
@@ -92,6 +96,8 @@ class Users extends ActiveRecord
 			'branch' => 'Branch',
 			'created' => 'Created',
 			'active' => 'Active',
+			'email' => 'Email',
+			'mobile_number' => 'Mobile_number',
 		);
 	}
 

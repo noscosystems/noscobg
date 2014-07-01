@@ -88,7 +88,7 @@
             $pages->pageSize = 10;
             $pages->applyLimit($criteria);
             $assets = Assets::model()->findAll($criteria);
-            $this->render('/account/listassets');//, array('form' => $form, 'assets' => $assets,'pages' => $pages));
+            $this->render('//account/listassets');//, array('form' => $form, 'assets' => $assets,'pages' => $pages));
         }
 
         // public function actionEditAsset(){

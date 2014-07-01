@@ -58,9 +58,24 @@ if($widget->errorSummary($form)){
 </div>
 <br>
 <div class="row">
+    <div class="col-sm-3 control-label">Enter your email here:</div>
+    <div class="col-sm-6">
+        <?php echo $widget->input($form, 'email', array('class' => 'form-control') ); ?>
+    </div>
+</div>
+<br>
+
+<div class="row">
     <div class="col-sm-3 control-label">Select your gender</div>
     <div class="col-sm-6">
         <?php echo $widget->input($form, 'gender', array('class' => 'form-control') ); ?>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-3 control-label">Enter your mobile number here:</div>
+    <div class="col-sm-6">
+        <?php echo $widget->input($form, 'mobile_number', array('class' => 'form-control') ); ?>
     </div>
 </div>
 <br>

@@ -8,7 +8,7 @@ I recommend that we create a module for the admin area. The new location for the
 `\application\modules\admin\`
 
 Inside the module will be the following controllers with their actions listed below:
- - UserController
+ ~~- UserController~~
   ~~- Create (Create a user)~~
   ~~- Edit (Edit a User)~~
   - Statistics (Display statistics about all the users)
