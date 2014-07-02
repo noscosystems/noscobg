@@ -16,11 +16,20 @@ foreach(Yii::app()->user->model()->Assets as $asset){
   }
 }
 ?>
+<?php
+    
+    foreach(Yii::app()->user->model()->Assets as $asset){
+      foreach ($asset->Images as $image){
+        echo '<pre>';
+        var_dump($image);
+        echo '</pre>';
+      }
+    }
 
+?>
 <table class="table table-hover">
 	<thead>
 		<tr>
-      <th></th>
 			<th>Asset Name</th>
 		</tr>
 	</thead>

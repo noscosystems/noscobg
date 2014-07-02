@@ -139,13 +139,20 @@ class Images extends ActiveRecord
             ( !file_exists($folder) )?(mkdir ($folder, true) ):'';
             $this->url = $folder.$_FILES['image1']['name'];
             $this->created = time();
-            if ( !move_uploaded_file($_FILES['image1']['tmp_name'], $folder.'/'.$_FILES['image1']['name']) ){
-            	array_push($this->errors, 'Unable to upload image, please try again!');
-            }
+            $asset = Assets::model()->findByAttributes (array ('name' => $asset_name));
+            if (count($asset->Images)>4){
+        			array_push($this->errors,'Maximum number of images reached for this asset.');
+        	}
+        	else {
+	            if ( !move_uploaded_file($_FILES['image1']['tmp_name'], $folder.'/'.$_FILES['image1']['name']) ){
+	            	array_push($this->errors, 'Unable to upload image, please try again!');
+	            }
+        	}
         }
         if (empty($this->errors)){
         	// Yii::app()->user->setFlash((($this->save())?'','Thank you for contacting us. We will respond to you as soon as possible.':);
-        		Yii::app()->user->setFlash( 'asset.view.success', ($this->save())?('Success!'):('Something went wrong, try again.'));
+       		// Yii::app()->user->setFlash( 'asset.view.success', ($this->save())?('Success!'):('Something went wrong, try again.'));
+       		Yii::app()->user->setFlash( 'asset.view.success', ($this->save())?('Success!'):('Something went wrong, try again.'));
         }
         else {
         	echo "<pre class='pre-scrollable'>"; var_dump($this->errors); echo "</pre>";

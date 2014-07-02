@@ -25,7 +25,7 @@ This will be in the standard appication area (not in a module) and will comprise
  - AccountController
   - Profile (Edit their profile, their about etc.)
   ~~- Password (Edit their password, include confirmations of current password)~~
-  - Contact (Edit their mobile number, email address etc.)
+  ~~- Contact (Edit their mobile number, email address etc.)~~
   ~~- Assets (List all the assets owned by the user)~~
   ~~- Log Out (Allow the option to log out)~~
 
