@@ -42,6 +42,8 @@
                     // DOB only saves as a number, a unix timestamp.
                     $user->dob = strtotime($form->model->dob);
                     // Finally, save.
+                    $user->email = (empty($form->model->email))?(null):'';
+                    $user->mobile_number = (empty($form->model->mobile_number))?(null):'';
                     if(!$user->save()){
                         echo "<pre class='pre-scrollable'>"; var_dump($user->errors); echo "</pre>";
                     }
