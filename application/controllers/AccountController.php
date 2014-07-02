@@ -87,52 +87,37 @@
 				$form = new Form('application.forms.userprof', new Userprof);
 				$user = Users::model()->findbyPk(Yii::app()->user->id);
 				if ($form->submitted() && $form->validate()){
-					// $user_search = Users::model()->findAllByAttributes(array('username' => $form->model->username));
-                	// if($user_search){
-                 //    	$form->model->addError('username', 'The username specified is already taken! Please choose another.');
-                	// }else{
-                		// $user1->dob = $user->dob;
-                		// $user1->priv = $user->priv;
-                		// $user1->branch = $user->branch;\
-						// $criteria = new \CDbCriteria;
-						// $criteria->addColumnCondition(array('email' => $form->model->email,
-						// 									'mobile_number' => $form->model->mobile_number
-						// 							  ),
-						// 'OR'
-						// );
-						// $users = Users::model()->findAll($criteria);
-						// echo '<pre>';
-						// var_dump($users);
-						// echo '</pre>';
-						// exit;
-						// foreach ($users as $user){
-						// 	if (in_array('Email already taken by another user.',$form->model->errors)){
-						// 		break;
-						// 	}
-						// 	else {
-						// 		($user->email == $form->model->email)?($form->model->addError('email','Email already taken by another user.')):'';
-						// 	}
-						// 	if (in_array('Mobile number already taken by another user.',$form->model->errors)){
-						// 		break;
-						// 	}
-						// 	else{
-						// 		($user->mobile_number == $form->model->mobile_number)?($form->model->addError('mobile number','Mobile number already taken by another user.')):'';
-						// 	}
-						// }
-						// echo '<pre>';
-						// var_dump($users->errors);
-						// echo '</pre>';
-						// exit;
-						$users = Users::model()->findAllByAttributes(array('mobile_number' => $form->model->mobile_number));
+						$sql = 'SELECT *
+							    FROM `users`
+							    WHERE `id`!=:id AND `email`=:email';
+						$sql1 = 'SELECT *
+							    FROM `users`
+							    WHERE `id`!=:id AND `mobile_number`=:mobile_number';
+						$users = Users::model()->findAllBySql($sql,
+							array(
+								':id' => (int)Yii::app()->user->id,
+								':email' => (string)$form->model->email
+								/*':mobile_number' => ($form->model->mobile_number)*/
+								)
+							);
+						// $users = Users::model()->findAllByAttributes(array('mobile_number' => $form->model->mobile_number));
 						if ($users){
-							$form->model->addError('mobile_number','Mobile number already taken by another user.');
-						}
-						if ($users = Users::model()->findAllByAttributes(array('email' => $form->model->email) ) ){
 							$form->model->addError('email','This Email is already taken.');
 						}
+						if ($users = Users::model()->findAllBySql($sql1, array(
+								':id' => (int)Yii::app()->user->id,
+								':mobile_number' => (string)$form->model->mobile_number
+								))) {
+							$form->model->addError('mobile_number','Mobile number already taken by another user.');
+						}
 						$user->attributes = $form->model->attributes;
-						($user->save())?(Yii::app()->user->setFlash('success','User profile updated successfully.')):'';
+						$user->email = (empty($form->model->email))?(null):(($user->email === $form->model->email)?($user->email):'');
+						$user->mobile_number = (empty($form->model->mobile_number))?(null):(($user->mobile_number === $form->model->mobile_number)?($user->mobile_number):'');
+						(empty($form->model->errors))?($user->save()?(Yii::app()->user->setFlash('success','User profile updated successfully.')):''):'';
 						// if (!$user->save()){
+						// 	foreach ($user->errors as $k => $v){
+						// 		$form->model->addError($k, $v);
+						// 	}
 							// echo 'Error saving user - Line: ' . __LINE__ ;
 	      //               	echo "<br><pre class='pre-scrollable'>"; var_dump($user->errors['mobile_number'][0]);
 	      //               	echo "</pre>";
@@ -142,6 +127,7 @@
 	     //                	Yii::app()->user->setFlash('User saving errors',$user->erros);
 							// exit;
 	                	// }
+	                	// ($user->save())?(Yii::app()->user->setFlash('success','User profile updated successfully.')):'';
 	              //   	else{
 	              //   		Yii::app()->user->setFlash('success','User profile updated successfully.');
 	            		// }

@@ -9,12 +9,12 @@ $widget = $form->activeFormWidget;
     <h1>User profile <small>Please enter your changes</small></h1>
 </div>
 
-<?php if(Yii::app()->user->hasFlash('account.myaccount.success')): ?>
+<?php if(Yii::app()->user->hasFlash('success')){ ?>
     <div class="alert alert-success">
+        <?php echo Yii::app()->user->getFlash('success'); ?>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <?php echo Yii::app()->user->getFlash('account.myaccount.success'); ?>
     </div>
-<?php endif; ?>
+<?php } ?>
 
 <?php if($widget->errorSummary($form)): ?>
 <div class="alert alert-danger">
