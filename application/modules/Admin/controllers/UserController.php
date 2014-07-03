@@ -65,4 +65,22 @@
             }
             $this->render('createuser', array ('form' => $form));
         }
+
+        public function actionDeleteUser(){
+        	if(Yii::app()->user->isGuest){
+                $this->redirect(array('/login'));
+            }
+            else if (Yii::app()->user->priv >=50){
+                $form = new Form('application.forms.register', new Register);
+            }
+            else {
+                $this->redirect(array('/home'));
+            }
+            // $this->render('deleteuser', array ('form' => $form));
+            if (isset($_GET['id']) && !empty($_GET['id'])) {
+            	$user = Users::model()->findByPk($_GET['id']);
+            	($user)?(($user->delete())?(Yii::app()->user->setFlash('del_success', 'You have just deleted a user!')):''):'';
+            	$this->redirect(array('/admin/listusers'));
+            }
+        }
 	}

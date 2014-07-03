@@ -5,10 +5,8 @@
     use \CException as Exception;
     use \application\components\Controller;
     use \application\components\Form;
-    use \application\models\form\Img_upload;
     use \application\models\form\Insert;
     use \application\models\form\ListUsers;
-    use \application\models\db\Images;
     use \application\models\db\Address;
     use \application\models\db\Assets;
 
@@ -81,30 +79,67 @@
 
             if ($form->submitted() && $form->validate()){
                $asset = Assets::model()->findByAttributes(array ('name' => $form->model->search));
+               $this->redirect (array('/admin/asset/editasset', 'id' => $asset->id));
             }
+            // if ($form->submitted() && $form->validate()){
+            //     $found_user = Users::model()->findByAttributes(array('username' => $form->model->search));
+            //     $this->redirect (array('/admin/user', 'id' => $found_user->id));
+            // }
             $criteria = new \CDbCriteria;
             $count = Assets::model()->count($criteria);
             $pages = new \CPagination( $count );
             $pages->pageSize = 10;
             $pages->applyLimit($criteria);
             $assets = Assets::model()->findAll($criteria);
-            $this->render('//account/listassets');//, array('form' => $form, 'assets' => $assets,'pages' => $pages));
+            $this->render('listassets', 
+                array('assets'=>$assets,
+                    'form'=>$form,
+                    'pages' => $pages
+                ));//, array('form' => $form, 'assets' => $assets,'pages' => $pages));
         }
 
-        // public function actionEditAsset(){
-        //     if(Yii::app()->user->isGuest){
-        //         $this->redirect(array('/login'));
-        //     }
-        //     else if (Yii::app()->user->priv >=50){
-        //         $form = new Form('application.forms.insert', new Insert);
-        //     }
-        //     else {
-        //         $this->redirect(array('/home'));
-        //     }
+        public function actionEditAsset(){
+            if(Yii::app()->user->isGuest){
+                $this->redirect(array('/login'));
+            }
+            else if (Yii::app()->user->priv >=50){
+                $form = new Form('application.forms.insert', new Insert);
+            }
+            else {
+                $this->redirect(array('/home'));
+            }
 
-        //     if($form->submitted() && $form->validate()) {
-        //     }
-        //     $this->render('index',array('form' => $form, 'asset' => $asset));
-        // }
+            $asset = (isset($_GET['id']) && !empty($_GET['id']))?(Assets::model()->findByPk($_GET['id'])):'';
+            if ($asset!=null){
+                
+                $form->model->attributes = $asset->attributes;
+                $address = Address::model()->findByPk($asset->address);
+                $form->model->attributes = $address->attributes;
+
+                if($form->submitted() && $form->validate()) {
+
+                    $asset->attributes = $form->model->attributes;
+                    $address->attributes = $form->model->attributes;
+                    $address->save();
+                    $asset->type = 1;
+                    $asset->address = $address->id;
+                    // echo '<pre>';
+                    ($asset->save())?(Yii::app()->user->setFlash('success','Asset updated successfully.')):'';
+                    // echo '</pre>';
+                }
+            }
+            else {
+                $this->redirect(array('/admin/asset/listassets'));
+            }
+            $this->render('editasset',array('form' => $form));
+        }
+
+        public function ActionImages(){
+            if (isset($_GET['id']) && !empty($_GET['id'])){
+                $asset = Assets::model()->findByPk($_GET['id']);
+                $images = ($asset)?($asset->Images):'';
+            }
+            $this->render('images', array('images' => $images));
+        }
 
     }

@@ -12,17 +12,17 @@
         echo '<div class="alert alert-danger">' . $widget->errorSummary($form) . '</div>';
     }
 ?>
+
+<?php if(Yii::app()->user->hasFlash('del_success')): ?>
+    <div class="alert alert-success">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <?php echo Yii::app()->user->getFlash('del_success'); ?>
+    </div>
+<?php endif;?>
+
 <div class="page-header">
   <h1>View users <small>Below is a list of all users.</small></h1>
 </div>
-<!--<div class="row">
-    <div class="col-sm-3 control-label">Enter your Password:</div>
-    <div class="col-sm-6">
-    </div>
-    <div class="col-sm-1"></div>
-    <div class="col-sm-2"></div>
-</div>
-<br>-->
 
 <div class="form-group">
     <div class="col-sm-10">
@@ -36,7 +36,7 @@
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th>username</th><th>current privilige</th><th>Link to edit page</th>
+			<th>username</th><th>current privilige</th><th class="text-right">Link to edit page</th><th class="text-right">Delete user</th>
 		</tr>
 	</thead>
 	<tbody>
@@ -44,7 +44,8 @@
             <tr>
                 <td><?php echo $v->username; ?></td>
                 <td><?php echo $v->priv; ?></td>
-                <td><?php echo CHtml::link($v->username, array('/admin/user/', 'id' => $v->id ),array('title' => 'Click to edit a user.')); ?></td>
+                <td class="text-right"><?php echo CHtml::link('Edit User', array('/admin/user/', 'id' => $v->id ),array('class' => 'btn btn-xs btn-warning', 'title' => 'Click to edit a user.')); ?></td>
+                <td class="text-right"><?php echo CHtml::link('Delete', array('/admin/user/deleteuser', 'id' => $v->id ),array('class' => 'btn btn-danger btn-xs', 'title' => 'Click to delete a user.')); ?></td>
             </tr>
         <?php endforeach; ?>
 	</tbody>

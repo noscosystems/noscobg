@@ -36,7 +36,7 @@
 
 		    if ($form->submitted() && $form->validate()){
 		    	$found_user = Users::model()->findByAttributes(array('username' => $form->model->search));
-		    	$this->redirect (array('/admin/edituser', 'id' => $found_user->id));
+		    	$this->redirect (array('/admin/user', 'id' => $found_user->id));
 		    }
 		    $this->render('index', array('form'=>$form,
 										 'pages' => $pages,
