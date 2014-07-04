@@ -13,7 +13,14 @@
 		<h1>Load Help</h1>
 		<p>In this page I want to load a page, within a page, maybe send some params.</p>
 		<p>
-			<a id="linkLoad" href="#" class="btn btn-primary btn-lg">Load Data</a>
+			<div class="row">
+				<div class="col-sm-4">
+					<input type="text" id="inputText" class="form-control" placeholder="Add text here.">
+				</div>
+				<div class="col-sm-8">
+					<a id="linkLoad" href="#" class="btn btn-primary btn-md">Load Data</a>
+				</div>
+			</div>
 		</p>
 	</div>
 </div>
@@ -25,7 +32,8 @@ $(document).ready( function(){
 	$("#linkLoad").click( function(event){
 		event.preventDefault();
 		var baseUrl = '<?php echo Yii::app()->urlManager->baseUrl; ?>';
-		$("#divLoadArea").load(baseUrl + '/help/load?display&id=2');
+		var inputText = $("#inputText").val();
+		$("#divLoadArea").load(baseUrl + '/help/load?display&id=' + inputText);
 	})
 })
 </script>
