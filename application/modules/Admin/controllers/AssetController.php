@@ -9,6 +9,9 @@
     use \application\models\form\ListUsers;
     use \application\models\db\Address;
     use \application\models\db\Assets;
+    use \application\models\db\Images;
+    use \application\models\form\Img_upload;
+
 
     class AssetController extends Controller{
 
@@ -136,10 +139,22 @@
 
         public function ActionImages(){
             if (isset($_GET['id']) && !empty($_GET['id'])){
+                $form = new Form('application.forms.img_upload', new Img_upload);
                 $asset = Assets::model()->findByPk($_GET['id']);
                 $images = ($asset)?($asset->Images):'';
             }
-            $this->render('images', array('images' => $images));
+            // if (!empty($_POST)){
+            if ($form->submitted() && $form->valiate()){
+                echo 'da';
+                echo '<pre>';
+                print_r($_POST);
+                echo '</pre>';
+            }
+            else {
+                $form->model->errors;
+            }
+            // }
+            $this->render('images', array('form' => $form, 'images' => $images));
         }
 
     }
