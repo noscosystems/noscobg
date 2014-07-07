@@ -159,4 +159,8 @@ class Images extends ActiveRecord
         	return false;
         }
     }
+    public function unlink_path(){
+		return (unlink_path($this->url))?true:false;
+	}
 }
+

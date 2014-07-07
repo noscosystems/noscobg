@@ -134,7 +134,7 @@
             else {
                 $this->redirect(array('/admin/asset/listassets'));
             }
-            $this->render('editasset',array('form' => $form));
+            $this->render('editasset', array('form' => $form));
         }
 
         public function ActionImages(){
@@ -143,18 +143,16 @@
                 $asset = Assets::model()->findByPk($_GET['id']);
                 $images = ($asset)?($asset->Images):'';
             }
-            // if (!empty($_POST)){
-            if ($form->submitted() && $form->valiate()){
-                echo 'da';
-                echo '<pre>';
-                print_r($_POST);
-                echo '</pre>';
-            }
-            else {
-                $form->model->errors;
-            }
-            // }
-            $this->render('images', array('form' => $form, 'images' => $images));
+           // $form = new Form('application.forms.img_upload', new Img_upload);
+            //$form->model->attributes->asset = $_GET['assetname'];
+            
+            $this->render('images', array(/*'form' => $form, */'images' => $images));
+        }
+        public function ActionDeleteImage($id){
+            $image = Images::model()->findByPk($id);
+            $image->delete();
+            //is supposed to point to a unlink the image path
+            $image->unlink_path();
         }
 
     }
