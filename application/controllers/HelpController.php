@@ -154,4 +154,9 @@
                 : $this->render('load', $variables);
         }
 
+        public function actionModal()
+        {
+            $this->render('modal');
+        }
+
     }
