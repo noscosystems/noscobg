@@ -110,10 +110,8 @@ class Images extends ActiveRecord
 		return parent::model($className);
 	}
 
-	public function image_upload($asset_name){
+	public function image_upload($id,$form){
         //2 097 152 = 2MegaBytes;
-        //$this->asset = $asset->id;
-        //$image->asset = $asset->id;
         $allowed_img_types = Array('image/bmp','image/jpeg','image/png');	//allowed image types, stored in an array
         //$mime_type = image_type_to_mime_type(exif_imagetype($_FILES['image1']['tmp_name']));
         $size = [];
@@ -135,11 +133,11 @@ class Images extends ActiveRecord
         	$_FILES['image1']['name'] = substr(md5(time()), 0, 7).$ext;	//sets a name based on crrent time
         	//then md5's it :D and get's a part of the string as the name
             $this->name = $_FILES['image1']['name'];
-            $folder = Yii::getPathOfAlias('application.views.Uploads').'\\'.$asset_name.'\\';/*Yii::getPathOfAlias("application.themes.classic.assets.images")*/
-            ( !file_exists($folder) )?(mkdir ($folder, true) ):'';
+            $folder = Yii::getPathOfAlias('application.views.Uploads').'\\';/*Yii::getPathOfAlias("application.themes.classic.assets.images")*/
+            //( !file_exists($folder) )?(mkdir ($folder, true) ):'';
             $this->url = $folder.$_FILES['image1']['name'];
             $this->created = time();
-            $asset = Assets::model()->findByAttributes (array ('name' => $asset_name));
+            $asset = Assets::model()->findByPk ($id);
             if (count($asset->Images)>4){
         			array_push($this->errors,'Maximum number of images reached for this asset.');
         	}
@@ -150,17 +148,22 @@ class Images extends ActiveRecord
         	}
         }
         if (empty($this->errors)){
-        	// Yii::app()->user->setFlash((($this->save())?'','Thank you for contacting us. We will respond to you as soon as possible.':);
-       		// Yii::app()->user->setFlash( 'asset.view.success', ($this->save())?('Success!'):('Something went wrong, try again.'));
-       		Yii::app()->user->setFlash( 'asset.view.success', ($this->save())?('Success!'):('Something went wrong, try again.'));
+        	if ($this->save()){
+       			Yii::app()->user->setFlash( 'success', 'Success!');
+       		}
+       		else if (!$this->save()){
+       			Yii::app()->user->setFlash( 'warning', 'Something went wrong, save unsuccessfull.' );
+       		}
         }
         else {
-        	echo "<pre class='pre-scrollable'>"; var_dump($this->errors); echo "</pre>";
+        	foreach ( $this->errors as $k => $error ){
+        		$form->model->addError($k , $error);
+        	}
         	return false;
         }
     }
     public function unlink_path(){
-		return (unlink_path($this->url))?true:false;
+		return (unlink($this->url))?true:false;
 	}
 }
 

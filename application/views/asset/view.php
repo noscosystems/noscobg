@@ -18,16 +18,18 @@ $form->attributes=array('class' => 'form-horizontal','enctype' => 'multipart/for
 echo $form->renderBegin();
 $widget = $form->activeFormWidget;
 
-if($widget->errorSummary($form)){
-    echo '<div class="alert alert-danger">' . $widget->errorSummary($form) . '</div>';
-}
-?>
+if($widget->errorSummary($form)): ?>
+    <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <?php echo $widget->errorSummary($form); ?>
+    </div>
+<?php endif; ?>
 
 <?php echo $widget->input($form, 'asset', array('class' => 'form-control') ); ?>
 <?php echo $widget->input($form, 'asset', array('class' => 'form-control' , 'value' => $_GET['id']) ); ?>
 <div class="form-horizontal">
 	<div class="col-sm-2 col-sm-offset-2">
-		<input name="image1" type='file' >
+		<input name="image1" type='file' />
 	</div>
 	<div class="col-sm-2 col-sm-offset-3">
         <?php echo $widget->button($form, 'submit', array('class' => 'btn btn-xs btn-success', 'value' => 'Upload Image') ); ?>

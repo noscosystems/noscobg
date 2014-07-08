@@ -138,21 +138,51 @@
         }
 
         public function ActionImages(){
+            if(Yii::app()->user->isGuest){
+                $this->redirect(array('/login'));
+            }
+            else if (Yii::app()->user->priv >=50){
+                $form = new Form('application.forms.insert', new Insert);
+            }
+            else {
+                $this->redirect(array('/home'));
+            }
+
             if (isset($_GET['id']) && !empty($_GET['id'])){
                 $form = new Form('application.forms.img_upload', new Img_upload);
                 $asset = Assets::model()->findByPk($_GET['id']);
                 $images = ($asset)?($asset->Images):'';
             }
-           // $form = new Form('application.forms.img_upload', new Img_upload);
-            //$form->model->attributes->asset = $_GET['assetname'];
-            
-            $this->render('images', array(/*'form' => $form, */'images' => $images));
+
+            if ($form->submitted() && $form->validate){
+                echo 'DA!';
+                exit;
+                $image = New Images;
+                $form->model->asset = $_GET['id'];
+                $image->attributes = $form->model->attributes;
+                $image->image_upload( $_GET['id'], $form );
+            }
+
+            $this->render('images', array('images' => $images, 'form' => $form ));
         }
         public function ActionDeleteImage($id){
+
+            if(Yii::app()->user->isGuest){
+                $this->redirect(array('/login'));
+            }
+            else if (Yii::app()->user->priv >=50){
+                $form = new Form('application.forms.insert', new Insert);
+            }
+            else {
+                $this->redirect(array('/home'));
+            }
+
             $image = Images::model()->findByPk($id);
-            $image->delete();
-            //is supposed to point to a unlink the image path
-            $image->unlink_path();
+            ( $image->unlink_path() &&
+            $image->delete() ) ?
+            (Yii::app()->user->setFlash('success','Deleted image successfully.')):
+            (Yii::app()->user->setFlash('warning','Something went wrong, try redeleting.'));
+            $this->render('delete');
         }
 
     }

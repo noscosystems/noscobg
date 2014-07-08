@@ -19,10 +19,9 @@
                 $image = New Images;
                 $form->model->asset = $_GET['id'];
                 $image->attributes = $form->model->attributes;
-                $image->image_upload($_GET['asset_name']);
+                $image->image_upload( $_GET['id'], $form );
             }
-            //$this->render('ownedassets');
-            $this->render('view',array('form' => $form));
+            $this->render( 'view', array ('form' => $form ) );
         }
 
     }

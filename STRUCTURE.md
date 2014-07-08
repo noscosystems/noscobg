@@ -14,7 +14,7 @@ Inside the module will be the following controllers with their actions listed be
   - Statistics (Display statistics about all the users)
  ~~- AssetController~~
   ~~- Create (Create an asset)~~
-  - Edit (Edit an asset)
+  ~~- Edit (Edit an asset)~~
   - Statistics (Display statistics about all the assets)
 
 ### User Area
