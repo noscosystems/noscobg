@@ -14,7 +14,7 @@ return array(
         'buttons' => array(
             'submit' => array(
                 'type' => 'submit',
-                'label' => Yii::t('application', 'Upload images'),
+                'label' => Yii::t('application', 'Upload image'),
             ),
         ),
     );

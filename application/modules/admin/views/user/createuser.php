@@ -6,7 +6,7 @@ $widget = $form->activeFormWidget;
 ?>
 
 <div class="page-header">
-    <h1>Create a user <small>Please enter the user's informatio</small></h1>
+    <h1>Create a user <small>Please enter the user's information</small></h1>
 </div>
 
 <?php if(Yii::app()->user->hasFlash('account.register.success')): ?>

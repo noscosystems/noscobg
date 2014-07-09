@@ -139,19 +139,6 @@
 
         public function ActionImages(){
 
-            $form = new Form('application.forms.img_upload', new Img_upload);
-            if($form->submitted()){
-                echo "Submitted";
-                if($form->validate()){
-                    echo 'Validated';
-                } else {
-                    echo "No Validate";
-                }
-            } else {
-                echo "No Submit";
-            }
-
-            /*
             if(Yii::app()->user->isGuest){
                 $this->redirect(array('/login'));
             }
@@ -167,23 +154,14 @@
                 $asset = Assets::model()->findByPk($_GET['id']);
                 $images = ($asset)?($asset->Images):'';
 
-                if($form->submitted()){
-                    if($form->validate()){
-                        echo 'DA!';
-                        exit;
-                        $image = New Images;
-                        // $form->model->asset = $_GET['id'];
-                        $image->attributes = $form->model->attributes;
-                        $image->image_upload( $_GET['id'], $form );
-                    } else {
-                        echo "No Validate";
-                    }
-                } else {
-                    echo "No Submit";
+                if($form->submitted() && $form->validate()){
+                    $image = New Images;
+                    $form->model->asset = $_GET['id'];
+                    $image->attributes = $form->model->attributes;
+                    $image->image_upload( $_GET['id'], $form );
                 }
             }
-            */
-            $this->render('images', array('form' => $form));
+            $this->render('images', array('form' => $form, 'images' => $images));
         }
         public function ActionDeleteImage($id){
 

@@ -13,13 +13,6 @@
 	echo $form->renderBegin();
 	$widget = $form->activeFormWidget;
 
-	echo $widget->input($form, 'asset', array('class' => 'form-control', 'value'=> 'notempty'));
-	echo $widget->button($form, 'submit', array('class' => 'btn btn-sm btn-success'));
-
-	echo $form->renderEnd();
-
-	return;
-
 	if($widget->errorSummary($form)):
 ?>
     <div class="alert alert-danger">
@@ -48,7 +41,8 @@
 	echo $widget->button($form, 'submit', array ( 'class' => 'btn btn-sm btn-success'));
 	echo $form->renderEnd();
 ?>
-<?php if(isset($images) && $images && count($images) > 0): ?>
+<br>
+<?php //if(isset($images) && $images && count($images) > 0): ?>
 	<div class="row" >
 		<!-- <table class="table"> -->
 		<!-- <tbody> -->
@@ -80,7 +74,7 @@
 	<?php endif; ?>
 	<!-- </tbody> -->
 	<!-- </table> -->
-<?php endif; ?>
+<?php //endif; ?>
 
 
 
