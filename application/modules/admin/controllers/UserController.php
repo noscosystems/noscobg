@@ -63,6 +63,38 @@
             else {
                 $this->redirect(array('/home'));
             }
+            if ($form->submitted() && $form->validate()){
+            	$user = Users::model()->findAllByAttributes(array('username' => $form->model->username));
+                if($user){
+                	//Chtml::errorSummary($form->model);
+                    $form->model->addError('username', 'The username specified is already taken! Please choose another.');
+                } else {
+                    // Create the user.
+                    $user = new Users;
+                    // Assign the attributes from the form model.
+                    $user->attributes = $form->model->attributes;
+                    // Update the fields that are required by default.
+                    // Have a basic user level of 10.
+                    $user->password = \CPasswordHelper::hashPassword($user->password);
+                    $user->priv = 10;
+                    // Assign the branch to 1 for now, we may be using the branch field later.
+                    $user->branch = 1;
+                    // The created field is a unix timestamp of when the user was created.
+                    $user->created = time();
+                    // DOB only saves as a number, a unix timestamp.
+                    $user->dob = strtotime($form->model->dob);
+                    // Finally, save.
+                    $user->email = (empty($form->model->email))?(null):'';
+                    $user->mobile_number = (empty($form->model->mobile_number))?(null):'';
+                    if(!$user->save()){
+                        echo "<pre class='pre-scrollable'>"; var_dump($user->errors); echo "</pre>";
+                    }
+                    else{
+                        Yii::app()->user->setFlash('success', 'Success!, you have successfully created a user!');
+                    }
+                }
+            }
+
             $this->render('createuser', array ('form' => $form));
         }
 
