@@ -94,7 +94,7 @@
             $pages->pageSize = 10;
             $pages->applyLimit($criteria);
             $assets = Assets::model()->findAll($criteria);
-            $this->render('listassets', 
+            $this->render('listassets',
                 array('assets'=>$assets,
                     'form'=>$form,
                     'pages' => $pages
@@ -114,7 +114,7 @@
 
             $asset = (isset($_GET['id']) && !empty($_GET['id']))?(Assets::model()->findByPk($_GET['id'])):'';
             if ($asset!=null){
-                
+
                 $form->model->attributes = $asset->attributes;
                 $address = Address::model()->findByPk($asset->address);
                 $form->model->attributes = $address->attributes;
@@ -138,6 +138,20 @@
         }
 
         public function ActionImages(){
+
+            $form = new Form('application.forms.img_upload', new Img_upload);
+            if($form->submitted()){
+                echo "Submitted";
+                if($form->validate()){
+                    echo 'Validated';
+                } else {
+                    echo "No Validate";
+                }
+            } else {
+                echo "No Submit";
+            }
+
+            /*
             if(Yii::app()->user->isGuest){
                 $this->redirect(array('/login'));
             }
@@ -152,21 +166,24 @@
                 $form = new Form('application.forms.img_upload', new Img_upload);
                 $asset = Assets::model()->findByPk($_GET['id']);
                 $images = ($asset)?($asset->Images):'';
+
+                if($form->submitted()){
+                    if($form->validate()){
+                        echo 'DA!';
+                        exit;
+                        $image = New Images;
+                        // $form->model->asset = $_GET['id'];
+                        $image->attributes = $form->model->attributes;
+                        $image->image_upload( $_GET['id'], $form );
+                    } else {
+                        echo "No Validate";
+                    }
+                } else {
+                    echo "No Submit";
+                }
             }
-
-            // var_dump($form->model);
-            // exit;
-
-            if ($form->submitted() && $form->validate() ){
-                echo 'DA!';
-                exit;
-                $image = New Images;
-                // $form->model->asset = $_GET['id'];
-                $image->attributes = $form->model->attributes;
-                $image->image_upload( $_GET['id'], $form );
-            }
-
-            $this->render('images', array('images' => $images, 'form' => $form ));
+            */
+            $this->render('images', array('form' => $form));
         }
         public function ActionDeleteImage($id){
 

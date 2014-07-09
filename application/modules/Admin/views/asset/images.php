@@ -9,9 +9,16 @@
 
 
 <?php
-	$form->attributes=array('class' => 'form-horizontal', 'enctype' => 'multipart/form-data' , 'id' => 'frm' );
+	$form->attributes = array('class' => 'form-horizontal', 'enctype' => 'multipart/form-data' , 'id' => 'frm' );
 	echo $form->renderBegin();
 	$widget = $form->ActiveFormWidget;
+
+	echo $widget->input($form, 'asset', array('class' => 'form-control', 'value'=> 'notempty'));
+	echo $widget->button($form, 'submit', array('class' => 'btn btn-sm btn-success'));
+
+	echo $form->renderEnd();
+
+	return;
 
 	if($widget->errorSummary($form)):
 ?>
@@ -19,17 +26,17 @@
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <?php echo $widget->errorSummary($form); ?>
     </div>
-<?php endif; ?>	
+<?php endif; ?>
 
 <?php if (Yii::app()->user->hasFlash('success')){ ?>
 	<div class="alert alert-success" >
 		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
 		<?php echo Yii::app()->user->getFlash('success') ?>
 	</div>
-<?php }else if (Yii::app()->user->hasFlash('success')){ ?>
+<?php } else if (Yii::app()->user->hasFlash('danger')){ ?>
 	<div class="alert alert-danger" >
 		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-		<?php echo Yii::app()->user->getFlash('success') ?>
+		<?php echo Yii::app()->user->getFlash('danger') ?>
 	</div>
 <?php } ?>
 
@@ -41,38 +48,40 @@
 	echo $widget->button($form, 'submit', array ( 'class' => 'btn btn-sm btn-success'));
 	echo $form->renderEnd();
 ?>
-
-<div class="row" >
-<!-- <table class="table"> -->
-	<!-- <tbody> -->
+<?php if(isset($images) && $images && count($images) > 0): ?>
+	<div class="row" >
+		<!-- <table class="table"> -->
+		<!-- <tbody> -->
 		<?php foreach ($images as $k => $v):?>
 			<?php //if ($k==0 || $k%3==0): ?>
-				<!-- <tr> -->
+			<!-- <tr> -->
 			<?php //endif; ?>
-					<!-- <td> -->
-					<div  class="col-sm-4" >
-						<div class="image-hover">
-							<?php echo CHtml::image(Yii::app()->assetManager->publish($v->url), $v->asset,
-								array(
-									'class' => 'img-rounded',
-									'height' => '240',
-									'width' => '300'
-								));
-							?>
-							<div class="overlay">  
-		        				<?php echo CHtml::link('Delete', array('DeleteImage', 'id' => $v->id), array('class' => 'btn btn-danger')); ?>
-		        			</div>
-						</div>
+			<!-- <td> -->
+			<div  class="col-sm-4" >
+				<div class="image-hover">
+					<?php echo CHtml::image(Yii::app()->assetManager->publish($v->url), $v->asset,
+					array(
+					'class' => 'img-rounded',
+					'height' => '240',
+					'width' => '300'
+					));
+					?>
+					<div class="overlay">
+						<?php echo CHtml::link('Delete', array('DeleteImage', 'id' => $v->id), array('class' => 'btn btn-danger')); ?>
 					</div>
-					<!-- </td> -->
-			
-		<?php endforeach; ?>
-				<!-- </tr> -->
-				<?php if ($k==0 || $k%3==0): ?>
 				</div>
-				<?php endif; ?>
+			</div>
+			<!-- </td> -->
+
+		<?php endforeach; ?>
+		<!-- </tr> -->
+		<?php if ($k==0 || $k%3==0): ?>
+		</div>
+	<?php endif; ?>
 	<!-- </tbody> -->
-<!-- </table> -->
+	<!-- </table> -->
+<?php endif; ?>
+
 
 
 <style>
@@ -113,7 +122,7 @@ $(document).ready( function (){
 		}, function(){
 			// What happens the mouse leaves
 			$(this).children('.overlay').hide();
-		
+
 		});
 });
 </script>
