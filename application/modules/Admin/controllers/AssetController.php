@@ -154,7 +154,7 @@
                 $images = ($asset)?($asset->Images):'';
             }
 
-            if ($form->submitted() && $form->validate){
+            if ($form->submitted() && $form->validate()){
                 echo 'DA!';
                 exit;
                 $image = New Images;

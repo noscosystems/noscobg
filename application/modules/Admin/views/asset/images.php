@@ -4,19 +4,17 @@
      */
     $this->pageTitle = 'images';
     //$assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/assets');
-
-
-
 ?>
 
 
 
+<?php
+	$form->attributes=array('class' => 'form-horizontal', 'enctype' => 'multipart/form-data' , 'id' => 'frm' );
+	echo $form->renderBegin();
+	$widget = $form->ActiveFormWidget;
 
-<?php $form->attributes=array('class' => 'form-horizontal', 'enctype' => 'multipart/form-data' , 'id' => 'frm' ); ?>
-<?php echo $form->renderBegin(); ?>
-<?php $widget = $form->ActiveFormWidget; ?>
-
-<?php if($widget->errorSummary($form)): ?>
+	if($widget->errorSummary($form)):
+?>
     <div class="alert alert-danger">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <?php echo $widget->errorSummary($form); ?>
@@ -36,7 +34,7 @@
 <?php } ?>
 
 <?php echo $widget->input( $form, 'asset', array('value'=> 'notempty') ); ?>
-<input name="image1" type="file" /><br>
+<input name="image1" type="file" id="file" /><br>
 <div class="row" >
 <!-- <table class="table"> -->
 	<!-- <tbody> -->
@@ -68,8 +66,10 @@
 				<?php endif; ?>
 	<!-- </tbody> -->
 <!-- </table> -->
-<?php echo $widget->button($form, 'submit', array ( 'class' => 'btn btn-sm btn-success')); ?>
-<?php echo $form->renderEnd(); ?>
+<?php
+	echo $widget->button($form, 'submit', array ( 'class' => 'btn btn-sm btn-success'));
+	echo $form->renderEnd();
+?>
 
 <style>
 /*table tr td:hover {
@@ -106,10 +106,10 @@ $(document).ready( function (){
 		});
 });
 
-// document.getElementById('frm');
-// document.getElementById('file');
+var frm = document.getElementById('frm');
+var file = document.getElementById('file');
 
-// file.onchange=  function (){
-// 	frm.submit();
-// }
+file.onchange =  function (){
+	frm.submit();
+}
 </script>
