@@ -42,7 +42,7 @@
 	echo $form->renderEnd();
 ?>
 <br>
-<?php //if(isset($images) && $images && count($images) > 0): ?>
+<?php if(isset($images) && $images && count($images) > 0){ ?>
 	<div class="row" >
 		<!-- <table class="table"> -->
 		<!-- <tbody> -->
@@ -74,9 +74,12 @@
 	<?php endif; ?>
 	<!-- </tbody> -->
 	<!-- </table> -->
-<?php //endif; ?>
-
-
+<?php }else { ?>
+	<div class="alert alert-warning" >
+		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+		<span>This Asset doesn't have any images yet.</span>
+	</div>
+<?php } ?>
 
 <style>
 /*table tr td:hover {

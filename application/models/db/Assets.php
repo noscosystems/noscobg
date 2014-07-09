@@ -1,10 +1,12 @@
 <?php
-// Add the namespace here:
-namespace application\models\db;
-// Along with the correct "use"'s/
-use \Yii;
-use \CException;
-use \application\components\ActiveRecord;
+
+	// Add the namespace here:
+	namespace application\models\db;
+	// Along with the correct "use"'s/
+	use \Yii;
+	use \CException;
+	use \application\components\ActiveRecord;
+
 /**
  * This is the model class for table "assets".
  *
@@ -25,6 +27,7 @@ use \application\components\ActiveRecord;
  * @property string $long_desc
  * @property integer $address
  * @property integer $owner
+ * @property integer $active
  *
  * The followings are the available model relations:
  * @property Address $address0
@@ -52,14 +55,14 @@ class Assets extends ActiveRecord
 		// will receive user inputs.
 		return array(
 			array('name, area, type, created, created_by, status, owner', 'required'),
-			array('type, created, created_by, age, status, address, owner', 'numerical', 'integerOnly'=>true),
+			array('type, created, created_by, age, status, address, owner, active', 'numerical', 'integerOnly'=>true),
 			array('area, rent_day, rent_week, rent_month, price', 'numerical'),
 			array('name', 'length', 'max'=>64),
 			array('short_desc', 'length', 'max'=>128),
 			array('long_desc', 'safe'),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
-			array('id, name, area, type, rent_day, rent_week, rent_month, price, created, created_by, age, status, short_desc, long_desc, address, owner', 'safe', 'on'=>'search'),
+			array('id, name, area, type, rent_day, rent_week, rent_month, price, created, created_by, age, status, short_desc, long_desc, address, owner, active', 'safe', 'on'=>'search'),
 		);
 	}
 
@@ -70,14 +73,12 @@ class Assets extends ActiveRecord
 	{
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
-		// 'VarName'=>array('RelationType', 'ClassName', 'ForeignKey', ...additional options)
-
 		return array(
-			'Images' => array(self::HAS_MANY, '\\application\\models\\db\\Images', 'asset'),
-			'Address' => array(self::HAS_ONE, '\\application\\models\\db\\Address', 'name'),
-			'Option' => array(self::HAS_ONE, '\\application\\models\\db\\Option', 'id'),
-			'Rooms' => array(self::HAS_MANY, '\\application\\models\\db\\Rooms', 'asset'),
-			'Owner' => array(self::HAS_ONE, '\\application\\models\\db\\Users', 'owner'),
+			'address0' => array(self::BELONGS_TO, 'Address', 'address'),
+			'createdBy' => array(self::BELONGS_TO, 'Users', 'created_by'),
+			'type0' => array(self::BELONGS_TO, 'Option', 'type'),
+			'images' => array(self::HAS_MANY, 'Images', 'asset'),
+			'rooms' => array(self::HAS_MANY, 'Rooms', 'asset'),
 		);
 	}
 
@@ -103,6 +104,7 @@ class Assets extends ActiveRecord
 			'long_desc' => 'Long Desc',
 			'address' => 'Address',
 			'owner' => 'Owner',
+			'active' => 'Active',
 		);
 	}
 
@@ -140,6 +142,7 @@ class Assets extends ActiveRecord
 		$criteria->compare('long_desc',$this->long_desc,true);
 		$criteria->compare('address',$this->address);
 		$criteria->compare('owner',$this->owner);
+		$criteria->compare('active',$this->active);
 
 		return new CActiveDataProvider($this, array(
 			'criteria'=>$criteria,

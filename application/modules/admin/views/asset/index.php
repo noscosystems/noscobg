@@ -11,10 +11,21 @@ $widget = $form->activeFormWidget;
 
 
 
-if($widget->errorSummary($form)){
-    echo '<div class="alert alert-danger">' . $widget->errorSummary($form) . '</div>';
-}
+if($widget->errorSummary($form)): ?>
+    <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <?php echo $widget->errorSummary($form); ?>
+    </div>
+<?php endif;
 ?>
+
+<?php if (Yii::app()->user->hasFlash('success')): ?>
+    <div class="alert alert-success" >
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <?php echo Yii::app()->user->getFlash('success') ?>
+    </div>
+<?php endif; ?>
+
 <div class="col-sm-offset-2 col-sm-10 page-header">
   <h1>New Asset <small>Please fill in the form to create a new asset.</small></h1>
 </div>
@@ -39,6 +50,13 @@ if($widget->errorSummary($form)){
     <div class="col-sm-3 control-label">Asset status:</div>
     <div class="col-sm-6">
         <?php echo $widget->input($form, 'status', array('class' => 'form-control') ); ?>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-3 control-label">Asset type:</div>
+    <div class="col-sm-6">
+        <?php echo $widget->input($form, 'type', array('class' => 'form-control') ); ?>
     </div>
 </div>
 <br>
@@ -95,6 +113,13 @@ if($widget->errorSummary($form)){
     <div class="col-sm-3 control-label">Long desciption:</div>
     <div class="col-sm-6">
         <?php echo $widget->input($form, 'long_desc', array('class' => 'form-control') ); ?>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-3 control-label">Active/Inactive:</div>
+    <div class="col-sm-6">
+        <?php echo $widget->input($form, 'active', array('class' => 'form-control', 'title' => 'Select wether the asset is active ( available for buy,rent, etc ) or inactive (not avaible for buy, rent, sell, etc).') ); ?>
     </div>
 </div>
 <br>

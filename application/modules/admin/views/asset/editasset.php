@@ -50,6 +50,13 @@ if(Yii::app()->user->hasFlash('success')): ?>
 </div>
 <br>
 <div class="row">
+    <div class="col-sm-3 control-label">Change asset type:</div>
+    <div class="col-sm-6">
+        <?php echo $widget->input($form, 'type', array('class' => 'form-control') ); ?>
+    </div>
+</div>
+<br>
+<div class="row">
     <div class="col-sm-3 control-label">Change owner of the asset:</div>
     <div class="col-sm-6">
         <?php echo $widget->input($form, 'owner', array('class' => 'form-control' ) ); ?>
@@ -102,6 +109,13 @@ if(Yii::app()->user->hasFlash('success')): ?>
     <div class="col-sm-3 control-label">Desciption:</div>
     <div class="col-sm-6">
         <?php echo $widget->input($form, 'long_desc', array('class' => 'form-control' ) ); ?>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-3 control-label">Active/Inactive:</div>
+    <div class="col-sm-6">
+        <?php echo $widget->input($form, 'active', array('class' => 'form-control', 'title' => 'Select wether the asset is active ( available for buy,rent, etc ) or inactive (not avaible for buy, rent, sell, etc).') ); ?>
     </div>
 </div>
 <br>

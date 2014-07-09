@@ -28,26 +28,35 @@
                 $this->redirect(array('/home'));
             }
             if($form->submitted() && $form->validate()) {
-                $address = New Address;
-                $address->attributes = $form->model->attributes;
-                $address->created = time();
-                $address->save();
-                //$address_name = Address::model()->findByAttributes(array('name'=> $address->name));
-                $asset = New Assets;
-                $asset->attributes = $form->model->attributes;
-                $asset->address = $address->id;// = $address_name->id;
-                $asset->created_by = Yii::app()->user->getId();
-                // The Type simply has to be the Option ID.
-                $asset->type = 1;
-                $asset->status = 1;
-                // Assign the owner to the asset
-                $asset->owner = $form->model->owner;
-                $asset->created = time();
-                if(!$asset->save()){
-                    echo 'Error saving asset - Line: ' . __LINE__ ;
-                    echo "<br><pre class='pre-scrollable'>"; var_dump($asset->errors); echo "</pre>";
+                $asset = Assets::model()->findAllByAttributes(array('name' => $form->model->name));
+                if($asset){
+                    $form->model->addError('name', 'An asset with this name already exists.');
                 }
-
+                else {
+                    $address = New Address;
+                    $address->attributes = $form->model->attributes;
+                    $address->created = time();
+                    $address->save();
+                    //$address_name = Address::model()->findByAttributes(array('name'=> $address->name));
+                    $asset = New Assets;
+                    $asset->attributes = $form->model->attributes;
+                    // switch ($asset->status)
+                    $asset->address = $address->id;// = $address_name->id;
+                    $asset->created_by = Yii::app()->user->getId();
+                    // The Type simply has to be the Option ID.
+                    // $asset->type = 1;
+                    //$asset->status = 1;
+                    // Assign the owner to the asset
+                    $asset->owner = $form->model->owner;
+                    $asset->created = time();
+                    if(!$asset->save()){
+                        echo 'Error saving asset - Line: ' . __LINE__ ;
+                        echo "<br><pre class='pre-scrollable'>"; var_dump($asset->errors); echo "</pre>";
+                    }
+                    else{
+                        Yii::app()->user->setFlash('success', 'The new Asset has been saved successfully.');
+                    }
+                }
                 /**
                 No longer need to save owner like this as it is now a 1 to 1 relationship.
                 */
@@ -63,7 +72,6 @@
                 // $image->image_upload();
 
                 // This will display a success message.
-                Yii::app()->user->setFlash('success', 'The new Asset has been saved successfully.');
             }
 
             $this->render('index',array('form' => $form));
@@ -124,6 +132,8 @@
                     $asset->attributes = $form->model->attributes;
                     $address->attributes = $form->model->attributes;
                     $address->save();
+                    $asset->active = $form->model->active;
+                    $asset->status = $form->model->status;
                     $asset->type = 1;
                     $asset->address = $address->id;
                     // echo '<pre>';
