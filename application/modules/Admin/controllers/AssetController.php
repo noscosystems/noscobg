@@ -7,10 +7,10 @@
     use \application\components\Form;
     use \application\models\form\Insert;
     use \application\models\form\ListUsers;
+    use \application\models\form\Img_upload;
     use \application\models\db\Address;
     use \application\models\db\Assets;
     use \application\models\db\Images;
-    use \application\models\form\Img_upload;
 
 
     class AssetController extends Controller{
@@ -154,11 +154,14 @@
                 $images = ($asset)?($asset->Images):'';
             }
 
-            if ($form->submitted() && $form->validate()){
+            // var_dump($form->model);
+            // exit;
+
+            if ($form->submitted() && $form->validate() ){
                 echo 'DA!';
                 exit;
                 $image = New Images;
-                $form->model->asset = $_GET['id'];
+                // $form->model->asset = $_GET['id'];
                 $image->attributes = $form->model->attributes;
                 $image->image_upload( $_GET['id'], $form );
             }

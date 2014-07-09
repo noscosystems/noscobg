@@ -33,8 +33,15 @@
 	</div>
 <?php } ?>
 
-<?php echo $widget->input( $form, 'asset', array('value'=> 'notempty') ); ?>
+<?php echo $widget->input( $form, 'asset', array('class' => 'form-control', 'value'=> 'notempty') ); ?>
+
 <input name="image1" type="file" id="file" /><br>
+
+<?php
+	echo $widget->button($form, 'submit', array ( 'class' => 'btn btn-sm btn-success'));
+	echo $form->renderEnd();
+?>
+
 <div class="row" >
 <!-- <table class="table"> -->
 	<!-- <tbody> -->
@@ -66,10 +73,7 @@
 				<?php endif; ?>
 	<!-- </tbody> -->
 <!-- </table> -->
-<?php
-	echo $widget->button($form, 'submit', array ( 'class' => 'btn btn-sm btn-success'));
-	echo $form->renderEnd();
-?>
+
 
 <style>
 /*table tr td:hover {
@@ -95,6 +99,13 @@
 </style>
 
 <script>
+// var frm = document.getElementById('frm');
+// var file = document.getElementById('file');
+
+// file.onchange =  function (){
+// 	frm.submit();
+// }
+
 $(document).ready( function (){
 	$(".image-hover").hover( function(){
 			// What happens when the mouse is hovered
@@ -105,11 +116,4 @@ $(document).ready( function (){
 		
 		});
 });
-
-var frm = document.getElementById('frm');
-var file = document.getElementById('file');
-
-file.onchange =  function (){
-	frm.submit();
-}
 </script>
