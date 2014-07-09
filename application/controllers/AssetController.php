@@ -24,4 +24,8 @@
             $this->render( 'view', array ('form' => $form ) );
         }
 
+        public function actionDetails(){
+            $this->render('details');
+        }
+
     }

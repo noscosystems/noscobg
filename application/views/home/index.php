@@ -128,6 +128,7 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
                 <li><?php echo (Yii::app()->user->isGuest)?(CHtml::link('Register', array('account/register'), array())):'';?></li>
                 <li><?php echo (!Yii::app()->user->isGuest)?(CHtml::link('My Account', array('/account/myaccount'), array())):'';?></li>
                 <li><?php echo (!Yii::app()->user->isGuest)?(CHtml::link('My Assets', array('/account/listassets'), array())):''; ?></li>
+                <?php echo (Yii::app()->user->priv>=50)?( '<li>'.CHtml::link('Admin', array('/admin')).'</li>'):''; ?>
                 <li><?php echo (Yii::app()->user->isGuest)?(CHtml::link('Guest\Login', array('/login'), array())):CHtml::link('Log Out', array('/account/logout'), array()); ?></li>
                 <!-- CHtml::link('Myaccount', array('account/myaccount'), array()) -->
             </ul>

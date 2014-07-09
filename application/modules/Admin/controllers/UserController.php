@@ -31,15 +31,15 @@
 					if ($form->submitted() && $form->validate()){
 						if ($form->model->old_pass == ''){
 							$user->attributes = $form->model->attributes;
-							$user->priv = ($form->model->priv!='')?($form->model->priv):$priv_;
+							$user->priv = ($form->model->priv!='' && $user->id != Yii::app()->user->id)?($form->model->priv):$priv_;
 							$user->password = $pass_;
-							$user->save();
+							($user->save())?( Yii::app()->user->setFlash('success', 'Profile of user '.$user->username.' updated successfully') ):(Yii::app()->user->setFlash('warning', 'Something went wrong, please try to reedit user profile.')); 
 						}
 						else if (!empty($form->model->old_pass)){
 							$correct = \CPasswordHelper::verifyPassword($form->model->old_pass, $user->password);
 							if ($correct && $form->model->password == $form->model->password2){
 								$user->attributes = $form->model->attributes;
-								$user->priv = ($form->model->priv!='')?($form->model->priv):$priv_;
+								$user->priv = ($form->model->priv!='' && $user->id != Yii::app()->user->id)?($form->model->priv):$priv_;
 								$user->password = $user->_setPassword($user->password);
 								$user->save();
 							}
@@ -49,7 +49,7 @@
 						// var_dump($form->model->attributes);
 						// echo '</pre>';
 				}
-			$this->render ( 'index', array ( 'form' => $form, 'user' => $user ));
+			$this->render ( 'userprofile', array ( 'form' => $form, 'user' => $user ));
 		}
 
 		public function actionCreateuser(){

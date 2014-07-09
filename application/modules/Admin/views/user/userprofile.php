@@ -11,22 +11,28 @@ echo $form->renderBegin();
 $widget = $form->activeFormWidget;
 ?>
 
-<div class="page-header">
-    <h1>User profile <small>Please enter your changes to</small></h1>
-</div>
-
-<?php if(Yii::app()->user->hasFlash('account.myaccount.success')): ?>
-    <div class="alert alert-success">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <?php echo Yii::app()->user->getFlash('account.myaccount.success'); ?>
-    </div>
-<?php endif; ?>
 
 <?php
 if($widget->errorSummary($form)){
     echo '<div class="alert alert-danger">' . $widget->errorSummary($form) . '</div>';
 }
 ?>
+
+<?php if (Yii::app()->user->hasFlash('success')){ ?>
+    <div class="alert alert-success" >
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <?php echo Yii::app()->user->getFlash('success') ?>
+    </div>
+<?php }else if (Yii::app()->user->hasFlash('warning')){ ?>
+    <div class="alert alert-danger" >
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <?php echo Yii::app()->user->getFlash('warning') ?>
+    </div>
+<?php } ?>
+
+<div class="page-header">
+    <h1>User profile <small>Please enter your changes to</small></h1>
+</div>
 
 <div class="row">
     <div class="col-sm-3 control-label">Change username:</div>
@@ -77,7 +83,7 @@ if($widget->errorSummary($form)){
     </div>
 </div>
 <br>
-<?php if (($user->priv<50)): ?>
+<?php //if (($user->priv<50)): ?>
 <div class="row">
     <div class="col-sm-3 control-label">Select privilige level for this user:</div>
     <div class="col-sm-6">
@@ -86,7 +92,7 @@ if($widget->errorSummary($form)){
 </div>
 <br>
 
-<?php endif; ?>
+<?php //endif; ?>
 <div class="row">
     <div class="col-sm-2 col-sm-offset-3">
         <?php echo $widget->button($form, 'submit', array('class' => 'btn btn-lg btn-success') ); ?>
