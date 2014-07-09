@@ -9,9 +9,9 @@
 
 
 <?php
-	$form->attributes = array('class' => 'form-horizontal', 'enctype' => 'multipart/form-data' , 'id' => 'frm' );
+	$form->attributes = array('class' => 'form-horizontal', 'enctype' => 'multipart/form-data');
 	echo $form->renderBegin();
-	$widget = $form->ActiveFormWidget;
+	$widget = $form->activeFormWidget;
 
 	echo $widget->input($form, 'asset', array('class' => 'form-control', 'value'=> 'notempty'));
 	echo $widget->button($form, 'submit', array('class' => 'btn btn-sm btn-success'));
