@@ -143,4 +143,20 @@
             ));
         }
 
+        public function actionLoad($id = null)
+        {
+            $variables = array(
+                'id' => $id,
+            );
+
+            Yii::app()->request->isAjaxRequest
+                ? $this->renderPartial('load', $variables)
+                : $this->render('load', $variables);
+        }
+
+        public function actionModal()
+        {
+            $this->render('modal');
+        }
+
     }

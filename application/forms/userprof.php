@@ -4,11 +4,6 @@
         'title' => Yii::t('application', 'Please provide your login credentials.'),
 
         'elements' => array(
-            'username' => array(
-                'type' => 'text',
-                'maxlength' => 64,
-                'hint' => Yii::t('application', 'Please enter your username; it is case-insensitive.'),
-            ),
             'firstname' => array(
                 'type' => 'text',
                 'maxlength' => 36,
@@ -23,7 +18,17 @@
                 'type' => 'text',
                 'maxlength' => 36,
                 'hint' => Yii::t('application', 'Please enter your lastname; it is case-insensitive.'),
-            )
+            ),
+            'email' => array(
+                'type' => 'text',
+                'maxlength' => 128,
+                'hint' => Yii::t('application', 'Please enter your email; it is case-insensitive.'),
+            ),
+            'mobile_number' => array(
+                'type' => 'text',
+                'maxlength' => 15,
+                'hint' => Yii::t('application', 'Please enter your mobile number; it is case-insensitive.'),
+            ),
 
         ),
 

@@ -12,16 +12,8 @@
         echo '<div class="alert alert-danger">' . $widget->errorSummary($form) . '</div>';
     }
 ?>
-
-<?php if(Yii::app()->user->hasFlash('del_success')): ?>
-    <div class="alert alert-success">
-        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-    <?php echo Yii::app()->user->getFlash('del_success'); ?>
-    </div>
-<?php endif;?>
-
 <div class="page-header">
-  <h1>View users <small>Below is a list of all users.</small></h1>
+  <h1>Assets <small>Below is a list of all users.</small></h1>
 </div>
 
 <div class="form-group">
@@ -29,23 +21,24 @@
         <?php echo $widget->input($form, 'search', array('class' => 'form-control', 'title' => 'Type in a username to find a user') ); //echo '<br>';?>
     </div>
     <div class="col-sm-2">
-        <?php echo $widget->button($form, 'submit', array('class' => 'btn btn-sm btn-success  form-control') ); ?>
+        <?php echo $widget->button($form, 'submit', array('class' => 'btn btn-sm btn-success  form-control', 'value' => 'Find Asset') ); ?>
     </div>
 </div>
 
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th>username</th><th>current privilige</th><th class="text-right">Link to edit page</th><th class="text-right">Delete user</th>
+			<th>Name of asset</th>
+			<th>Link to edit page</th>
+            <th>Images</th>
 		</tr>
 	</thead>
 	<tbody>
-        <?php foreach($users as $v): ?>
+        <?php foreach($assets as $v): ?>
             <tr>
-                <td><?php echo $v->username; ?></td>
-                <td><?php echo $v->priv; ?></td>
-                <td class="text-right"><?php echo CHtml::link('Edit User', array('/admin/user/', 'id' => $v->id ),array('class' => 'btn btn-xs btn-warning', 'title' => 'Click to edit a user.')); ?></td>
-                <td class="text-right"><?php echo CHtml::link('Delete', array('/admin/user/deleteuser', 'id' => $v->id ),array('class' => 'btn btn-danger btn-xs', 'title' => 'Click to delete a user.')); ?></td>
+                <td><?php echo $v->name; ?></td>
+                <td><?php echo CHtml::link($v->name, array('/admin/asset/editasset', 'id' => $v->id ),array('title' => 'Click to edit a user.')); ?></td>
+                <td><?php echo CHtml::link('View', array('/admin/asset/images', 'id' => $v->id ),array('title' => 'Click to view images related to this asset.')); ?></td>
             </tr>
         <?php endforeach; ?>
 	</tbody>

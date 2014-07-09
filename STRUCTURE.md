@@ -8,13 +8,13 @@ I recommend that we create a module for the admin area. The new location for the
 `\application\modules\admin\`
 
 Inside the module will be the following controllers with their actions listed below:
- - UserController
-  - Create (Create a user)
+ ~~- UserController~~
+  ~~- Create (Create a user)~~
   ~~- Edit (Edit a User)~~
   - Statistics (Display statistics about all the users)
  ~~- AssetController~~
   ~~- Create (Create an asset)~~
-  - Edit (Edit an asset)
+  ~~- Edit (Edit an asset)~~
   - Statistics (Display statistics about all the assets)
 
 ### User Area
@@ -25,7 +25,7 @@ This will be in the standard appication area (not in a module) and will comprise
  - AccountController
   - Profile (Edit their profile, their about etc.)
   ~~- Password (Edit their password, include confirmations of current password)~~
-  - Contact (Edit their mobile number, email address etc.)
+  ~~- Contact (Edit their mobile number, email address etc.)~~
   ~~- Assets (List all the assets owned by the user)~~
   ~~- Log Out (Allow the option to log out)~~
 

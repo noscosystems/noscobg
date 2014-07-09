@@ -8,7 +8,7 @@ return array(
                 'type' => 'hidden',
                 'maxlength' => 11,
                 'hint' => Yii::t('application', ''),
-            ),
+            )
         ),
 
         'buttons' => array(

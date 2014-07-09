@@ -15,6 +15,15 @@ class DefaultController extends Controller
 	public $identity;
 
         public function actionIndex(){
+            if(Yii::app()->user->isGuest){
+                $this->redirect(array('/login'));
+            }
+            else if (Yii::app()->user->priv >=50){
+                $form = new Form('application.forms.insert', new Insert);
+            }
+            else {
+                $this->redirect(array('/home'));
+            }
             $this->render('index');
         }
 

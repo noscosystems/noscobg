@@ -52,7 +52,7 @@ class Images extends ActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'Assets'=>array(self::HAS_ONE, 'Images', 'asset')
+			'Assets'=>array(self::HAS_ONE, 'Assets', 'asset')
 		);
 	}
 
@@ -110,15 +110,13 @@ class Images extends ActiveRecord
 		return parent::model($className);
 	}
 
-	public function image_upload($asset_name){
+	public function image_upload($id,$form){
         //2 097 152 = 2MegaBytes;
-        //$this->asset = $asset->id;
-        //$image->asset = $asset->id;
-        $allowed_img_types = Array('image/bmp','image/jpeg','image/png');
+        $allowed_img_types = Array('image/bmp','image/jpeg','image/png');	//allowed image types, stored in an array
         //$mime_type = image_type_to_mime_type(exif_imagetype($_FILES['image1']['tmp_name']));
         $size = [];
         $size = getimagesize($_FILES['image1']['tmp_name']);
-        if (!in_array($size['mime'],$allowed_img_types)){
+        if (!in_array($size['mime'],$allowed_img_types)){ // Checking wether the image is of the allowed image types
             array_push($this->errors, 'Image not of allowed type. Allowed image types are jpeg, bmp and png!');
         }
         else if ($size[0]>3072){
@@ -131,21 +129,41 @@ class Images extends ActiveRecord
             array_push($this->errors, 'Size is greater than 2MBs, please upload a smaller image!');
         }
         else{
+        	$ext = strstr($_FILES['image1']['name'], '.');
+        	$_FILES['image1']['name'] = substr(md5(time()), 0, 7).$ext;	//sets a name based on crrent time
+        	//then md5's it :D and get's a part of the string as the name
             $this->name = $_FILES['image1']['name'];
-            $folder = Yii::getPathOfAlias('application.views.Uploads').'\\'.$asset_name.'\\';/*Yii::getPathOfAlias("application.themes.classic.assets.images")*/
-            ( !file_exists($folder) )?(mkdir ($folder, true) ):'';
+            $folder = Yii::getPathOfAlias('application.views.Uploads').'\\';/*Yii::getPathOfAlias("application.themes.classic.assets.images")*/
+            //( !file_exists($folder) )?(mkdir ($folder, true) ):'';
             $this->url = $folder.$_FILES['image1']['name'];
             $this->created = time();
-            if ( !move_uploaded_file($_FILES['image1']['tmp_name'], $folder.'/'.$_FILES['image1']['name']) ){
-            	array_push($this->errors, 'Unable to upload image, please try again!');
-            }
+            $asset = Assets::model()->findByPk ($id);
+            if (count($asset->Images)>4){
+        			array_push($this->errors,'Maximum number of images reached for this asset.');
+        	}
+        	else {
+	            if ( !move_uploaded_file($_FILES['image1']['tmp_name'], $folder.'/'.$_FILES['image1']['name']) ){
+	            	array_push($this->errors, 'Unable to upload image, please try again!');
+	            }
+        	}
         }
         if (empty($this->errors)){
-        	echo ($this->save())?'YESSSSS!!!!':'Noooooooooo!';
+        	if ($this->save()){
+       			Yii::app()->user->setFlash( 'success', 'Success!');
+       		}
+       		else if (!$this->save()){
+       			Yii::app()->user->setFlash( 'warning', 'Something went wrong, save unsuccessfull.' );
+       		}
         }
         else {
-        	echo "<pre class='pre-scrollable'>"; var_dump($this->errors); echo "</pre>";
+        	foreach ( $this->errors as $k => $error ){
+        		$form->model->addError($k , $error);
+        	}
         	return false;
         }
     }
+    public function unlink_path(){
+		return (unlink($this->url))?true:false;
+	}
 }
+

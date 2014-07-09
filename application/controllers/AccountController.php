@@ -42,11 +42,13 @@
                     // DOB only saves as a number, a unix timestamp.
                     $user->dob = strtotime($form->model->dob);
                     // Finally, save.
+                    $user->email = (empty($form->model->email))?(null):'';
+                    $user->mobile_number = (empty($form->model->mobile_number))?(null):'';
                     if(!$user->save()){
                         echo "<pre class='pre-scrollable'>"; var_dump($user->errors); echo "</pre>";
                     }
                     else{
-                        Yii::app()->user->setFlash('home.register.success', 'Success!, you have successfully registered!');
+                        Yii::app()->user->setFlash('account.register.success', 'Success!, you have successfully registered!');
                     }
                 }
             }
@@ -87,24 +89,51 @@
 				$form = new Form('application.forms.userprof', new Userprof);
 				$user = Users::model()->findbyPk(Yii::app()->user->id);
 				if ($form->submitted() && $form->validate()){
-					$user_search = Users::model()->findAllByAttributes(array('username' => $form->model->username));
-                	if($user_search){
-                    	$form->model->addError('username', 'The username specified is already taken! Please choose another.');
-                	}else{
-                		// $user1->dob = $user->dob;
-                		// $user1->priv = $user->priv;
-                		// $user1->branch = $user->branch;\
+						$sql = 'SELECT *
+							    FROM `users`
+							    WHERE `id`!=:id AND `email`=:email';
+						$sql1 = 'SELECT *
+							    FROM `users`
+							    WHERE `id`!=:id AND `mobile_number`=:mobile_number';
+						$users = Users::model()->findAllBySql($sql,
+							array(
+								':id' => (int)Yii::app()->user->id,
+								':email' => (string)$form->model->email
+								/*':mobile_number' => ($form->model->mobile_number)*/
+								)
+							);
+						// $users = Users::model()->findAllByAttributes(array('mobile_number' => $form->model->mobile_number));
+						if ($users){
+							$form->model->addError('email','This Email is already taken.');
+						}
+						if ($users = Users::model()->findAllBySql($sql1, array(
+								':id' => (int)Yii::app()->user->id,
+								':mobile_number' => (string)$form->model->mobile_number
+								))) {
+							$form->model->addError('mobile_number','Mobile number already taken by another user.');
+						}
 						$user->attributes = $form->model->attributes;
-						if (!$user->save()){
-							echo 'Error saving user - Line: ' . __LINE__ ;
-	                    	echo "<br><pre class='pre-scrollable'>"; var_dump($user1->errors);
-	                    	echo "</pre>";
-	                    	// Yii::setFlash('warning','');
-	                	}
-	                	else{
-	                		Yii::app()->user->setFlash('success','User profile updated successfully.');
-	            		}
-	            	}
+						$user->email = (empty($form->model->email))?(null):(($user->email === $form->model->email)?($user->email):'');
+						$user->mobile_number = (empty($form->model->mobile_number))?(null):(($user->mobile_number === $form->model->mobile_number)?($user->mobile_number):'');
+						(empty($form->model->errors))?($user->save()?(Yii::app()->user->setFlash('success','User profile updated successfully.')):''):'';
+						// if (!$user->save()){
+						// 	foreach ($user->errors as $k => $v){
+						// 		$form->model->addError($k, $v);
+						// 	}
+							// echo 'Error saving user - Line: ' . __LINE__ ;
+	      //               	echo "<br><pre class='pre-scrollable'>"; var_dump($user->errors['mobile_number'][0]);
+	      //               	echo "</pre>";
+	          //           	(!empty($user->errors['email'][0]))?Yii::app()->user->setFlash('account.myaccount.warning1',$user->errors['email'][0]):'';
+	     					// (!empty($user->errors['mobile_number'][0]))?Yii::app()->user->setFlash('account.myaccount.warning',$user->errors['mobile_number'][0]):'';
+	     //                	Yii::app()->setFlash('warning',$users->errors);
+	     //                	Yii::app()->user->setFlash('User saving errors',$user->erros);
+							// exit;
+	                	// }
+	                	// ($user->save())?(Yii::app()->user->setFlash('success','User profile updated successfully.')):'';
+	              //   	else{
+	              //   		Yii::app()->user->setFlash('success','User profile updated successfully.');
+	            		// }
+	            	// }
 				}
 			}
             $this->render('myaccount',array('form' => $form, 'user'=>$user));
@@ -122,12 +151,13 @@
                 $image->attributes = $form->model->attributes;
                 $image->image_upload($_GET['asset_name']);
             }
-            //$this->render('ownedassets');
             $this->render('view',array('form' => $form));
         }
 
 		function actionLogout(){
-		    (Yii::app()->user->logout())?(Yii::app()->user->setFlash('user.logout.success', 'Successfully logged out. Hope to see you soon, again.')):'';
+		    // (Yii::app()->user->logout())?(Yii::app()->user->setFlash('account.logout.success', 'Successfully logged out. Hope to see you soon, again.')):'';
+		    Yii::app()->user->logout();
+		    Yii::app()->user->setFlash('account.logout.success', 'Successfully logged out. Hope to see you soon, again.');
 		    $this->render('logout');
 		}
 
