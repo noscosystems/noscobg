@@ -84,8 +84,8 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
 
     .search {
         background: #333;
-        width: 100%;
-        height: 150px;
+        /*width: 100%;*/
+        /*height: 200px;*/
         padding-top: 20px;
         color: #FFF;
         -webkit-box-shadow: 0px 0px 8px 2px #444444;
@@ -175,33 +175,85 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
     </a>
 </div>
 
-
-
-
-<div class="search row">
-    <div class="col-md-6 col-md-offset-3">
+    <div class="search row col-md-10 col-md-offset-1">
         <?php
-            // $form->attributes = array('class' => 'form-horizontal', 'enctype' => 'multipart/form-data');
-            // $form->renderBegin ();
-            // $widget = $form->activeFormWidget();
-            // $form->renderEnd();
+            $form->attributes = array('class' => 'form-horizontal', 'enctype' => 'multipart/form-data');
+            echo $form->renderBegin ();
+            $widget = $form->activeFormWidget;
         ?>
+
+        <?php if($widget->errorSummary($form)): ?>
+            <div class="alert alert-danger">
+                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <?php echo $widget->errorSummary($form); ?>
+            </div>
+        <?php endif; ?>
+
+        <div class="row col-sm-4">
+            <div class="row">
+                <div class="col-sm-5 control-label"> Min price:</div>
+                <div class="col-sm-7">
+                    <?php echo $widget->input($form, 'price_dn', array('class' => 'form-control') ); ?>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-5 control-label">Max price:</div>
+                <div class="col-sm-7">
+                    <?php echo $widget->input($form, 'price_up', array('class' => 'form-control') ); ?>
+                </div>
+            </div>
+        </div>
+        <div class="row col-sm-3">
+            <div class="row">
+                <div class="col-sm-5 control-label"> Min area:</div>
+                <div class="col-sm-7">
+                    <?php echo $widget->input($form, 'area_dn', array('class' => 'form-control') ); ?>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-5 control-label">Max area:</div>
+                <div class="col-sm-7">
+                    <?php echo $widget->input($form, 'area_up', array('class' => 'form-control') ); ?>
+                </div>
+            </div>
+        </div>
+        <div class="row col-sm-3">
+            <div class="row">
+                <div class="col-sm-5 control-label"> Type:</div>
+                <div class="col-sm-7">
+                    <?php echo $widget->input($form, 'type', array('class' => 'form-control') ); ?>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-5 control-label">Status:</div>
+                <div class="col-sm-7">
+                    <?php echo $widget->input($form, 'status', array('class' => 'form-control') ); ?>
+                </div>
+            </div>
+        </div>
+        <div class="row col-sm-3">
+            <div class="row">
+                <div class="col-sm-5 control-label"></div>
+                <div class="col-sm-7">
+                    <?php echo $widget->button($form, 'submit', array('class' => 'btn btn-success') ); ?>
+                    <br><br>
+                </div>
+            </div>
+            </div
+        <?php $form->renderEnd(); ?>
     </div>
 
-<?php //if($widget->errorSummary($form)): ?>
-    <!-- <div class="alert alert-danger"> -->
-        <!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
-        <?php //echo $widget->errorSummary($form); ?>
-    <!-- </div> -->
-<?php //endif; ?>
    <!--  <div class="container">
         Search
     </div> -->
-</div>
+
 
 
 <div class="searchResults col-md-10 col-md-offset-1">
-    <?php foreach ($randAssets as $asset ): ?>
+    <?php foreach ($assets as $asset ): ?>
     <br>
         <div class="row">
             <?php $images = ($asset)?($asset->Images):''; ?>

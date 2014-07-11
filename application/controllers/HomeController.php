@@ -9,6 +9,7 @@
     use \application\components\Form;
     use \application\models\form\Login;
     use \application\models\form\Register;
+	use \application\models\form\Search;
     use \application\models\db\Users;
     use \application\models\db\Assets;
     use \application\models\db\Address;
@@ -19,35 +20,86 @@
 
         public function actionIndex()
         {
-            $assets = Assets::model()->findAll();
+			$form = new Form('application.forms.search', new Search);
 
-            $randAsets = [];
-
-            $count = count($assets) -1;
-
-            // echo '<pre>';
-            // var_dump( $assets );
-            // echo '</pre>'; 
-            // exit;
-            $randAssets = [];
-            for ($i=0; $i<3; $i++){
-                foreach ( $assets as $v ) {
-                    $rand =  rand(0, $count);
-                    if ( $rand == (int)$v->id || $i == 4 ){
-                        echo "Yeaaaaaaaaaaa<br>";
-                        break;
-                    }
-                    else
-                        $randAssets[] = $assets[rand(0, $count)];
+            if ($form->submitted() && $form->validate()){
+                $frm = $form->model;
+                if ( $frm->price_up < $frm->price_dn ) {
+                    $frm->addError ('price range', 'Minimal price is greater than maximum price.');
                 }
-           }
+                if ( $frm->area_up < $frm->area_dn ) {
+                    $frm->addError ('area range', 'Minimal area is greater than maximum area.');
+                }
 
-            echo '<pre>';
-            var_dump( $randAssets );
-            echo '</pre>'; 
-            exit;
-        
-            $this->renderPartial('index', array('randAssets' => $randAssets));
+                $sql = "SELECT * FROM assets WHERE
+                            type ".(($frm->type=='')?("!="):("=")).":type        
+                            AND
+                            status ".(($frm->status=='')?("!="):("="))." :status
+                            AND
+                            price BETWEEN 
+                            :price_dn
+                            AND
+                            :price_up
+                            AND area BETWEEN
+                            :area_dn
+                            AND
+                            :area_up
+                        ORDER BY 
+                            price DESC
+                ";
+
+                if(!$form->model->area_up)
+                    $form->model->area_up = 99999999;
+
+                if(!$form->model->area_dn)
+                    $form->model->area_dn = 1;
+
+                if(!$form->model->area_up)
+                    $form->model->area_up = 1;
+
+                if(!$form->model->price_up)
+                    $form->model->price_up = 99999999;
+
+                if(!$form->model->price_dn)
+                    $form->model->price_dn = 1;
+
+                if(!$form->model->price_up)
+                    $form->model->price_up = 1;
+
+                $assets = Assets::model()->findBySql($sql, array(
+                    ':type' => $frm->type,
+                    ':status' => $frm->status,
+                    ':price_up' => $frm->price_up,
+                    ':price_dn' => $frm->price_dn,
+                    ':area_up' => $frm->area_up,
+                    ':area_dn' => $frm->area_dn
+                ));
+            }else {
+
+                $assets_db = Assets::model()->findAll();
+
+                $count = count($assets_db) -1;
+
+                // echo '<pre>';
+                // var_dump( $assets );
+                // echo '</pre>'; 
+                // exit;
+                $assets = [];
+                $rands = []
+                for ($i=0; $i<3; $i++){
+                    do {
+                        $rand = rand(0,$count);
+                    }while ( !in_array( $rand, $rands ));
+                    array_push( $rands, $rand );
+                    $assets[] = $assets_db[$rand];
+                }
+
+                echo '<pre>';
+                var_dump( $assets );
+                echo '</pre>';
+                exit;
+            }
+            $this->renderPartial('index', array ('form' => $form, 'assets' => $assets));
         }
 
         public function actionLogin(){
