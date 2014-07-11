@@ -5,10 +5,10 @@
     $this->pageTitle = false;
     $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/assets');
 
-if(Yii::app()->user->hasFlash('asset.view.success')):?>
+if(Yii::app()->user->hasFlash('success')):?>
     <div class="alert alert-success">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <?php echo Yii::app()->user->getFlash('asset.view.success'); ?>
+        <?php echo Yii::app()->user->getFlash('success'); ?>
     </div>
 <?php endif;
 

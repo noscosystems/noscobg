@@ -5,13 +5,18 @@
     $this->pageTitle = false;
     $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/assets');
 
-$form->attributes=array('class' => 'form-horizontal','enctype' => 'multipart/form-data');
-echo $form->renderBegin();
-$widget = $form->activeFormWidget;
+    $form->attributes=array('class' => 'form-horizontal','enctype' => 'multipart/form-data');
+    echo $form->renderBegin();
+    $widget = $form->activeFormWidget;
+?>
 
+<style>
+.textarea{
+    resize: none;
+}
+</style>
 
-
-if($widget->errorSummary($form)): ?>
+<?php if($widget->errorSummary($form)): ?>
     <div class="alert alert-danger">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <?php echo $widget->errorSummary($form); ?>
@@ -105,14 +110,14 @@ if($widget->errorSummary($form)): ?>
 <div class="row">
     <div class="col-sm-3 control-label">Short description:</div>
     <div class="col-sm-6">
-        <?php echo $widget->input($form, 'short_desc', array('class' => 'form-control') ); ?>
+        <?php echo $widget->input($form, 'short_desc', array('class' => 'form-control textarea') ); ?>
     </div>
 </div>
 <br>
 <div class="row">
     <div class="col-sm-3 control-label">Long desciption:</div>
     <div class="col-sm-6">
-        <?php echo $widget->input($form, 'long_desc', array('class' => 'form-control') ); ?>
+        <?php echo $widget->input($form, 'long_desc', array('class' => 'form-control textarea') ); ?>
     </div>
 </div>
 <br>

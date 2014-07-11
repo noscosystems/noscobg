@@ -10,6 +10,7 @@
     use \application\models\form\Login;
     use \application\models\form\Register;
     use \application\models\db\Users;
+    use \application\models\db\Assets;
     use \application\models\db\Address;
 
     class HomeController extends Controller {
@@ -18,7 +19,35 @@
 
         public function actionIndex()
         {
-            $this->renderPartial('index');
+            $assets = Assets::model()->findAll();
+
+            $randAsets = [];
+
+            $count = count($assets) -1;
+
+            // echo '<pre>';
+            // var_dump( $assets );
+            // echo '</pre>'; 
+            // exit;
+            $randAssets = [];
+            for ($i=0; $i<3; $i++){
+                foreach ( $assets as $v ) {
+                    $rand =  rand(0, $count);
+                    if ( $rand == (int)$v->id || $i == 4 ){
+                        echo "Yeaaaaaaaaaaa<br>";
+                        break;
+                    }
+                    else
+                        $randAssets[] = $assets[rand(0, $count)];
+                }
+           }
+
+            echo '<pre>';
+            var_dump( $randAssets );
+            echo '</pre>'; 
+            exit;
+        
+            $this->renderPartial('index', array('randAssets' => $randAssets));
         }
 
         public function actionLogin(){
@@ -137,11 +166,6 @@
             $this->render('login',array(
                 'form' => $form
             ));
-        }
-
-        function actionLogout(){
-            Yii::app()->user->logout();
-            $this->render('logout');
         }
 
     }

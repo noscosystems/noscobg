@@ -6,13 +6,15 @@
     $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/assets');
 
 ?>
+<div class="jumbotron">
+	<div class="container">
+		<h1 class="text-center">Administration</h1>
+		<p>Welcome to the administration section. Here you can create users and assets.</p>
+		<p>
+			<!-- <a class="btn btn-primary btn-lg">Learn more</a> -->
+		</p>
+	</div>
+</div>
 
-<?php echo CHtml::link('Create user', array('user/createuser'), array ('class' => 'btn btn-sm btn-success') ); ?>
-<br><br>
-<?php echo CHtml::link('Create Asset', array('asset/index'), array ('class' => 'btn btn-sm btn-success') ); ?>
-<br><br>
-<?php echo CHtml::link('List users', array('/admin/listusers'), array ('class' => 'btn btn-sm btn-primary') ); ?>
-<br><br>
-<?php echo CHtml::link('List Assets', array('asset/listassets'), array ('class' => 'btn btn-sm btn-primary') ); ?>
 
 

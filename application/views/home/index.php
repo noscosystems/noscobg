@@ -96,9 +96,9 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
 
     .searchResults {
         background: #CCC;
-        width: 100%;
-        height: 150px;
-        padding-top: 20px;
+        /*width: 100%;*/
+        /*height: 150px;*/
+        /*padding-top: 20px;*/
         color: #999;
         z-index: 130;
     }
@@ -178,13 +178,53 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
 
 
 
-<div class="search">
-    <div class="container">
+<div class="search row">
+    <div class="col-md-6 col-md-offset-3">
+        <?php
+            // $form->attributes = array('class' => 'form-horizontal', 'enctype' => 'multipart/form-data');
+            // $form->renderBegin ();
+            // $widget = $form->activeFormWidget();
+            // $form->renderEnd();
+        ?>
+    </div>
+
+<?php //if($widget->errorSummary($form)): ?>
+    <!-- <div class="alert alert-danger"> -->
+        <!-- <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button> -->
+        <?php //echo $widget->errorSummary($form); ?>
+    <!-- </div> -->
+<?php //endif; ?>
+   <!--  <div class="container">
         Search
-    </div>
+    </div> -->
 </div>
-<div class="searchResults">
-    <div class="container">
-        Search Results
-    </div>
+
+
+<div class="searchResults col-md-10 col-md-offset-1">
+    <?php foreach ($randAssets as $asset ): ?>
+    <br>
+        <div class="row">
+            <?php $images = ($asset)?($asset->Images):''; ?>
+            <div class="col-md-3">
+                <?php $image = $asset->Images; ?>
+                <?php echo (isset ($image) && count($image) > 0 )?
+                (CHtml::image(Yii::app()->assetManager->publish($image[0]->url), $image[0]->asset,
+                    array(
+                        'class' => 'img-responsive',
+                        'height' => '240',
+                        'width' => '300'
+                        ))
+                        )
+                        :'';?>
+            </div>
+            <div class="col-md-8">
+                <p>
+                    <?php echo $asset->name; ?>
+                </p>
+            </div>
+            <div class="col-md-1">
+                <?php echo CHtml::link('Details', array('/asset/details'), array('class' => 'btn btn-danger')); ?>
+            </div>
+        </div>
+    <?php endforeach; ?>
 </div>

@@ -41,12 +41,9 @@
                     $asset = New Assets;
                     $asset->attributes = $form->model->attributes;
                     // switch ($asset->status)
-                    $asset->address = $address->id;// = $address_name->id;
+                    $asset->address = $address->id;
                     $asset->created_by = Yii::app()->user->getId();
-                    // The Type simply has to be the Option ID.
-                    // $asset->type = 1;
-                    //$asset->status = 1;
-                    // Assign the owner to the asset
+                    $asset->active = ( $form->model->active == '' )?(1):($form->model->active);
                     $asset->owner = $form->model->owner;
                     $asset->created = time();
                     if(!$asset->save()){
@@ -132,11 +129,11 @@
                     $asset->attributes = $form->model->attributes;
                     $address->attributes = $form->model->attributes;
                     $address->save();
-                    $asset->active = $form->model->active;
-                    $asset->status = $form->model->status;
-                    $asset->type = 1;
+                    // $asset->active = $form->model->active;
+                    // $asset->status = $form->model->status;
+                    $asset->owner = $form->model->owner;
                     $asset->address = $address->id;
-                    // echo '<pre>';
+                    $asset->active = ( $form->model->active == '' )?(1):($form->model->active);
                     ($asset->save())?(Yii::app()->user->setFlash('success','Asset updated successfully.')):'';
                     // echo '</pre>';
                 }
