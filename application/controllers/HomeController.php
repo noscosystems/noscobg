@@ -76,28 +76,29 @@
                 ));
             }else {
 
+                // $sql = "SELECT * FROM `assets` LIMIT 0,10";
+
                 $assets_db = Assets::model()->findAll();
 
                 $count = count($assets_db) -1;
 
-                // echo '<pre>';
-                // var_dump( $assets );
-                // echo '</pre>'; 
-                // exit;
                 $assets = [];
-                $rands = []
-                for ($i=0; $i<3; $i++){
-                    do {
-                        $rand = rand(0,$count);
-                    }while ( !in_array( $rand, $rands ));
-                    array_push( $rands, $rand );
-                    $assets[] = $assets_db[$rand];
-                }
+                $rands = [];
+                $i=0;
+                do {
 
-                echo '<pre>';
-                var_dump( $assets );
-                echo '</pre>';
-                exit;
+                    $rand = rand(1,$count);
+
+                    if ( !in_array($rand = rand(1,$count), $rands) ){
+                        array_push( $rands, $rand );
+                        $i++;
+                    }
+
+                }while ($i<3);
+
+                for ($j=0; $j<count($rands);  $j++){
+                    $assets[] = $assets_db[$rands[$j]];
+                }
             }
             $this->renderPartial('index', array ('form' => $form, 'assets' => $assets));
         }

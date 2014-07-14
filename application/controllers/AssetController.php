@@ -7,6 +7,7 @@
     use \application\components\Form;
     use \application\components\Controller;
     use \application\components\UserIdentity;
+    use \application\models\db\Assets;
     use \application\models\db\Images;
     use \application\models\form\Img_upload;
 
@@ -24,8 +25,9 @@
             $this->render( 'view', array ('form' => $form ) );
         }
 
-        public function actionDetails(){
-            $this->render('details');
+        public function actionDetails($id){
+            $asset = Assets::model()->findByPk($id);
+            $this->render('details' , array ('asset' => $asset ) );
         }
 
     }

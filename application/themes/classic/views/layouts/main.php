@@ -16,6 +16,7 @@
         <!-- <link rel="stylesheet" type="text/css" href="<?php // echo Yii::app()->assetManager->publish(Yii::getPathOfAlias('themes.classic.assets') . '/css/styles.css'); ?>" media="all" /> -->
         <script src="https://code.jquery.com/jquery.js"></script>
         <script src="<?php echo $bootstrap; ?>/js/bootstrap.min.js"></script>
+        <script src="<?php echo $bootstrap; ?>/js/galleria/galleria-1.3.6.min.js" type="text/javascript"></script>
         <link href="<?php echo $bootstrap; ?>/css/bootstrap.min.css" rel="stylesheet" type="text/css" media="all" />
 
         <link  href='http://fonts.googleapis.com/css?family=Raleway:400,300' rel='stylesheet' type='text/css'>
@@ -85,7 +86,7 @@
                         <li><?php echo CHtml::link('Create user', array('user/createuser') ); ?><li>
                         <li><?php echo CHtml::link('Create Asset', array('asset/index') ); ?></li>
                         <li><?php echo CHtml::link('List users', array('/admin/listusers') ); ?></li>
-                        <li><?php echo CHtml::link('List Assets', array('asset/listassets') ); ?></li>
+                        <li><?php echo CHtml::link('List Assets', array('/admin/asset/listassets') ); ?></li>
                         <li class="dropdown">
                         <?php if( Yii::app()->user->isGuest){ ?>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Guest <b class="caret"></b></a>

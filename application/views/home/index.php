@@ -87,6 +87,7 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
         /*width: 100%;*/
         /*height: 200px;*/
         padding-top: 20px;
+        padding-bottom:20px;
         color: #FFF;
         -webkit-box-shadow: 0px 0px 8px 2px #444444;
            -moz-box-shadow: 0px 0px 8px 2px #444444;
@@ -98,7 +99,7 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
         background: #CCC;
         /*width: 100%;*/
         /*height: 150px;*/
-        /*padding-top: 20px;*/
+        padding-bottom: 15px;
         color: #999;
         z-index: 130;
     }
@@ -242,7 +243,7 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
                     <br><br>
                 </div>
             </div>
-            </div
+        </div>
         <?php $form->renderEnd(); ?>
     </div>
 
@@ -275,7 +276,7 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
                 </p>
             </div>
             <div class="col-md-1">
-                <?php echo CHtml::link('Details', array('/asset/details'), array('class' => 'btn btn-danger')); ?>
+                <?php echo CHtml::link('Details', array('/asset/details', 'id' => $asset->id), array('class' => 'btn btn-danger' ) ); ?>
             </div>
         </div>
     <?php endforeach; ?>
