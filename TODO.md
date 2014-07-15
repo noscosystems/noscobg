@@ -5,10 +5,10 @@
 ### Index
 The index page for the property website should look like the design that we sketched up. Or at least as close as possible.  
 The index page needs to have:
- - A header or somethign similar with links.
- - A Carousel that rotates images.
- - A search function that will allow the user to search for properties.
- - A results area that will display the results from the property search.
+ ~~- A header or somethign similar with links.~~
+ ~~- A Carousel that rotates images.~~
+ ~~- A search function that will allow the user to search for properties.~~
+ ~~- A results area that will display the results from the property search.~~
  - A small footer that shows that the site was by Nosco, and I mean small. One line. :)  
   
 Were hoping that Marcus can supply all the images we need, otherwise we will take matters into our own hands.  
@@ -17,8 +17,8 @@ Use dummy date for the search function until we get some actual data to insert.
 ### Admin Area
 This will be where the users with a level of 60 or above will be able to manage the site.  
 Admins should be able to do the following:  
- - Create and edit assets. 
- - Create and edit users.
+ ~~- Create and edit assets.~~
+ ~~- Create and edit users.~~
  - Soft deletion of assets and users (never hard deletion).
  - See basic statistics, like how many users, how many assets, how many X, Y, Z...  
 

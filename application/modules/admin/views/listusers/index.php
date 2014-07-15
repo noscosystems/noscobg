@@ -20,6 +20,13 @@
     </div>
 <?php endif;?>
 
+<?php if(Yii::app()->user->hasFlash('del_failed')): ?>
+    <div class="alert alert-danger">
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+    <?php echo Yii::app()->user->getFlash('del_failed'); ?>
+    </div>
+<?php endif;?>
+
 <div class="page-header">
   <h1>View users <small>Below is a list of all users.</small></h1>
 </div>

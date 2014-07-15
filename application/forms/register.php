@@ -29,7 +29,7 @@
                 'hint' => Yii::t('application', 'Please enter your password; it is case-sensitive.'),
             ),
             'dob' => array(
-                'type' => 'date',
+                'type' => 'text',
                 'hint' => Yii::t('application', 'Please enter your date of birth; it is case-sensitive.'),
             ),
             'gender' => array(

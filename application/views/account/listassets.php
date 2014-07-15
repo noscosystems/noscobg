@@ -18,12 +18,16 @@ $assets = Yii::app()->user->model()->Assets;
 	<thead>
 		<tr>
 			<th>Asset Name</th>
+            <th class="text-center">Link to edit asset page</th>
+            <th class="text-center">Link to add/delete images page</th>
 		</tr>
 	</thead>
 	<tbody>
         <?php foreach(Yii::app()->user->model()->Assets as $asset): ?>
             <tr>
-                <td><?php echo CHtml::link($asset->name, array('/asset/view', 'id' => $asset->id, 'asset_name' => $asset->name)); ?></td>
+                <td><?php echo $asset->name; ?></td>
+                <td class="text-right"><?php echo CHtml::link('Edit Asset', array('/asset/editasset', 'id' => $asset->id ), array('class' => 'btn btn-sm btn-warning' ) ); ?></td>
+                <td class="text-right"><?php echo CHtml::link('Add / Delete Images', array('/asset/images', 'id' => $asset->id ), array('class' => 'btn btn-sm btn-warning' ) ); ?></td>
             </tr>
         <?php endforeach; ?>
 	</tbody>

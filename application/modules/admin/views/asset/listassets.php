@@ -18,7 +18,7 @@
 
 <div class="form-group">
     <div class="col-sm-10">
-        <?php echo $widget->input($form, 'search', array('class' => 'form-control', 'title' => 'Type in a username to find a user') ); //echo '<br>';?>
+        <?php echo $widget->input($form, 'search', array('class' => 'form-control', 'title' => 'Type in an asset name to hopefully find it.') ); //echo '<br>';?>
     </div>
     <div class="col-sm-2">
         <?php echo $widget->button($form, 'submit', array('class' => 'btn btn-sm btn-success  form-control', 'value' => 'Find Asset') ); ?>
@@ -37,8 +37,8 @@
         <?php foreach($assets as $v): ?>
             <tr>
                 <td><?php echo $v->name; ?></td>
-                <td><?php echo CHtml::link($v->name, array('/admin/asset/editasset', 'id' => $v->id ),array('title' => 'Click to edit a user.')); ?></td>
-                <td><?php echo CHtml::link('View', array('/admin/asset/images', 'id' => $v->id ),array('title' => 'Click to view images related to this asset.')); ?></td>
+                <td><?php echo CHtml::link($v->name, array('/admin/asset/editasset', 'id' => $v->id ),array('class' => 'btn btn-sm btn-warning' ,'title' => 'Click to edit a user.')); ?></td>
+                <td><?php echo CHtml::link('Add/Delete Images', array('/admin/asset/images', 'id' => $v->id ),array('class' => 'btn btn-sm btn-warning', 'title' => 'Click to view images related to this asset.')); ?></td>
             </tr>
         <?php endforeach; ?>
 	</tbody>

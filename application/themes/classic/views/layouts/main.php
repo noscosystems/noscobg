@@ -83,10 +83,12 @@
                         <li><?php //echo CHtml::link('Apartments', array('/asset', 'type' => 2), array()); ?></li>
                         <li><?php// echo CHtml::link('Land', array('/asset', 'type' => 3), array()); ?></li> -->
                         <!--<li><?php //echo CHtml::link('Sell', array('/sell')); ?></li> -->
+                        <?php if (Yii::app()->user->priv >=50){ ?>
                         <li><?php echo CHtml::link('Create user', array('user/createuser') ); ?><li>
                         <li><?php echo CHtml::link('Create Asset', array('asset/index') ); ?></li>
                         <li><?php echo CHtml::link('List users', array('/admin/listusers') ); ?></li>
                         <li><?php echo CHtml::link('List Assets', array('/admin/asset/listassets') ); ?></li>
+                        <?php }  ?>
                         <li class="dropdown">
                         <?php if( Yii::app()->user->isGuest){ ?>
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Guest <b class="caret"></b></a>

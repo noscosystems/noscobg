@@ -33,7 +33,7 @@ This will be in the standard appication area (not in a module) and will comprise
 This area will allow any user to view the asset.
 This will comprise of the following:
  - AssetController
-  - View (View an asset and all its details)
+  ~~- View (View an asset and all its details)~~
   - Edit (If the user owns the asset, allow them to edit certain properties)
   - ~~Images (If the user owns the asset, allow them to upload images to the asset)~~
 
@@ -42,5 +42,5 @@ This is the home page, we already have the home controller.
 We still need the search functions though.
 This will comprise of the following:
  - HomeController
-  - Index (The index page with the search box, carousel, nav bar etc)
+  ~~- Index (The index page with the search box, carousel, nav bar etc)~~
   - Results (We will call this dynamically within the page to display the results from the search)

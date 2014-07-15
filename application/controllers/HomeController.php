@@ -80,24 +80,29 @@
 
                 $assets_db = Assets::model()->findAll();
 
-                $count = count($assets_db) -1;
+                if ( isset($assets_db) && !empty($assets_db) && count($assets_db)>=3 ){
 
-                $assets = [];
-                $rands = [];
-                $i=0;
-                do {
+                    $count = count($assets_db) -1;
 
-                    $rand = rand(1,$count);
+                    $assets = [];
+                    $rands = [];
+                    $i=0;
+                    do {
 
-                    if ( !in_array($rand = rand(1,$count), $rands) ){
-                        array_push( $rands, $rand );
-                        $i++;
+                        $rand = rand(1,$count);
+
+                        if ( !in_array($rand = rand(1,$count), $rands) ){
+                            array_push( $rands, $rand );
+                            $i++;
+                        }
+
+                    }while ($i<3);
+
+                    for ($j=0; $j<count($rands);  $j++){
+                        $assets[] = $assets_db[$rands[$j]];
                     }
-
-                }while ($i<3);
-
-                for ($j=0; $j<count($rands);  $j++){
-                    $assets[] = $assets_db[$rands[$j]];
+                }elseif (empty ($assets_db)){
+                    $assets = 'No assets yet.';
                 }
             }
             $this->renderPartial('index', array ('form' => $form, 'assets' => $assets));

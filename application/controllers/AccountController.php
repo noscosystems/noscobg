@@ -31,6 +31,31 @@
                     $user = new Users;
                     // Assign the attributes from the form model.
                     $user->attributes = $form->model->attributes;
+                    $sql = 'SELECT *
+							    FROM `users`
+							    WHERE `id`!=:id AND `email`=:email';
+						$sql1 = 'SELECT *
+							    FROM `users`
+							    WHERE `id`!=:id AND `mobile_number`=:mobile_number';
+						$users = Users::model()->findAllBySql($sql,
+							array(
+								':id' => (int)Yii::app()->user->id,
+								':email' => (string)$form->model->email
+								/*':mobile_number' => ($form->model->mobile_number)*/
+								)
+							);
+					$user->email = (empty($form->model->email))?(null):(($user->email === $form->model->email)?($user->email):'');
+					$user->mobile_number = (empty($form->model->mobile_number))?(null):(($user->mobile_number === $form->model->mobile_number)?($user->mobile_number):'');
+						// $users = Users::model()->findAllByAttributes(array('mobile_number' => $form->model->mobile_number));
+						if ($users){
+							$form->model->addError('email','This Email is already taken.');
+						}
+						if ($users = Users::model()->findAllBySql($sql1, array(
+								':id' => (int)Yii::app()->user->id,
+								':mobile_number' => (string)$form->model->mobile_number
+								))) {
+							$form->model->addError('mobile_number','Mobile number already taken by another user.');
+						}
                     // Update the fields that are required by default.
                     // Have a basic user level of 10.
                     $user->password = \CPasswordHelper::hashPassword($user->password);
@@ -42,14 +67,7 @@
                     // DOB only saves as a number, a unix timestamp.
                     $user->dob = strtotime($form->model->dob);
                     // Finally, save.
-                    $user->email = (empty($form->model->email))?(null):'';
-                    $user->mobile_number = (empty($form->model->mobile_number))?(null):'';
-                    if(!$user->save()){
-                        echo "<pre class='pre-scrollable'>"; var_dump($user->errors); echo "</pre>";
-                    }
-                    else{
-                        Yii::app()->user->setFlash('account.register.success', 'Success!, you have successfully registered!');
-                    }
+                    (empty($form->model->errors))?($user->save()?(Yii::app()->user->setFlash('success','Registered successfully.')):''):'';
                 }
             }
         }
@@ -141,17 +159,6 @@
 
         public function actionListAssets(){
             $this->render('listassets');
-        }
-
-		public function actionView(){
-            $form = new Form('application.forms.img_upload', new Img_upload);
-            if ($form->submitted() && $form->validate()){
-                $image = New Images;
-                $form->model->asset = $_GET['id'];
-                $image->attributes = $form->model->attributes;
-                $image->image_upload($_GET['asset_name']);
-            }
-            $this->render('view',array('form' => $form));
         }
 
 		function actionLogout(){

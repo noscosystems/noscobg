@@ -9,10 +9,10 @@ $widget = $form->activeFormWidget;
     <h1>Register <small>Please enter your information</small></h1>
 </div>
 
-<?php if(Yii::app()->user->hasFlash('account.register.success')): ?>
+<?php if(Yii::app()->user->hasFlash('success')): ?>
     <div class="alert alert-success">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
-        <?php echo Yii::app()->user->getFlash('account.register.success'); ?>
+        <?php echo Yii::app()->user->getFlash('success'); ?>
     </div>
 <?php endif; ?>
 
@@ -88,7 +88,7 @@ if($widget->errorSummary($form)){
 <br>
 <div class="row">
     <div class="col-sm-2 col-sm-offset-3">
-        <?php echo $widget->button($form, 'submit', array('class' => 'btn btn-lg btn-success',) ); ?>
+        <?php echo $widget->button($form, 'submit', array('class' => 'btn btn-lg btn-success', 'id'=>'datepicker') ); ?>
     </div>
 </div>
 <?php echo $form->renderEnd(); ?>

@@ -128,6 +128,7 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
             <ul class="dropdown-menu">
                 <li><?php echo (Yii::app()->user->isGuest)?(CHtml::link('Register', array('account/register'), array())):'';?></li>
                 <li><?php echo (!Yii::app()->user->isGuest)?(CHtml::link('My Account', array('/account/myaccount'), array())):'';?></li>
+                <li><?php echo (!Yii::app()->user->isGuest)?(CHtml::link('Change password', array('/account/changepass'), array())):'';?></li>
                 <li><?php echo (!Yii::app()->user->isGuest)?(CHtml::link('My Assets', array('/account/listassets'), array())):''; ?></li>
                 <?php echo (Yii::app()->user->priv>=50)?( '<li>'.CHtml::link('Admin', array('/admin')).'</li>'):''; ?>
                 <li><?php echo (Yii::app()->user->isGuest)?(CHtml::link('Guest\Login', array('/login'), array())):CHtml::link('Log Out', array('/account/logout'), array()); ?></li>
@@ -268,7 +269,7 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
                         'width' => '300'
                         ))
                         )
-                        :'';?>
+                        :'No picture available';?>
             </div>
             <div class="col-md-8">
                 <p>

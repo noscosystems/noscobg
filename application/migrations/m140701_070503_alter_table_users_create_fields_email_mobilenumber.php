@@ -4,8 +4,8 @@ class m140701_070503_alter_table_users_create_fields_email_mobilenumber extends 
 {
 	public function up()
 	{
-		$this->addColumn("{{users}}", 'email', 'VARCHAR(128) NOT NULL DEFAULT 1');
-		$this->addColumn("{{users}}", 'mobile_number', 'VARCHAR(15) NOT NULL DEFAULT 1');
+		$this->addColumn("{{users}}", 'email', 'VARCHAR(128)');
+		$this->addColumn("{{users}}", 'mobile_number', 'VARCHAR(15)');
 	}
 
 	public function down()
