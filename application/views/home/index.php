@@ -255,14 +255,14 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
 
 
 <div class="searchResults col-md-10 col-md-offset-1">
+    <?php if (gettype ( $assets ) =='array') { ?>
     <?php foreach ($assets as $asset ): ?>
     <br>
         <div class="row">
             <?php $images = ($asset)?($asset->Images):''; ?>
             <div class="col-md-3">
-                <?php $image = $asset->Images; ?>
-                <?php echo (isset ($image) && count($image) > 0 )?
-                (CHtml::image(Yii::app()->assetManager->publish($image[0]->url), $image[0]->asset,
+                <?php echo ($images && !empty ( $images ) )?
+                (CHtml::image(Yii::app()->assetManager->publish($images[0]->url), 'No image available',
                     array(
                         'class' => 'img-responsive',
                         'height' => '240',
@@ -281,4 +281,10 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
             </div>
         </div>
     <?php endforeach; ?>
+    <?php } elseif (gettype ( $assets ) == 'string'){ ?>
+                <br>
+                <p class="text-center">
+                    <?php echo $assets; ?>
+                </p>
+    <?php } ?>
 </div>

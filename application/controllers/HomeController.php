@@ -91,7 +91,7 @@
 
                         $rand = rand(1,$count);
 
-                        if ( !in_array($rand = rand(1,$count), $rands) ){
+                        if ( !in_array($rand = rand(0,$count), $rands) ){
                             array_push( $rands, $rand );
                             $i++;
                         }
