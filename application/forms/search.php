@@ -17,11 +17,6 @@
         'title' => Yii::t('application', 'Please provide your login credentials.'),
 
         'elements' => array(
-            'name' => array(
-                'type' => 'text',
-                'maxlength' => 60,
-                'hint' => Yii::t('application', 'Please enter your old password here.'),
-            ),
             'price_up' => array(
                 'type' => 'text',
                 'hint' => Yii::t('application', 'Please enter new password.'),

@@ -31,6 +31,12 @@
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
         <?php echo Yii::app()->user->getFlash('danger') ?>
     </div>
+
+<?php } else if (Yii::app()->user->hasFlash('empty')){ ?>
+    <div class="alert alert-danger" >
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <?php echo Yii::app()->user->getFlash('empty') ?>
+    </div>
 <?php } ?>
 
 <?php echo $widget->input( $form, 'asset', array('class' => 'form-control', 'value'=> 'notempty') ); ?>

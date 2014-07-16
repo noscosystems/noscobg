@@ -66,7 +66,7 @@
                 if(!$form->model->price_up)
                     $form->model->price_up = 1;
 
-                $assets = Assets::model()->findBySql($sql, array(
+                $assets = Assets::model()->findAllBySql($sql, array(
                     ':type' => $frm->type,
                     ':status' => $frm->status,
                     ':price_up' => $frm->price_up,
@@ -74,8 +74,10 @@
                     ':area_up' => $frm->area_up,
                     ':area_dn' => $frm->area_dn
                 ));
+                
+                    // $assets[] = $assets_obj;
+                
             }else {
-
                 // $sql = "SELECT * FROM `assets` LIMIT 0,10";
 
                 $assets_db = Assets::model()->findAll();

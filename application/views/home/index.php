@@ -256,6 +256,7 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
 
 <div class="searchResults col-md-10 col-md-offset-1">
     <?php if (gettype ( $assets ) =='array') { ?>
+
     <?php foreach ($assets as $asset ): ?>
     <br>
         <div class="row">

@@ -9,15 +9,15 @@
     class Search extends FormModel
     {
 
-        public $name,$price_up,$price_dn,$area_up,$area_dn,$type,$status;
+        public $price_up,$price_dn,$area_up,$area_dn,$type,$status;
 
         public function rules()
         {
             return array(
                 // Username and password are required.
-                array('name', 'required'),
+                // array('name', 'required'),
                 // The database has a maximum username length of 64 characters.
-				array ('name','length'),
+				// array ('name','length'),
                 array('price_up', 'numerical'),
                 array('price_dn', 'numerical'),
 				array('area_up', 'numerical'),
