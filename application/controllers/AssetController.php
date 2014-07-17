@@ -17,6 +17,19 @@
 
     class AssetController extends Controller{
 
+
+        public function actionHouses(){
+            $this->render( 'houses');
+        }
+        
+        public function actionApartments(){
+            $this->render( 'houses');
+        }
+
+        public function actionLand(){
+            $this->render( 'land');
+        }
+
         public function actionView(){
             $form = new Form('application.forms.img_upload', new Img_upload);
             if ($form->submitted() && $form->validate()){

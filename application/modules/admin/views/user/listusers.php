@@ -1,5 +1,5 @@
 <?php
-	/**
+    /**
      * @var AdminController $this
      */
     $this->pageTitle = false;
@@ -41,12 +41,12 @@
 </div>
 
 <table class="table table-hover">
-	<thead>
-		<tr>
-			<th>username</th><th>current privilige</th><th class="text-right">Link to edit page</th><th class="text-right">Delete user</th>
-		</tr>
-	</thead>
-	<tbody>
+    <thead>
+        <tr>
+            <th>username</th><th>current privilige</th><th class="text-right">Link to edit page</th><th class="text-right">Delete user</th>
+        </tr>
+    </thead>
+    <tbody>
         <?php foreach($users as $v): ?>
             <tr>
                 <td><?php echo $v->username; ?></td>
@@ -55,7 +55,7 @@
                 <td class="text-right"><?php echo CHtml::link('Delete', array('/admin/user/deleteuser', 'id' => $v->id ),array('class' => 'btn btn-danger btn-xs', 'title' => 'Click to delete a user.')); ?></td>
             </tr>
         <?php endforeach; ?>
-	</tbody>
+    </tbody>
 </table>
 <?php $this->widget('CLinkPager', array('pages' => $pages)); ?>
 <?php echo $form->renderEnd(); ?>

@@ -125,7 +125,11 @@
 			Owner of the asset:
 		</td>
 		<td>
-			<?php  echo $owner->username; ?>
+			<?php  
+				echo ((isset($owner->firstname) && $owner->firstname!='' && $owner->firstname!=null )?($owner->firstname):'').' ';
+				echo ((isset($owner->middlename) && $owner->middlename!='' && $owner->middlename!=null )?($owner->middlename):'').' ';
+				echo ((isset($owner->lastname) && $owner->lastname!='' && $owner->lastname!=null )?($owner->lastname):'').' ';
+			?>
 		</td>
 	</tr>
 	<tr>
@@ -133,7 +137,7 @@
 			Owner's mbile:
 		</td>
 		<td>
-			<?php  echo $owner->mobile_number; ?>
+			<?php  echo (isset($owner->mobile_number) && $owner->mobile_number!='' && $owner->mobile_number!=null )?($owner->mobile_number):'Not present.'; ?>
 		</td>
 	</tr>
 	<tr>
@@ -141,7 +145,7 @@
 			Owner of the asset:
 		</td>
 		<td>
-			<?php  echo $owner->email; ?>
+			<?php  echo (isset($owner->email) && $owner->email!='' && $owner->email!=null )?($owner->email):'Not present.'; ?>
 		</td>
 	</tr>
 	</table>

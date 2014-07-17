@@ -103,7 +103,7 @@
                     for ($j=0; $j<count($rands);  $j++){
                         $assets[] = $assets_db[$rands[$j]];
                     }
-                }elseif (empty ($assets_db)){
+                }else{
                     $assets = 'No assets yet.';
                 }
             }

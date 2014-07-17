@@ -120,10 +120,10 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
 
     <div class="pull-right font-raleway links">
         <?php echo CHtml::link('Home', array('/home'), array()); ?>
-        <?php echo CHtml::link('Houses', array('/asset', 'type' => 1), array()); ?>
-        <?php echo CHtml::link('Apartments', array('/asset', 'type' => 2), array()); ?>
-        <?php echo CHtml::link('Land', array('/asset', 'type' => 3), array()); ?>
-        <?php echo CHtml::link('Sell', array('/sell')); ?>
+        <?php echo CHtml::link('Houses', array('/asset/houses'), array()); ?>
+        <?php echo CHtml::link('Apartments', array('/asset/apartments'), array()); ?>
+        <?php echo CHtml::link('Land', array('/asset/land'), array()); ?>
+        <?php //echo CHtml::link('Sell', array('/sell')); ?>
         <a href="#" class="dropdown-toggle" data-toggle="dropdown">User <b class="caret"></b></a>
             <ul class="dropdown-menu">
                 <li><?php echo (Yii::app()->user->isGuest)?(CHtml::link('Register', array('account/register'), array())):'';?></li>
@@ -146,13 +146,15 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
     <ol class="carousel-indicators">
         <li data-target="#image-cycle" data-slide-to="0" class="active"></li>
         <li data-target="#image-cycle" data-slide-to="1"></li>
-        <!-- <li data-target="#image-cycle" data-slide-to="2"></li> -->
+        <li data-target="#image-cycle" data-slide-to="2"></li>
+        <li data-target="#image-cycle" data-slide-to="3"></li>
+        <li data-target="#image-cycle" data-slide-to="4"></li>
     </ol>
 
     <!-- Wrapper for slides -->
     <div class="carousel-inner">
         <div class="item active">
-            <img src="<?php echo $assetUrl; ?>/images/varna1.png" width="100%" style="height:100%">
+            <img src="<?php echo $assetUrl; ?>/images/carousel_1_16_9.jpg" width="100%" style="height:100%">
             <div class="carousel-caption">
                 <h1></h1>
                 <br />
@@ -160,9 +162,30 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
         </div>
 
         <div class="item">
-            <img src="<?php echo $assetUrl; ?>/images/varna2.png" width="100%" style="height:100%">
+            <img src="<?php echo $assetUrl; ?>/images/carousel_2_16_9.jpg" width="100%" style="height:100%">
             <div class="carousel-caption">
                 <h1></h1>
+                <br />
+            </div>
+        </div>
+        <div class="item">
+            <img src="<?php echo $assetUrl; ?>/images/carousel_3_16_9.jpg" width="100%" style="height:100%">
+            <div class="carousel-caption">
+                <h1></h1>
+                <br />
+            </div>
+        </div>
+        <div class="item">
+            <img src="<?php echo $assetUrl; ?>/images/landscape_1_16_9.jpg" width="100%" style="height:100%">
+            <div class="carousel-caption">
+                <h1>Monument of Borimechkata</h1>
+                <br />
+            </div>
+        </div>
+        <div class="item">
+            <img src="<?php echo $assetUrl; ?>/images/landscape_2_16_9.jpg" width="100%" style="height:100%">
+            <div class="carousel-caption">
+                <h1>Rilla Monastery</h1>
                 <br />
             </div>
         </div>
@@ -273,8 +296,8 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
                         :'No picture available';?>
             </div>
             <div class="col-md-8">
-                <p>
-                    <?php echo $asset->name; ?>
+                <p style="overflow:auto;">
+                    <?php echo $asset->short_desc; ?>
                 </p>
             </div>
             <div class="col-md-1">
