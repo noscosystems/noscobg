@@ -112,13 +112,15 @@
             // $this->render('deleteuser', array ('form' => $form));
             if (isset($_GET['id']) && !empty($_GET['id'])) {
             	$user = Users::model()->findByPk($_GET['id']);
-                $assets = $user->Assets;
+                $assets = $user->model()->Assets;
+                var_dump ( $assets );
+                exit;
             	($user && empty ($assets))
                     ?(($user->delete())
                         ?(Yii::app()->user->setFlash('del_success', 'You have just deleted a user!'))
                         :(Yii::app()->user->setFlash('del_failed', 'User owns assets!')))
                     :'';
-            	$this->redirect(array('/admin/listusers'));
+            	$this->redirect(array('/admin/user/listusers'));
             }
         }
 
