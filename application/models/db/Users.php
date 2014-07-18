@@ -70,7 +70,7 @@ class Users extends ActiveRecord
 		// NOTE: you may need to adjust the relation name and the related
 		// class name for the relations automatically generated below.
 		return array(
-			'Assets' => array(self::HAS_MANY, '\\application\\models\\db\\Assets', 'owner'),
+			'Assets' => array(self::HAS_MANY, '\\application\\models\\db\\Assets', 'created_by'),
 			'OwnedAssets' => array(self::HAS_MANY, '\\application\\models\\db\\Owners', '{{owners}}(user, asset)', 'order' => 'Assets.id DESC'),
 			'Rooms' => array(self::HAS_MANY, '\\application\\models\\db\\Rooms', 'created_by'),
 			'Title' => array(self::BELONGS_TO, '\\application\\models\\db\\Option', 'title'),

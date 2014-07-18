@@ -110,17 +110,29 @@
                 $this->redirect(array('/home'));
             }
             // $this->render('deleteuser', array ('form' => $form));
-            if (isset($_GET['id']) && !empty($_GET['id'])) {
-            	$user = Users::model()->findByPk($_GET['id']);
-                $assets = $user->model()->Assets;
-                var_dump ( $assets );
-                exit;
-            	($user && empty ($assets))
-                    ?(($user->delete())
-                        ?(Yii::app()->user->setFlash('del_success', 'You have just deleted a user!'))
-                        :(Yii::app()->user->setFlash('del_failed', 'User owns assets!')))
-                    :'';
-            	$this->redirect(array('/admin/user/listusers'));
+            if (isset($_POST['id']) && !empty($_POST['id'])) {
+            	$user = Users::model()->findByPk($_POST['id']);
+                if (Yii::app()->user->priv > $user->priv){
+                    if ($_POST['butt_value'] == 'Inactive'){
+                        $user->active =0;
+                        echo 'Active';
+                    }
+                    else {
+                        $user->active =1;
+                        echo 'Inactive';
+                    }
+                    $user->save();
+                }
+                else {
+                    echo Yii::app()->user->setFlash('fail', 'You do not have the required privlige level for this command.');
+                }
+             //    exit;
+            	// ($user && empty ($assets))
+             //        ?(($user->delete())
+             //            ?(Yii::app()->user->setFlash('del_success', 'You have just deleted a user!'))
+             //            :(Yii::app()->user->setFlash('del_failed', 'User owns assets!')))
+             //        :'';
+            	// $this->redirect(array('/admin/user/listusers'));
             }
         }
 

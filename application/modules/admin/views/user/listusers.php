@@ -3,7 +3,7 @@
      * @var AdminController $this
      */
     $this->pageTitle = false;
-    $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/assets');
+    $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath);
     $form->attributes=array('class' => 'form-horizontal','enctype' => 'multipart/form-data');
     echo $form->renderBegin();
     $widget = $form->activeFormWidget;
@@ -52,13 +52,43 @@
                 <td><?php echo $v->username; ?></td>
                 <td><?php echo $v->priv; ?></td>
                 <td class="text-right"><?php echo CHtml::link('Edit User', array('/admin/user/', 'id' => $v->id ),array('class' => 'btn btn-xs btn-warning', 'title' => 'Click to edit a user.')); ?></td>
-                <td class="text-right"><?php echo CHtml::link('Delete', array('/admin/user/deleteuser', 'id' => $v->id ),array('class' => 'btn btn-danger btn-xs', 'title' => 'Click to delete a user.')); ?></td>
+                <!-- <td class="text-right"><?php //echo CHtml::link(($v->active == 1)?'Ianctive':'Active', array('/admin/user/deleteuser', 'id' => $v->id ),array('class' => ($v->active == 1)?'btn btn-danger btn-xs':'btn btn-primary btn-xs')); ?></td> -->
+                <td class="text-right"><button value="<?php echo $v->id; ?>" class="btn btn-danger btn-xs" onclick="return send(this)">Inactive</button></td>
+                
             </tr>
         <?php endforeach; ?>
     </tbody>
 </table>
 <?php $this->widget('CLinkPager', array('pages' => $pages)); ?>
 <?php echo $form->renderEnd(); ?>
+<script>
+
+
+function send(button){
+//var butt = document.getElementById('butt');
+    var xmlhttp = httpReq();
+    do {
+        xmlhttp.open('POST','<?php echo Yii::app()->baseUrl; ?>'+'/admin/user/deleteuser',false);
+        xmlhttp.setRequestHeader('Content-type','application/x-www-form-urlencoded');
+        xmlhttp.send('id='+button.value+'&butt_value='+button.innerHTML);
+    }while (xmlhttp.readyState!=4 && xmlhttp.status!=200);
+    if (xmlhttp.readyState==4 && xmlhttp.status==200){
+        (xmlhttp.responseText == 'Active')
+        ?(button.className = 'btn btn-xs btn-primary')
+        :(button.className = 'btn btn-xs btn-danger');
+        
+        button.innerHTML = xmlhttp.responseText;
+    }
+    return false;
+}
+
+function httpReq(){
+    var xmlhttp;
+    return xmlhttp=(window.XMLHttpRequest)?(new XMLHttpRequest()):(new ActiveXObject('Microsoft.XMLHTTP'));
+}
+</script>
+
+
 
  <?php
 //  $this->widget('zii.widgets.CListView', array(
