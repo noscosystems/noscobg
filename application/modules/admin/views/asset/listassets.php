@@ -13,7 +13,7 @@
     }
 ?>
 <div class="page-header">
-  <h1>Assets <small>Below is a list of all users.</small></h1>
+  <h1>Assets <small>Below is a list of all assets.</small></h1>
 </div>
 
 <div class="form-group">
@@ -29,16 +29,16 @@
 	<thead>
 		<tr>
 			<th>Name of asset</th>
-			<th>Link to edit page</th>
-            <th>Images</th>
+			<th class="text-right">Link to edit page</th>
+            <th class="text-right">Images</th>
 		</tr>
 	</thead>
 	<tbody>
         <?php foreach($assets as $v): ?>
             <tr>
                 <td><?php echo $v->name; ?></td>
-                <td><?php echo CHtml::link($v->name, array('/admin/asset/editasset', 'id' => $v->id ),array('class' => 'btn btn-sm btn-warning' ,'title' => 'Click to edit a user.')); ?></td>
-                <td><?php echo CHtml::link('Add/Delete Images', array('/admin/asset/images', 'id' => $v->id ),array('class' => 'btn btn-sm btn-warning', 'title' => 'Click to view images related to this asset.')); ?></td>
+                <td class="text-right"><?php echo CHtml::link($v->name, array('/admin/asset/editasset', 'id' => $v->id ),array('class' => 'btn btn-sm btn-warning' ,'title' => 'Click to edit a user.')); ?></td>
+                <td class="text-right"><?php echo CHtml::link('Add/Delete Images', array('/admin/asset/images', 'id' => $v->id ),array('class' => 'btn btn-sm btn-warning', 'title' => 'Click to view images related to this asset.')); ?></td>
             </tr>
         <?php endforeach; ?>
 	</tbody>
