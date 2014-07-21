@@ -8,14 +8,38 @@
     use \application\models\form\Insert;
     use \application\models\form\ListUsers;
     use \application\models\form\Img_upload;
+    use \application\models\form\Room;
     use \application\models\db\Address;
     use \application\models\db\Assets;
     use \application\models\db\Images;
-
+    use \application\models\db\Rooms;
 
     class AssetController extends Controller{
 
         public $identity;
+
+        public function actionaddRoom($id){
+            if(Yii::app()->user->isGuest){
+                $this->redirect(array('/login'));
+            }
+            else if (Yii::app()->user->priv >=50){
+                $form = new Form('application.forms.room', new Room);
+            }
+            else {
+                $this->redirect(array('/home'));
+            }
+
+            if($form->submitted() && $form->validate()) {
+                $room = new Rooms;
+                $room->attributes = $form->model->attributes;
+                $room->asset = $id;
+                $room->created = time();
+                $room->created_by = Yii::app()->user->id;
+                $room->save();
+            }
+
+            $this->render('addRoom', array ( 'form' => $form));
+        }
 
         public function actionIndex(){
             if(Yii::app()->user->isGuest){

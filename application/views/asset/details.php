@@ -6,18 +6,19 @@
 	use \application\models\db\Users;
 ?> 
 <div class="row col-md-12">
-    <div class="col-md-6">
+    <div class="col-md-8">
         <div class="galleria">
             <?php foreach ($asset->Images  as $image ): ?>
                 <img src="<?php echo Yii::app()->assetManager->publish($image->url); ?>" data-title="My title" data-description="My description">
             <?php endforeach; ?>
         </div>
     </div>
-	<div class="col-md-5 col-md-offset-1">
+	<div class="col-md-3 col-md-offset-1">
 	<?php 
 		$type = Option::model()->findByPk($asset->type);
 		$status = Option::model()->findByPk($asset->status);
 		$owner = Users::model()->findByPk($asset->owner);
+		$rooms = $asset->Rooms;
 	?>
 		<table class="table">
 			<tr>
@@ -121,6 +122,32 @@
 		</td>
 	</tr>
 	<tr>
+		<td colspan="2">
+			<div class="panel-group" id="accordion">
+			<?php foreach ( $rooms as $room ): ?>
+				<div class="panel panel-default">
+					<div class="panel-heading">
+						
+						<h4 class="panel-title">
+							<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+								<!-- Room 1 -->
+								<?php echo  $room->Type->name; ?>
+							</a>
+						</h4>
+					</div>
+					<div id="collapseOne" class="panel-collapse collapse">
+						<div class="panel-body">
+							<!-- Room desc. -->
+							<?php echo $room->area; ?>
+							<?php echo $room->desc; ?>
+						</div>
+					</div>
+				</div>
+					<?php endforeach; ?>
+			</div>
+		</td>
+	</tr>
+	<tr>
 		<td>
 			Owner of the asset:
 		</td>
@@ -134,7 +161,7 @@
 	</tr>
 	<tr>
 		<td>
-			Owner's mbile:
+			Owner's mobile:
 		</td>
 		<td>
 			<?php  echo (isset($owner->mobile_number) && $owner->mobile_number!='' && $owner->mobile_number!=null )?($owner->mobile_number):'Not present.'; ?>
@@ -152,8 +179,8 @@
 </div>
 <style>
     .galleria{ 
-        width: 400px;
-        height: 300px;
+        width: 576px;
+        height: 432px;
         background: #000;
     }
 	.textarea{

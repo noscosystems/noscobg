@@ -29,6 +29,7 @@
 	<thead>
 		<tr>
 			<th>Name of asset</th>
+            <th>Add rooms</th>
 			<th class="text-right">Link to edit page</th>
             <th class="text-right">Images</th>
 		</tr>
@@ -37,8 +38,9 @@
         <?php foreach($assets as $v): ?>
             <tr>
                 <td><?php echo $v->name; ?></td>
-                <td class="text-right"><?php echo CHtml::link($v->name, array('/admin/asset/editasset', 'id' => $v->id ),array('class' => 'btn btn-sm btn-warning' ,'title' => 'Click to edit a user.')); ?></td>
-                <td class="text-right"><?php echo CHtml::link('Add/Delete Images', array('/admin/asset/images', 'id' => $v->id ),array('class' => 'btn btn-sm btn-warning', 'title' => 'Click to view images related to this asset.')); ?></td>
+                <td><?php echo CHtml::link('Add room', array('/admin/asset/addRoom', 'id' => $v->id), array('class'=>'btn btn-xs btn-primary')); ?>
+                <td class="text-right"><?php echo CHtml::link($v->name, array('/admin/asset/editasset', 'id' => $v->id ),array('class' => 'btn btn-xs btn-warning' ,'title' => 'Click to edit a user.')); ?></td>
+                <td class="text-right"><?php echo CHtml::link('Add/Delete Images', array('/admin/asset/images', 'id' => $v->id ),array('class' => 'btn btn-xs btn-warning', 'title' => 'Click to view images related to this asset.')); ?></td>
             </tr>
         <?php endforeach; ?>
 	</tbody>
