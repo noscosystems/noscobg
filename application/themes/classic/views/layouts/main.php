@@ -78,6 +78,7 @@
                 <!-- Collect the nav links, forms, and other content for toggling -->
                 <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                     <ul class="nav navbar-nav navbar-right">
+                        <li><a  href='#' id="goBack" >Go Back</a></li>
                         <li><?php echo CHtml::link('Home', array('/home'), array()); ?></li><!-- 
                         <li><?php //echo CHtml::link('Houses', array('/asset', 'type' => 1), array()); ?></li>
                         <li><?php //echo CHtml::link('Apartments', array('/asset', 'type' => 2), array()); ?></li>
@@ -155,6 +156,14 @@
                 </div>
             </div>
         </div>
+        <script>
+            var goBack = document.getElementById('goBack');
+
+            goBack.onclick = function (){
+                window.history.back()
+            }
+
+        </script>
     </body>
 
 </html>

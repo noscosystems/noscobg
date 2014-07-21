@@ -18,6 +18,13 @@ if($widget->errorSummary($form)){
 }
 ?>
 
+<?php if (Yii::app()->user->hasFlash('priv')): ?>
+    <div class="alert alert-danger" >
+        <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+        <?php echo Yii::app()->user->getFlash('priv') ?>
+    </div>
+<?php endif; ?>
+
 <?php if (Yii::app()->user->hasFlash('success')){ ?>
     <div class="alert alert-success" >
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -80,6 +87,20 @@ if($widget->errorSummary($form)){
     <div class="col-sm-3 control-label">Change lastname:</div>
     <div class="col-sm-6">
         <?php echo $widget->input($form, 'lastname', array('class' => 'form-control', 'value'=>$user->lastname) ); ?>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-3 control-label">Change email:</div>
+    <div class="col-sm-6">
+        <?php echo $widget->input($form, 'email', array('class' => 'form-control', 'value'=>$user->email) ); ?>
+    </div>
+</div>
+<br>
+<div class="row">
+    <div class="col-sm-3 control-label">Change mobile number:</div>
+    <div class="col-sm-6">
+        <?php echo $widget->input($form, 'mobile_number', array('class' => 'form-control', 'value'=>$user->mobile_number) ); ?>
     </div>
 </div>
 <br>

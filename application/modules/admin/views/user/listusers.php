@@ -12,7 +12,8 @@
         echo '<div class="alert alert-danger">' . $widget->errorSummary($form) . '</div>';
     }
 ?>
-
+ <div class="row" id="fail"> 
+ </div>
 <?php if(Yii::app()->user->hasFlash('del_success')): ?>
     <div class="alert alert-success">
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
@@ -66,6 +67,11 @@
 
 function send(button){
 //var butt = document.getElementById('butt');
+    var fail = document.getElementById('fail');
+    var fail_msg ='<div class="alert alert-danger">'
+                +'<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>'
+                +'You do not have the required privilige level for this command.'
+            +'</div>';
     var xmlhttp = httpReq();
     do {
         xmlhttp.open('POST','<?php echo Yii::app()->baseUrl; ?>'+'/admin/user/deleteuser',false);
@@ -75,8 +81,10 @@ function send(button){
     if (xmlhttp.readyState==4 && xmlhttp.status==200){
         (xmlhttp.responseText == 'Active')
         ?(button.className = 'btn btn-xs btn-primary')
-        :(button.className = 'btn btn-xs btn-danger');
-        
+        :((xmlhttp.responseText == 'Inactive')
+        ?
+        (button.className = 'btn btn-xs btn-danger')
+        :(fail.innerHTML = fail_msg));
         button.innerHTML = xmlhttp.responseText;
     }
     return false;

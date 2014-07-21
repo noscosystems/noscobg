@@ -30,21 +30,33 @@
 					$priv_ = $user->priv;	//buffer variable for storing the user's privilige
 					$pass_ = $user->password;	//buffer variable for storing the user's password
 					if ($form->submitted() && $form->validate()){
-						if ($form->model->old_pass == ''){
-							$user->attributes = $form->model->attributes;
-							$user->priv = ($form->model->priv!='' && $user->id != Yii::app()->user->id)?($form->model->priv):$priv_;
-							$user->password = $pass_;
-							($user->save())?( Yii::app()->user->setFlash('success', 'Profile of user '.$user->username.' updated successfully') ):(Yii::app()->user->setFlash('warning', 'Something went wrong, please try to reedit user profile.')); 
-						}
-						else if (!empty($form->model->old_pass)){
-							$correct = \CPasswordHelper::verifyPassword($form->model->old_pass, $user->password);
-							if ($correct && $form->model->password == $form->model->password2){
-								$user->attributes = $form->model->attributes;
-								$user->priv = ($form->model->priv!='' && $user->id != Yii::app()->user->id)?($form->model->priv):$priv_;
-								$user->password = $user->_setPassword($user->password);
-								$user->save();
-							}
-						}
+                        if (Yii::app()->user->priv > $user->priv){
+    						if ($form->model->old_pass == ''){
+    							$user->attributes = $form->model->attributes;
+                                //If the user's privilige is left empty, asign his old privilige.
+    							$user->priv = ($form->model->priv!='' && $user->id != Yii::app()->user->id)?($form->model->priv):$priv_;
+                                //Same for password.
+    							$user->password = $pass_;
+                                $user->email = (empty($form->model->email))?(null):(($user->email === $form->model->email)?($user->email):'');
+                                $user->mobile_number = (empty($form->model->mobile_number))?(null):(($user->mobile_number === $form->model->mobile_number)?($user->mobile_number):'');
+    							($user->save())
+                                ?( Yii::app()->user->setFlash('success', 'Profile of user '.$user->username.' updated successfully') )
+                                :(Yii::app()->user->setFlash('warning', 'Something went wrong, please try to reedit user profile.')); 
+    						}
+    						else if (!empty($form->model->old_pass)){
+    							$correct = \CPasswordHelper::verifyPassword($form->model->old_pass, $user->password);
+    							if ($correct && $form->model->password == $form->model->password2){
+    								$user->attributes = $form->model->attributes;
+                                    $user->email = (empty($form->model->email))?(null):(($user->email === $form->model->email)?($user->email):'');
+                                    $user->mobile_number = (empty($form->model->mobile_number))?(null):(($user->mobile_number === $form->model->mobile_number)?($user->mobile_number):'');
+    								$user->priv = ($form->model->priv!='' && $user->id != Yii::app()->user->id)?($form->model->priv):$priv_;
+    								$user->password = $user->_setPassword($user->password);
+    								$user->save();
+    							}
+    						}
+                        }else {
+                            Yii::app()->user->setFlash('priv', 'You do not have the required privilige to edit this user!');
+                        }
 					}
 						// echo '<pre>';
 						// var_dump($form->model->attributes);
@@ -124,7 +136,7 @@
                     $user->save();
                 }
                 else {
-                    echo Yii::app()->user->setFlash('fail', 'You do not have the required privlige level for this command.');
+                    echo 'You do not have the required privilige level for this command.';
                 }
              //    exit;
             	// ($user && empty ($assets))
