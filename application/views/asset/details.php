@@ -124,18 +124,18 @@
 	<tr>
 		<td colspan="2">
 			<div class="panel-group" id="accordion">
-			<?php foreach ( $rooms as $room ): ?>
+			<?php foreach ( $rooms as $k => $room ): ?>
 				<div class="panel panel-default">
-					<div class="panel-heading">
+					<div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#<?php echo $k; ?>">
 						
 						<h4 class="panel-title">
-							<a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+							<a >
 								<!-- Room 1 -->
 								<?php echo  $room->Type->name; ?>
 							</a>
 						</h4>
 					</div>
-					<div id="collapseOne" class="panel-collapse collapse">
+					<div id="<?php echo $k; ?>" class="panel-collapse collapse">
 						<div class="panel-body">
 							<!-- Room desc. -->
 							<?php echo $room->area; ?>
@@ -177,6 +177,11 @@
 	</tr>
 	</table>
 </div>
+<button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#demo">
+  simple collapsible
+</button>
+
+<div id="demo" class="collapse in">Some Div with Some Text.</div>
 <style>
     .galleria{ 
         width: 576px;
