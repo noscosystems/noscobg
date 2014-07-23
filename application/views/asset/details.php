@@ -121,25 +121,37 @@
 			</p>
 		</td>
 	</tr>
+<?php if(!empty($rooms)): ?>
 	<tr>
-		<td colspan="2">
+		<td >Rooms</td>
+		<td>
 			<div class="panel-group" id="accordion">
 			<?php foreach ( $rooms as $k => $room ): ?>
 				<div class="panel panel-default">
-					<div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#<?php echo $k; ?>">
+					<div class="panel-heading" data-toggle="collapse" data-parent="#accordion" href="#<?php echo $k;?>">
 						
 						<h4 class="panel-title">
-							<a >
-								<!-- Room 1 -->
+							<span>
 								<?php echo  $room->Type->name; ?>
-							</a>
+							</span>
 						</h4>
 					</div>
-					<div id="<?php echo $k; ?>" class="panel-collapse collapse">
+					<div id="<?php echo $k;?>" class="panel-collapse collapse">
 						<div class="panel-body">
-							<!-- Room desc. -->
-							<?php echo $room->area; ?>
-							<?php echo $room->desc; ?>
+							<div class="row">
+								<div class="col-sm-4">
+									Area:
+								</div>
+								<div class="col-sm-8">
+									<?php echo $room->area; ?>
+								</div>
+							<div class="col-sm-4">
+									Room description:
+								</div>
+								<div class="col-sm-8">
+									<p><?php echo $room->desc; ?></p>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
@@ -147,6 +159,7 @@
 			</div>
 		</td>
 	</tr>
+<?php endif; ?>
 	<tr>
 		<td>
 			Owner of the asset:
@@ -177,11 +190,6 @@
 	</tr>
 	</table>
 </div>
-<button type="button" class="btn btn-danger" data-toggle="collapse" data-target="#demo">
-  simple collapsible
-</button>
-
-<div id="demo" class="collapse in">Some Div with Some Text.</div>
 <style>
     .galleria{ 
         width: 576px;
@@ -201,24 +209,24 @@ $(function() {
     Galleria.loadTheme('<?php echo $bootstrap; ?>/js/galleria/themes/classic/galleria.classic.min.js');
     Galleria.run('.galleria', {
 
-    extend: function(options) {
+	    extend: function(options) {
 
-        Galleria.log(this) // the gallery instance
-        Galleria.log(options) // the gallery options
+	        Galleria.log(this) // the gallery instance
+	        Galleria.log(options) // the gallery options
 
-        // listen to when an image is shown
-        this.bind('image', function(e) {
+	        // listen to when an image is shown
+	        this.bind('image', function(e) {
 
-            Galleria.log(e) // the event object may contain custom objects, in this case the main image
-            Galleria.log(e.imageTarget) // the current image
+	            Galleria.log(e) // the event object may contain custom objects, in this case the main image
+	            Galleria.log(e.imageTarget) // the current image
 
-            // lets make galleria open a lightbox when clicking the main image:
-            $(e.imageTarget).click(this.proxy(function() {
-               this.openLightbox();
-            }));
-        });
-    }
-});
+	            // lets make galleria open a lightbox when clicking the main image:
+	            $(e.imageTarget).click(this.proxy(function() {
+	               this.openLightbox();
+	            }));
+	        });
+	    }
+	});
 });
 
 </script>

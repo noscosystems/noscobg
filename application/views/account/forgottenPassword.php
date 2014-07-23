@@ -27,20 +27,19 @@
         </div>
     </div>
 
-    <div class="form-group <?php echo $widget->error($form, 'password') ? 'has-error' : ''; ?>">
-        <?php echo $widget->labelEx($form, 'password', array('class' => 'col-xs-12 col-sm-3 text-right control-label')); ?>
+    <div class="form-group <?php echo $widget->error($form, 'email') ? 'has-error' : ''; ?>">
+        <?php echo $widget->labelEx($form, 'email', array('class' => 'col-xs-12 col-sm-3 text-right control-label')); ?>
         <div class="col-xs-12 col-sm-<?php echo $formLength; ?>">
-            <?php echo $widget->input($form, 'password', array('class' => 'form-control')); ?>
+            <?php echo $widget->input($form, 'email', array('class' => 'form-control')); ?>
             <?php
-                echo $widget->error($form, 'password', array('class' => 'help-block'))
-                  ?: $widget->hint($form, 'password', 'div', array('class' => 'help-block'));
+                echo $widget->error($form, 'email', array('class' => 'help-block'))
+                  ?: $widget->hint($form, 'email', 'div', array('class' => 'help-block'));
             ?>
         </div>
     </div>
 
     <div class="col-sm-offset-3">
         <?php echo $widget->button($form, 'submit', array('class' => 'btn btn-primary')); ?>
-        <?php echo CHtml::link('Forgotten Password', array('/account/forgottenPassword'), array('class' => 'btn btn-link')); ?>
     </div>
 
 </fieldset>

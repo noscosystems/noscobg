@@ -8,12 +8,39 @@
 	use \application\components\Controller;
 	use \application\components\UserIdentity;
 	use \application\models\db\Users;
+	use \application\models\form\ForgottenPassword;
 	use \application\models\form\Register;
 	use \application\models\form\Editpass;
 	use \application\models\form\Userprof;
 
 
 	class AccountController extends Controller{
+
+		public function actionForgottenPasswordRestore($param1,$param2){
+			if ($form->submitted() $form->validate()){
+				
+			}
+			$this->render('forgottenPasswordRestore');
+		}
+
+
+		public function actionForgottenPassword(){
+
+				(Yii::app()->user->isGuest)
+				?($form = New Form('application.forms.forgottenPassword', new ForgottenPassword))
+				:($this->redirect(array('/home')));
+
+				$frm = $form->model;
+				if ($form->submitted() && $form->validate()){
+					$user = Users::model()->findByAttributes( array ('username' => $frm->username, 'email' => $frm->email));
+					var_dump($user);
+					exit;
+					//$tmpPass = $user->_setPassword (md5(time()));
+					//$user->save();
+				}
+
+			$this->render ('forgottenPassword', array ('form' => $form ));
+		}
 
 		public function actionRegister(){
             if (Yii::app()->user->isGuest){
