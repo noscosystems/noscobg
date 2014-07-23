@@ -14,6 +14,20 @@
     $widget = $form->activeFormWidget;
 ?>
 
+<?php if (Yii::app()->user->hasFlash('Sent')){ ?>
+<div class="alert alert-success">
+    <?php echo Yii::app()->user->getFlash('Sent'); ?>
+     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+</div>
+
+<?php }else if (Yii::app()->user->hasFlash('Try again')){ ?>
+<div class="alert alert-danger">
+    <?php echo Yii::app()->user->getFlash('Try again'); ?>
+     <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+</div>
+
+<?php } ?>
+
 <fieldset>
 <?php if(isset($partial)) $formLength = 9; else $formLength = 6; ?>
     <div class="form-group <?php echo $widget->error($form, 'username') ? 'has-error' : ''; ?>">

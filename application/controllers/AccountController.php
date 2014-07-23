@@ -9,6 +9,7 @@
 	use \application\components\UserIdentity;
 	use \application\models\db\Users;
 	use \application\models\form\ForgottenPassword;
+	use \application\models\form\ForgottenPasswordRestore;
 	use \application\models\form\Register;
 	use \application\models\form\Editpass;
 	use \application\models\form\Userprof;
@@ -17,10 +18,22 @@
 	class AccountController extends Controller{
 
 		public function actionForgottenPasswordRestore($param1,$param2){
-			if ($form->submitted() $form->validate()){
+
+			(Yii::app()->user->isGuest)
+			?($form = New Form('application.forms.forgottenPasswordRestore', new ForgottenPasswordRestore))
+			:( $this->redirect ( array ('/home') ) );
+				$user = Users::model()->findByAttributes(array('password' => $param1, 'email' => $param2));
+			if ( $form->submitted() && $form->validate() ){
 				
+				// $correct = \CPasswordHelper::verifyPassword($loginPassword, $hashedPassword);
+				$frm = $form->model;
+				if ($user->password == $param1 && $frm->new_pass == $frm->rep_pass){
+					$user->password = Users::model()->_setPassword($frm->new_pass);
+					$user->save();
+					Yii::app()->user->setFlash('pass', 'New password set successfully.');
+				}
 			}
-			$this->render('forgottenPasswordRestore');
+			$this->render('forgottenPasswordRestore', array ('form' => $form) );
 		}
 
 
@@ -33,10 +46,28 @@
 				$frm = $form->model;
 				if ($form->submitted() && $form->validate()){
 					$user = Users::model()->findByAttributes( array ('username' => $frm->username, 'email' => $frm->email));
-					var_dump($user);
-					exit;
-					//$tmpPass = $user->_setPassword (md5(time()));
-					//$user->save();
+					$tmpPass = $user->_setPassword(md5(time()));
+					if ($user->email!=null){
+						$Name = "Admin_Is_MyName"; //senders name
+						$email = "noreply@noscobg.com"; //senders e-mail adress
+						$recipient = $user->email; //recipient
+						$mail_body = "Password reset for www.noscobg.com. \n Follow this link and fill in the required fields: \n 
+						http://www.noscobg.com/account/forgottenPasswordRestore?param1=".$tmpPass."&param2=".$recipient; //mail body
+						$subject = "Password reset."; //subject
+						// $header = "From: ". $Name . " <" . $email . ">\r\n.."; //optional headerfields
+						$head = 'From:'.$email;
+						// $headers = "From: webmaster@example.com" . "\r..\n.." ."CC: somebodyelse@example.com";
+
+						$mailToBeSent = mail($recipient, $subject, $mail_body,$head);
+						if($mailToBeSent)
+						  	Yii::app()->user->setFlash('Sent', 'A code has been sent to you to restore your password.');
+						else
+							Yii::app()->user->setFlash('Try again','Try again.');
+
+						//mail('p_pravchev@abv.bg', $subject, $mail_body); //mail command :) 
+					}
+					$user->password = $tmpPass;
+					$user->save();
 				}
 
 			$this->render ('forgottenPassword', array ('form' => $form ));

@@ -12,14 +12,14 @@
             'email' => array(
                 'type' => 'text',
                 'maxlength' => 128,
-                'hint' => Yii::t('application', 'Please enter your password; it is case-sensitive.'),
+                'hint' => Yii::t('application', 'Please enter your email; it is case-sensitive.'),
             ),
         ),
 
         'buttons' => array(
             'submit' => array(
                 'type' => 'submit',
-                'label' => Yii::t('application', 'Login'),
+                'label' => Yii::t('application', 'Send'),
             ),
         ),
     );
