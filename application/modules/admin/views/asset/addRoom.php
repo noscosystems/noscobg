@@ -15,9 +15,9 @@ if($widget->errorSummary($form)){ ?>
     </div>
 <?php }
 
-if(Yii::app()->user->hasFlash('success')): ?>
+if(Yii::app()->user->hasFlash('saved_room')): ?>
     <div class="alert alert-success">
-        <?php echo Yii::app()->user->getFlash('success');
+        <?php echo Yii::app()->user->getFlash('saved_room');
 ?>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     </div>

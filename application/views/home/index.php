@@ -141,7 +141,7 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
 
 
 
-<div style="margin-left: -20px; width: 105%; z-index: 100;" id="image-cycle" class="carousel slide" data-ride="carousel" data-interval="4000" data-wrap="true">
+<div style=" width: 100%; z-index: 100;" id="image-cycle" class="carousel slide" data-ride="carousel" data-interval="4000" data-wrap="true">
     <!-- Indicators -->
     <ol class="carousel-indicators">
         <li data-target="#image-cycle" data-slide-to="0" class="active"></li>

@@ -42,9 +42,10 @@ class Rooms extends ActiveRecord
 		// will receive user inputs.
 		return array(
 			array('type, asset, area, created, created_by', 'required'),
-			array('type, asset, created, created_by', 'numerical', 'integerOnly'=>true),
+			array('asset, created, created_by', 'numerical', 'integerOnly'=>true),
 			array('area', 'numerical'),
 			array('desc', 'length', 'max'=>256),
+			array('type', 'length', 'max'=>30),
 			// The following rule is used by search().
 			// @todo Please remove those attributes that should not be searched.
 			array('id, type, asset, area, desc, created, created_by', 'safe', 'on'=>'search'),

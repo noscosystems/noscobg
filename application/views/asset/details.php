@@ -123,7 +123,7 @@
 	</tr>
 <?php if(!empty($rooms)): ?>
 	<tr>
-		<td >Rooms</td>
+		<td>Rooms</td>
 		<td>
 			<div class="panel-group" id="accordion">
 			<?php foreach ( $rooms as $k => $room ): ?>
@@ -132,7 +132,7 @@
 						
 						<h4 class="panel-title">
 							<span>
-								<?php echo  $room->Type->name; ?>
+								<?php echo  $room->type; ?>
 							</span>
 						</h4>
 					</div>
@@ -192,8 +192,8 @@
 </div>
 <style>
     .galleria{ 
-        width: 576px;
-        height: 432px;
+        width: 620px;
+        height: 465px;
         background: #000;
     }
 	.textarea{
@@ -206,26 +206,26 @@
 $(function() {
 //$( document ).ready(function() {
 // Handler for .ready() called.
-    Galleria.loadTheme('<?php echo $bootstrap; ?>/js/galleria/themes/classic/galleria.classic.min.js');
+
+   Galleria.loadTheme('<?php echo $bootstrap; ?>/js/galleria/themes/classic/galleria.classic.min.js');
     Galleria.run('.galleria', {
+		    extend: function(options) {
 
-	    extend: function(options) {
+		        Galleria.log(this) // the gallery instance
+		        Galleria.log(options) // the gallery options
 
-	        Galleria.log(this) // the gallery instance
-	        Galleria.log(options) // the gallery options
+		        // listen to when an image is shown
+		        this.bind('image', function(e) {
 
-	        // listen to when an image is shown
-	        this.bind('image', function(e) {
+		            Galleria.log(e) // the event object may contain custom objects, in this case the main image
+		            Galleria.log(e.imageTarget) // the current image
 
-	            Galleria.log(e) // the event object may contain custom objects, in this case the main image
-	            Galleria.log(e.imageTarget) // the current image
-
-	            // lets make galleria open a lightbox when clicking the main image:
-	            $(e.imageTarget).click(this.proxy(function() {
-	               this.openLightbox();
-	            }));
-	        });
-	    }
+		            // lets make galleria open a lightbox when clicking the main image:
+		            $(e.imageTarget).click(this.proxy(function() {
+		               this.openLightbox();
+		            }));
+		        });
+		    }
 	});
 });
 

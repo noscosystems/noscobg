@@ -17,7 +17,7 @@
                 // Username and password are required.
                 array('type, area, desc', 'required'),
                 // The database has a maximum username length of 64 characters.
-                array('type', 'numerical', 'integerOnly' => true, 'max' => 11),
+                array('type', 'length', 'max' => 30),
                 array('area', 'numerical'),
                 array('desc', 'length', 'max' => 256)
             );
