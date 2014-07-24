@@ -35,7 +35,10 @@
                 $room->asset = $id;
                 $room->created = time();
                 $room->created_by = Yii::app()->user->id;
-                $room->save();
+                if($room->save())
+                    Yii::app()->user->setFlash('room_saved', 'Successfully added new room to asset.');
+                else 
+                    Yii::app()->user->setFlash('failed_saving_room', 'Failed saving room to asset.');
             }
 
             $this->render('addRoom', array ( 'form' => $form));
@@ -57,6 +60,7 @@
                     $form->model->addError('name', 'An asset with this name already exists.');
                 }
                 else {
+                    var_dump ( $form->model->status );
                     $address = New Address;
                     $address->attributes = $form->model->attributes;
                     $address->created = time();
