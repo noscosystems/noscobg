@@ -7,14 +7,15 @@
 ?> 
 <div class="row col-md-12">
     <div class="col-md-8">
-        	<?php if (!empty($asset->Images)){ ?>
+        	<?php if ($asset->Images!=null){ ?>
         <div class="galleria">
 	            <?php foreach ($asset->Images  as $image ): ?>
 	                <img src="<?php echo Yii::app()->assetManager->publish($image->url); ?>" data-title="My title" data-description="My description">
 	            <?php endforeach; ?>
         </div>
-        	<?php }else ?>
+        	<?php }else{ ?>
         	<div>Asset doesn't have any images</div>
+        	<?php } ?>
     </div>
 	<div class="col-md-3 col-md-offset-1">
 	<?php 
@@ -211,7 +212,7 @@ $(function() {
 // Handler for .ready() called.
 	var galleria = document.getElementsByClassName('galleria');
 	if (galleria.length>0){
-	Galleria.loadTheme('<?php echo $bootstrap; ?>/js/galleria/themes/classic/galleria.classic.min.js');
+		Galleria.loadTheme('<?php echo $bootstrap; ?>/js/galleria/themes/classic/galleria.classic.min.js');
 	    Galleria.run('.galleria', {
 		    extend: function(options) {
 
@@ -231,7 +232,7 @@ $(function() {
 		        });
 		    }
 		});
-		}
+	}
 });
 
 </script>
