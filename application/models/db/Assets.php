@@ -79,7 +79,7 @@ class Assets extends ActiveRecord
 			'Images' => array(self::HAS_MANY, '\\application\\models\\db\\Images', 'asset'),
 			'Address' => array(self::HAS_ONE, '\\application\\models\\db\\Address', 'id'),
 			'Option' => array(self::HAS_ONE, '\\application\\models\\db\\Option', 'id'),
-			'Rooms' => array(self::HAS_MANY, '\\application\\models\\db\\Rooms', 'asset'),
+			'Features' => array(self::HAS_MANY, '\\application\\models\\db\\Features', 'asset'),
 			'Owner' => array(self::HAS_ONE, '\\application\\models\\db\\Users', 'id'),
 		);
 	}

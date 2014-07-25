@@ -8,40 +8,40 @@
     use \application\models\form\Insert;
     use \application\models\form\ListUsers;
     use \application\models\form\Img_upload;
-    use \application\models\form\Room;
+    use \application\models\form\Feature;
     use \application\models\db\Address;
     use \application\models\db\Assets;
     use \application\models\db\Images;
-    use \application\models\db\Rooms;
+    use \application\models\db\Features;
 
     class AssetController extends Controller{
 
         public $identity;
 
-        public function actionaddRoom($id){
+        public function actionaddFeature($id){
             if(Yii::app()->user->isGuest){
                 $this->redirect(array('/login'));
             }
             else if (Yii::app()->user->priv >=50){
-                $form = new Form('application.forms.room', new Room);
+                $form = new Form('application.forms.feature', new Feature);
             }
             else {
                 $this->redirect(array('/home'));
             }
 
             if($form->submitted() && $form->validate()) {
-                $room = new Rooms;
-                $room->attributes = $form->model->attributes;
-                $room->asset = $id;
-                $room->created = time();
-                $room->created_by = Yii::app()->user->id;
-                if($room->save())
-                    Yii::app()->user->setFlash('room_saved', 'Successfully added new room to asset.');
+                $feature = new Features;
+                $feature->attributes = $form->model->attributes;
+                $feature->asset = $id;
+                $feature->created = time();
+                $feature->created_by = Yii::app()->user->id;
+                if($feature->save())
+                    Yii::app()->user->setFlash('feature_saved', 'Successfully added new feature to asset.');
                 else 
-                    Yii::app()->user->setFlash('failed_saving_room', 'Failed saving room to asset.');
+                    Yii::app()->user->setFlash('failed_saving_feature', 'Failed saving feature to asset.');
             }
 
-            $this->render('addRoom', array ( 'form' => $form));
+            $this->render('addFeature', array ( 'form' => $form));
         }
 
         public function actionIndex(){

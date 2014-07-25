@@ -7,18 +7,21 @@
 ?> 
 <div class="row col-md-12">
     <div class="col-md-8">
+        	<?php if (!empty($asset->Images)){ ?>
         <div class="galleria">
-            <?php foreach ($asset->Images  as $image ): ?>
-                <img src="<?php echo Yii::app()->assetManager->publish($image->url); ?>" data-title="My title" data-description="My description">
-            <?php endforeach; ?>
+	            <?php foreach ($asset->Images  as $image ): ?>
+	                <img src="<?php echo Yii::app()->assetManager->publish($image->url); ?>" data-title="My title" data-description="My description">
+	            <?php endforeach; ?>
         </div>
+        	<?php }else ?>
+        	<div>Asset doesn't have any images</div>
     </div>
 	<div class="col-md-3 col-md-offset-1">
 	<?php 
 		$type = Option::model()->findByPk($asset->type);
 		$status = Option::model()->findByPk($asset->status);
 		$owner = Users::model()->findByPk($asset->owner);
-		$rooms = $asset->Rooms;
+		$rooms = $asset->Features;
 	?>
 		<table class="table">
 			<tr>
@@ -123,7 +126,7 @@
 	</tr>
 <?php if(!empty($rooms)): ?>
 	<tr>
-		<td>Rooms</td>
+		<td>Features</td>
 		<td>
 			<div class="panel-group" id="accordion">
 			<?php foreach ( $rooms as $k => $room ): ?>
@@ -146,7 +149,7 @@
 									<?php echo $room->area; ?>
 								</div>
 							<div class="col-sm-4">
-									Room description:
+									Feature description:
 								</div>
 								<div class="col-sm-8">
 									<p><?php echo $room->desc; ?></p>
@@ -206,9 +209,10 @@
 $(function() {
 //$( document ).ready(function() {
 // Handler for .ready() called.
-
-   Galleria.loadTheme('<?php echo $bootstrap; ?>/js/galleria/themes/classic/galleria.classic.min.js');
-    Galleria.run('.galleria', {
+	var galleria = document.getElementsByClassName('galleria');
+	if (galleria.length>0){
+	Galleria.loadTheme('<?php echo $bootstrap; ?>/js/galleria/themes/classic/galleria.classic.min.js');
+	    Galleria.run('.galleria', {
 		    extend: function(options) {
 
 		        Galleria.log(this) // the gallery instance
@@ -226,7 +230,8 @@ $(function() {
 		            }));
 		        });
 		    }
-	});
+		});
+		}
 });
 
 </script>

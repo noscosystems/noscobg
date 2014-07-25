@@ -6,7 +6,7 @@
     use \CException;
     use \application\components\FormModel;
 
-    class Room extends FormModel
+    class Feature extends FormModel
     {
 
         public $type,$area,$desc;

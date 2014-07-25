@@ -33,6 +33,6 @@
         'buttons' => array(
             'submit' => array(
                 'type' => 'submit',
-                'label' => Yii::t('application', 'Create Room'),
+                'label' => Yii::t('application', 'Create Feature'),
             )
         ));

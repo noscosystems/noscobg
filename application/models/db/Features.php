@@ -23,14 +23,14 @@ use \Yii;
 use \CException;
 use \application\components\ActiveRecord;
 
-class Rooms extends ActiveRecord
+class Features extends ActiveRecord
 {
 	/**
 	 * @return string the associated database table name
 	 */
 	public function tableName()
 	{
-		return 'rooms';
+		return 'features';
 	}
 
 	/**
