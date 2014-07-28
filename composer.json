@@ -23,6 +23,7 @@
     },
 
     "require": {
+		"intervention/image": "2.*",
         "yiisoft/yii":      "1.1.14",
         "twbs/bootstrap":   "3.1.*",
         "php":              ">=5.3"
