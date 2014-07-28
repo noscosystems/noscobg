@@ -126,6 +126,22 @@ class Images extends ActiveRecord
 			else if ($size[1]>2304){
 				array_push($this->errors, 'Height is larger than 2304 pixels, please resize!');
 			}
+			/*if ($w%4 && $h%3){
+					$new_w = 3072;
+					$new_h = 2304;
+				}
+				else if($w%16 && $h%9){
+					$new_w = 3528;
+					$new_h = 1984;
+				}
+				else if ($w%16 && $h%10){
+					$new_w = 3344;
+					$new_h = 2088;
+				}
+				else {
+					$new_w = 1024;
+					$new_h = 768;
+				}*/
 			else if ($_FILES['image1']['size']>2097152){
 				array_push($this->errors, 'Size is greater than 2MBs, please upload a smaller image!');
 			}
