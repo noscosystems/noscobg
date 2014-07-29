@@ -112,38 +112,49 @@ class Images extends ActiveRecord
 
 	public function image_upload($id,$form){
         //2 097 152 = 2MegaBytes;
-        $allowed_img_types = Array('image/bmp','image/jpeg','image/png');	//allowed image types, stored in an array
+        $allowed_img_types = Array('image/jpeg','image/png');	//allowed image types, stored in an array
         //$mime_type = image_type_to_mime_type(exif_imagetype($_FILES['image1']['tmp_name']));
         $size = [];
-		if ( (isset ($_FILES['image1'])?($_FILES['image1']['size']>0):'' ) ){
+		if ($_FILES['image1']['size']>0 && $_FILES['image1']['type']!='' && $_FILES['image1']['tmp_name']!=''){
 			$size = getimagesize($_FILES['image1']['tmp_name']);
-			if (!in_array($size['mime'],$allowed_img_types)){ // Checking wether the image is of the allowed image types
+
+			$asset = Assets::model()->findByPk ($id);
+			if (count($asset->Images)>4){
+					array_push($this->errors,'Maximum number of images reached for this asset.');
+			}
+			else if (!in_array($size['mime'],$allowed_img_types)){ // Checking wether the image is of the allowed image types
 				array_push($this->errors, 'Image not of allowed type. Allowed image types are jpeg, bmp and png!');
 			}
-			else if ($size[0]>3072){
-				array_push($this->errors, 'Width is larger than 3072 pixels, please resize!');
-			}
-			else if ($size[1]>2304){
-				array_push($this->errors, 'Height is larger than 2304 pixels, please resize!');
-			}
-			/*if ($w%4 && $h%3){
-					$new_w = 3072;
-					$new_h = 2304;
+			else if ($size[0]>3072 || $size[1]>2304 || $_FILES['image1']['size']>3145728){
+				$folder = Yii::getPathOfAlias('application.views.Uploads').'\\';
+				$ext = strstr($_FILES['image1']['name'], '.');
+				$new_h = 2304;
+				$new_w = 3072;
+				$image_p = imagecreatetruecolor($new_w, $new_h);
+
+				switch ($size['mime']){
+					case 'image/jpeg':{
+						$image	 = imagecreatefromjpeg($_FILES['image1']['tmp_name']);
+						imagecopyresampled($image_p, $image, 0, 0, 0, 0, $new_w, $new_h, $size[0], $size[1]);
+						$this->name = substr(md5(time()), 0, 7).$ext;
+						$this->url = $folder.$this->name;
+						imagejpeg($image_p, $folder.$this->name , 95);
+						$this->created = time();
+						break;
+					}
+					case 'image/png':{
+						$image	 = imagecreatefrompng($_FILES['image1']['tmp_name']);
+						imagecopyresampled($image_p, $image, 0, 0, 0, 0, $new_w, $new_h, $size[0], $size[1]);
+						$this->name = substr(md5(time()), 0, 7).$ext;
+						$this->url = $folder.$this->name;
+						imagepng($image_p, $folder.$this->name , 95);
+						$this->created = time();
+						break;
+					}
+					 default:
+                		return false;
 				}
-				else if($w%16 && $h%9){
-					$new_w = 3528;
-					$new_h = 1984;
-				}
-				else if ($w%16 && $h%10){
-					$new_w = 3344;
-					$new_h = 2088;
-				}
-				else {
-					$new_w = 1024;
-					$new_h = 768;
-				}*/
-			else if ($_FILES['image1']['size']>2097152){
-				array_push($this->errors, 'Size is greater than 2MBs, please upload a smaller image!');
+				
 			}
 			else{
 				$ext = strstr($_FILES['image1']['name'], '.');
