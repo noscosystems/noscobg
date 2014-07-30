@@ -126,28 +126,96 @@ class Images extends ActiveRecord
 				array_push($this->errors, 'Image not of allowed type. Allowed image types are jpeg, bmp and png!');
 			}
 			else if ($size[0]>3072 || $size[1]>2304 || $_FILES['image1']['size']>3145728){
+
 				$folder = Yii::getPathOfAlias('application.views.Uploads').'\\';
 				$ext = strstr($_FILES['image1']['name'], '.');
-				$new_h = 2304;
-				$new_w = 3072;
-				$image_p = imagecreatetruecolor($new_w, $new_h);
+				//$new_h = 2304;
+				//$new_w = 3072;
+				//$image_p = imagecreatetruecolor($new_w, $new_h);
 
 				switch ($size['mime']){
 					case 'image/jpeg':{
-						$image	 = imagecreatefromjpeg($_FILES['image1']['tmp_name']);
-						imagecopyresampled($image_p, $image, 0, 0, 0, 0, $new_w, $new_h, $size[0], $size[1]);
+
+						$src = imagecreatefromjpeg($_FILES['image1']['tmp_name']); // Source image 
+						$sw = imagesx($src); // Source image Width
+						$sh = imagesy($src); // Source image Height
+
+						$dw = 3072; // Destination image Width 
+						$dh = 2304; // Destination image Height
+						
+						$wr = $sw / $dw; // Width Ratio (source:destination)
+						$hr = $sh / $dh; // Height Ratio (source:destination)
+						
+						$cx = 0; // Crop X (source offset left) 
+						$cy = 0; // Crop Y (source offset top)
+						
+						if ($hr < $wr){ // Height is the limiting dimension;adjust Width 
+						
+							$ow = $sw; // Old Source Width (temp)
+							$sw = $dw * $hr; // New virtual Source Width
+							
+							$cx = ($ow - $sw) / 2; // Crops source width; focus remains centered
+						}
+						if ($wr < $hr){ // Width is the limiting dimension; adjust Height
+						
+							$oh = $sh; // Old Source Height (temp)
+							$sh = $dh * $wr; // New virtual Source Height
+							
+							$cy = ($oh - $sh) / 2; // Crops source height; focus remains centered
+						} 
+						// If the width ratio equals the height ratio, the dimensions stay the same. 
+						
+						$dst = imagecreatetruecolor($dw, $dh); // Destination image
+						imagecopyresampled($dst, $src, 0, 0, $cx, $cy, $dw, $dh, $sw, $sh); // Previews the resized image (not saved)
 						$this->name = substr(md5(time()), 0, 7).$ext;
 						$this->url = $folder.$this->name;
-						imagejpeg($image_p, $folder.$this->name , 95);
+						imagejpeg($dst, $folder.$this->name , 95);
 						$this->created = time();
 						break;
+
+						// $image	 = imagecreatefromjpeg($_FILES['image1']['tmp_name']);
+						// imagecopyresampled($image_p, $image, 0, 0, 0, 0, $new_w, $new_h, $size[0], $size[1]);
+						// $this->name = substr(md5(time()), 0, 7).$ext;
+						// $this->url = $folder.$this->name;
+						// imagejpeg($image_p, $folder.$this->name , 95);
+						// $this->created = time();
+						// break;
 					}
 					case 'image/png':{
-						$image	 = imagecreatefrompng($_FILES['image1']['tmp_name']);
-						imagecopyresampled($image_p, $image, 0, 0, 0, 0, $new_w, $new_h, $size[0], $size[1]);
+						$src = imagecreatefrompng($_FILES['image1']['tmp_name']); // Source image 
+						$sw = imagesx($src); // Source image Width
+						$sh = imagesy($src); // Source image Height
+
+						$dw = 3072; // Destination image Width 
+						$dh = 2304; // Destination image Height
+						
+						$wr = $sw / $dw; // Width Ratio (source:destination)
+						$hr = $sh / $dh; // Height Ratio (source:destination)
+						
+						$cx = 0; // Crop X (source offset left) 
+						$cy = 0; // Crop Y (source offset top)
+						
+						if ($hr < $wr){ // Height is the limiting dimension;adjust Width 
+						
+							$ow = $sw; // Old Source Width (temp)
+							$sw = $dw * $hr; // New virtual Source Width
+							
+							$cx = ($ow - $sw) / 2; // Crops source width; focus remains centered
+						}
+						if ($wr < $hr){ // Width is the limiting dimension; adjust Height
+						
+							$oh = $sh; // Old Source Height (temp)
+							$sh = $dh * $wr; // New virtual Source Height
+							
+							$cy = ($oh - $sh) / 2; // Crops source height; focus remains centered
+						} 
+						// If the width ratio equals the height ratio, the dimensions stay the same. 
+						
+						$dst = imagecreatetruecolor($dw, $dh); // Destination image
+						imagecopyresampled($dst, $src, 0, 0, $cx, $cy, $dw, $dh, $sw, $sh); // Previews the resized image (not saved)
 						$this->name = substr(md5(time()), 0, 7).$ext;
 						$this->url = $folder.$this->name;
-						imagepng($image_p, $folder.$this->name , 95);
+						imagepng($dst, $folder.$this->name , 95);
 						$this->created = time();
 						break;
 					}
@@ -155,6 +223,102 @@ class Images extends ActiveRecord
                 		return false;
 				}
 				
+			}
+			else if ($size[1]>$size[0]){
+				$folder = Yii::getPathOfAlias('application.views.Uploads').'\\';
+				$ext = strstr($_FILES['image1']['name'], '.');
+				//$new_h = 2304;
+				//$new_w = 3072;
+
+				switch ($size['mime']){
+					case 'image/jpeg':{
+
+						$src = imagecreatefromjpeg($_FILES['image1']['tmp_name']); // Source image 
+						$sw = imagesx($src); // Source image Width
+						$sh = imagesy($src); // Source image Height
+
+						$dw = ($sh/4)*3;	// Destination image Width 
+						$dh = $sw;			// Destination image Height
+						
+						$wr = $sw / $dw; // Width Ratio (source:destination)
+						$hr = $sh / $dh; // Height Ratio (source:destination)
+						
+						$cx = 0; // Crop X (source offset left) 
+						$cy = 0; // Crop Y (source offset top)
+						
+						if ($hr < $wr){ // Height is the limiting dimension;adjust Width 
+						
+							$ow = $sw; // Old Source Width (temp)
+							$sw = $dw * $hr; // New virtual Source Width
+							
+							$cx = ($ow - $sw) / 2; // Crops source width; focus remains centered
+						}
+						if ($wr < $hr){ // Width is the limiting dimension; adjust Height
+						
+							$oh = $sh; // Old Source Height (temp)
+							$sh = $dh * $wr; // New virtual Source Height
+							
+							$cy = ($oh - $sh) / 2; // Crops source height; focus remains centered
+						} 
+						// If the width ratio equals the height ratio, the dimensions stay the same. 
+						
+						$dst = imagecreatetruecolor($dw, $dh); // Destination image
+						imagecopyresampled($dst, $src, 0, 0, $cx, $cy, $dw, $dh, $sw, $sh); // Previews the resized image (not saved)
+						$this->name = substr(md5(time()), 0, 7).$ext;
+						$this->url = $folder.$this->name;
+						imagejpeg($dst, $folder.$this->name , 95);
+						$this->created = time();
+						break;
+
+						// $image	 = imagecreatefromjpeg($_FILES['image1']['tmp_name']);
+						// imagecopyresampled($image_p, $image, 0, 0, 0, 0, $new_w, $new_h, $size[0], $size[1]);
+						// $this->name = substr(md5(time()), 0, 7).$ext;
+						// $this->url = $folder.$this->name;
+						// imagejpeg($image_p, $folder.$this->name , 95);
+						// $this->created = time();
+						// break;
+					}
+					case 'image/png':{
+						$src = imagecreatefrompng($_FILES['image1']['tmp_name']); // Source image 
+						$sw = imagesx($src); // Source image Width
+						$sh = imagesy($src); // Source image Height
+
+						$dw = ($sh/4)*3;	// Destination image Width 
+						$dh = $sw;			// Destination image Height
+						
+						$wr = $sw / $dw; // Width Ratio (source:destination)
+						$hr = $sh / $dh; // Height Ratio (source:destination)
+						
+						$cx = 0; // Crop X (source offset left) 
+						$cy = 0; // Crop Y (source offset top)
+						
+						if ($hr < $wr){ // Height is the limiting dimension;adjust Width 
+						
+							$ow = $sw; // Old Source Width (temp)
+							$sw = $dw * $hr; // New virtual Source Width
+							
+							$cx = ($ow - $sw) / 2; // Crops source width; focus remains centered
+						}
+						if ($wr < $hr){ // Width is the limiting dimension; adjust Height
+						
+							$oh = $sh; // Old Source Height (temp)
+							$sh = $dh * $wr; // New virtual Source Height
+							
+							$cy = ($oh - $sh) / 2; // Crops source height; focus remains centered
+						} 
+						// If the width ratio equals the height ratio, the dimensions stay the same. 
+						
+						$dst = imagecreatetruecolor($dw, $dh); // Destination image
+						imagecopyresampled($dst, $src, 0, 0, $cx, $cy, $dw, $dh, $sw, $sh); // Previews the resized image (not saved)
+						$this->name = substr(md5(time()), 0, 7).$ext;
+						$this->url = $folder.$this->name;
+						imagepng($dst, $folder.$this->name , 95);
+						$this->created = time();
+						break;
+					}
+					 default:
+                		return false;
+				}
 			}
 			else{
 				$ext = strstr($_FILES['image1']['name'], '.');
