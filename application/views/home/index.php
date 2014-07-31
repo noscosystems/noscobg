@@ -284,12 +284,11 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
     <br>
         <div class="row">
             <?php $images = ($asset)?($asset->Images):''; ?>
-            <div class="col-md-3" style="max-heigh:240px; max-width:320px;">
+            <div class="col-md-3" style="height:150px; width:200px; position:relative;" align="center">
                 <?php echo ($images && !empty ( $images ) )?
                 (CHtml::image(Yii::app()->assetManager->publish($images[0]->url), 'No image available',
                     array(
-                        'class' => 'img-rounded',
-                        'style' => 'max-width:100%; max-height:100%;'
+                        'style' => 'position:relative; max-height:100%;'
                         ))
                         )
                         :'No picture available';?>
