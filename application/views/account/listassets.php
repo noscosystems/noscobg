@@ -6,7 +6,7 @@
     $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/assets');
 ?>
 <div class="page-header">
-  <h1>View Assets <small>Below is a list of your Assets.</small></h1>
+  <h1>View Properties <small>Below is a list of your Properties.</small></h1>
 </div>
 <?php
 $assets = Yii::app()->user->model()->Assets;
@@ -17,7 +17,7 @@ $assets = Yii::app()->user->model()->Assets;
 <table class="table table-hover">
 	<thead>
 		<tr>
-			<th>Asset Name</th>
+			<th>Property Name</th>
             <th class="text-center">Link to edit asset page</th>
             <th class="text-center">Link to add/delete images page</th>
 		</tr>
@@ -34,7 +34,7 @@ $assets = Yii::app()->user->model()->Assets;
 </table>
 <?php }else { ?>
         <div class="alert alert-warning">
-        <span> You do not own any assets on the site currently!</span>
+        <span> You do not own any properties on the site currently!</span>
         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
     </div>  
 <?php }

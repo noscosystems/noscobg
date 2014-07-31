@@ -35,10 +35,13 @@
                 $feature->asset = $id;
                 $feature->created = time();
                 $feature->created_by = Yii::app()->user->id;
-                if($feature->save())
+                if($feature->save()){
                     Yii::app()->user->setFlash('feature_saved', 'Successfully added new feature to asset.');
-                else 
+                    $this->redirect(array('/admin/asset/images?id='.$id ));
+                }
+                else {
                     Yii::app()->user->setFlash('failed_saving_feature', 'Failed saving feature to asset.');
+                }
             }
 
             $this->render('addFeature', array ( 'form' => $form));
@@ -64,14 +67,14 @@
                     $address = New Address;
                     $address->attributes = $form->model->attributes;
                     $address->created = time();
-                    $address->save();
+                    (empty($asset->errors))?($address->save()):'';
                     //$address_name = Address::model()->findByAttributes(array('name'=> $address->name));
                     $asset = New Assets;
                     $asset->attributes = $form->model->attributes;
                     // switch ($asset->status)
                     $asset->address = $address->id;
                     $asset->created_by = Yii::app()->user->getId();
-                    $asset->active = ( $form->model->active == '' )?(1):($form->model->active);
+                    $asset->active = ( $form->model->active == '' || $form->model->active == null)?(1):($form->model->active);
                     $asset->owner = $form->model->owner;
                     $asset->created = time();
                     if(!$asset->save()){
@@ -80,6 +83,7 @@
                     }
                     else{
                         Yii::app()->user->setFlash('success', 'The new Asset has been saved successfully.');
+                        $this->redirect(array('/admin/asset/addFeature?id='.$asset->id));
                     }
                 }
                 /**

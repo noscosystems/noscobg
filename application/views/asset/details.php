@@ -14,7 +14,7 @@
 	            <?php endforeach; ?>
         </div>
         	<?php }else{ ?>
-        	<div>Asset doesn't have any images</div>
+        	<div>Property doesn't have any images</div>
         	<?php } ?>
     </div>
 	<div class="col-md-3 col-md-offset-1">
@@ -27,7 +27,7 @@
 		<table class="table">
 			<tr>
 				<td>
-					Asset name:
+					Property name:
 				</td>
 				<td>
 					<?php echo $asset->name; ?>
@@ -35,7 +35,7 @@
 			</tr>
 			<tr>
 				<td>
-					Asset area:
+					Property area:
 				</td>
 				<td>
 					<?php echo $asset->area; ?>
@@ -43,7 +43,7 @@
 			</tr>
 			<tr>
 				<td>
-					Asset type:
+					Property type:
 				</td>
 				<td>
 					<?php echo $type->name; ?>
@@ -51,7 +51,7 @@
 			</tr>
 			<tr>
 				<td>
-					Asset status:
+					Property status:
 				</td>
 				<td>
 					<?php echo $status->name; ?>
@@ -96,7 +96,7 @@
 	<table class="table">
 	<tr>
 		<td>
-			Asset description:
+			Property description:
 		</td>
 		<td>
 			<p>
@@ -105,7 +105,7 @@
 		</td>
 	</tr>
 	<tr>
-		<td>Address of the Asset:</td>
+		<td>Address of the Property:</td>
 		<td>
 			<p>
 				<?php echo $asset->Address->country; ?>
@@ -166,7 +166,7 @@
 <?php endif; ?>
 	<tr>
 		<td>
-			Owner of the asset:
+			Owner of the property:
 		</td>
 		<td>
 			<?php  
@@ -186,7 +186,7 @@
 	</tr>
 	<tr>
 		<td>
-			Owner of the asset:
+			Owner's email:
 		</td>
 		<td>
 			<?php  echo (isset($owner->email) && $owner->email!='' && $owner->email!=null )?($owner->email):'Not present.'; ?>
