@@ -295,7 +295,13 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
                             :'No picture available';?>
                 </div>
             </div>
-            <div class="col-md-8">
+            <div class="col-md-2">
+                <?php echo $asset->name; ?>
+            </div>
+            <div class="col-md-2">
+                <?php echo $asset->Option->name; ?>
+            </div>
+            <div class="col-md-2">
                 <p style="overflow:auto;">
                     <?php echo $asset->short_desc; ?>
                 </p>

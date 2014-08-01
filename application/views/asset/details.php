@@ -6,7 +6,6 @@
 	use \application\models\db\Users;
 ?>
 
-<?php ini_set('display_errors', 'On'); ?>
 <div class="row col-md-12">
     <div class="col-md-8">
         	<?php if ($asset->Images!=null){ ?>
