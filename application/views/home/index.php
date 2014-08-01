@@ -301,12 +301,12 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
             <div class="col-md-2">
                 <?php echo $asset->Option->name; ?>
             </div>
-            <div class="col-md-2">
+            <div class="col-md-3">
                 <p style="overflow:auto;">
                     <?php echo $asset->short_desc; ?>
                 </p>
             </div>
-            <div class="col-md-1">
+            <div class="col-md-2">
                 <?php echo CHtml::link('Details', array('/asset/details', 'id' => $asset->id), array('class' => 'btn btn-danger' ) ); ?>
             </div>
         </div>
