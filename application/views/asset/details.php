@@ -109,20 +109,15 @@
 		<td>Address of the Property:</td>
 		<td>
 			<p>
-				<?php echo $asset->Address->country; ?>
-				, 
-				<?php echo $asset->Address->town; ?>
-				, 
-				<?php echo $asset->Address->county; ?>
-				, 
-				<?php echo $asset->Address->district; ?>
-				, 
-				Building number 
-				<?php echo $asset->Address->number; ?>
-				, 
-				<?php echo $asset->Address->street; ?>
-				 
-				<?php echo $asset->Address->flat; ?>
+				<?php 
+					echo ($asset->Address->country!='' or $asset->Address->country!=null)?($asset->Address->country).', ':('');
+					echo ( $asset->Address->town!='' or $asset->Address->town!=null)?($asset->Address->town.', '):('');
+				 	echo ($asset->Address->county!='' or $asset->Address->county!=null)?($asset->Address->county.', '):('');
+				 	echo ($asset->Address->district!='' or $asset->Address->district!=null)?($asset->Address->district.', '):('');
+					echo ($asset->Address->street!='' or $asset->Address->street!=null)?($asset->Address->street.', '):('');
+					echo ($asset->Address->number!='' or $asset->Address->number!=null)?('Building number '.$asset->Address->number.', '):'';
+					echo ($asset->Address->flat!='' or $asset->Address->flat!=null)?('Flat number '.$asset->Address->flat):('');
+				?>
 			</p>
 		</td>
 	</tr>
@@ -171,9 +166,9 @@
 		</td>
 		<td>
 			<?php  
-				echo ((isset($owner->firstname) && $owner->firstname!='' && $owner->firstname!=null )?($owner->firstname):'').' ';
-				echo ((isset($owner->middlename) && $owner->middlename!='' && $owner->middlename!=null )?($owner->middlename):'').' ';
-				echo ((isset($owner->lastname) && $owner->lastname!='' && $owner->lastname!=null )?($owner->lastname):'').' ';
+				echo (( $owner->firstname!='' && $owner->firstname!=null )?($owner->firstname):'').' ';
+				echo (( $owner->middlename!='' && $owner->middlename!=null )?($owner->middlename):'').' ';
+				echo (( $owner->lastname!='' && $owner->lastname!=null )?($owner->lastname):'').' ';
 			?>
 		</td>
 	</tr>

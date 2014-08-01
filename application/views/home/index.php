@@ -296,14 +296,14 @@ $assetUrl = Yii::app()->assetManager->publish(Yii::app()->theme->basePath . '/as
                 </div>
             </div>
             <div class="col-md-2">
-                <?php echo $asset->name; ?>
+                <?php echo ($asset->name!='' or $asset->name!= null)?($asset->name):'No info available'; ?>
             </div>
             <div class="col-md-2">
-                <?php echo $asset->Option->name; ?>
+                <?php echo ($asset->Option->name!='' or $asset->Option->name!= null)?($asset->Option->name):'No info available'; ?>
             </div>
             <div class="col-md-3">
                 <p style="overflow:auto;">
-                    <?php echo $asset->short_desc; ?>
+                    <?php echo ($asset->short_desc!='' or $asset->short_desc!= null)?($asset->short_desc):'No info available'; ?>
                 </p>
             </div>
             <div class="col-md-2">

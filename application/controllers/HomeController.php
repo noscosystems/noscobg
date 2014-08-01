@@ -49,7 +49,7 @@
                 ";
 
                 if(!$form->model->area_up)
-                    $form->model->area_up = 99999999;
+                    $form->model->area_up = 9999999999999999;
 
                 if(!$form->model->area_dn)
                     $form->model->area_dn = 1;
@@ -58,7 +58,7 @@
                     $form->model->area_up = 1;
 
                 if(!$form->model->price_up)
-                    $form->model->price_up = 99999999;
+                    $form->model->price_up = 9999999999999999;
 
                 if(!$form->model->price_dn)
                     $form->model->price_dn = 1;
