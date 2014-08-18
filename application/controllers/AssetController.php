@@ -23,7 +23,7 @@
         }
         
         public function actionApartments(){
-            $this->render( 'houses');
+            $this->render( 'apartments');
         }
 
         public function actionLand(){
