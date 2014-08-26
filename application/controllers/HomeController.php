@@ -185,47 +185,13 @@
                 }
             }
 
-            /*
-
-            Pav, this is your code, I updated the login to use UserIdentity, this sets all the properties needed to login etc.
-
-            if($form->submitted() && $form->validate()) {
-                $user = Users::model()->findByAttributes(array('username'=>$form->model->username));
-                if ($user && count($user)>0){
-                    $correct = \CPasswordHelper::verifyPassword($form->model->password, $user->password);
-                    if($correct) {
-                        echo 'The password is correct! :)';
-                        //if(!Yii::app()->user->isGuest){
-                            //echo 'DA!';
-                            if($user->priv >= 30){
-                                // The user is an admin!
-                                // $showadminPanel = true;
-                                Yii::app()->user->__set('username',$user->username);
-                                $this->redirect(array('admin/index'));
-                                // Yii::app()->user->setId($user->id);
-                                // Yii::app()->user->setName($user->username);
-                                //$this->redirect(array('admin/'));
-                            } else {
-                                // The user has only basic permissions
-                                // $showAdminPanel = false;
-                                $this->redirect(array('admin/login'));
-                            }
-                       // }
-                    }
-                    else {
-                        echo 'The password was wrong :(';
-                    }
-                    // if ($user->password == $form->model->password){
-                    //     echo'SUCCESS';
-                    // }
-
-                }
-            }
-            */
-
             $this->render('login',array(
                 'form' => $form
             ));
+        }
+        public function actionAboutUs()
+        {
+            $this->render('AboutUs');
         }
 
     }

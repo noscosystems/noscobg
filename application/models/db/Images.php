@@ -215,7 +215,7 @@ class Images extends ActiveRecord
 						imagecopyresampled($dst, $src, 0, 0, $cx, $cy, $dw, $dh, $sw, $sh); // Previews the resized image (not saved)
 						$this->name = substr(md5(time()), 0, 7).$ext;
 						$this->url = $folder.$this->name;
-						imagepng($dst, $folder.$this->name , 95);
+						imagepng($dst, $folder.$this->name , 9);
 						$this->created = time();
 						break;
 					}

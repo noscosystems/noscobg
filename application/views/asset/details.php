@@ -201,7 +201,7 @@
 	}
 </style>
 <?php $bootstrap = Yii::app()->assetManager->publish(Yii::getPathOfAlias('composer.twbs.bootstrap.dist')); ?>
-
+<script src="plugins/flickr/galleria.flickr.min.js"></script>
 <script>
 $(function() {
 //$( document ).ready(function() {
